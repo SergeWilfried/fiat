@@ -22,6 +22,7 @@ export const DocumentList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
         <TextField label="DocumentType" source="documentType" />
+        <TextField label="Expiring At" source="expiringAt" />
         <TextField label="ID" source="id" />
         <TextField label="Status" source="status" />
         <DateField source="updatedAt" label="Updated At" />

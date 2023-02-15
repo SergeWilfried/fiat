@@ -349,6 +349,7 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         documentType: true,
+        expiringAt: true,
         id: true,
         status: true,
         updatedAt: true,

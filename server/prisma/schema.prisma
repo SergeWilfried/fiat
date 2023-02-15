@@ -1,0 +1,123 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  accounts     Account[]
+  address      Json
+  businessName String?         @unique
+  createdAt    DateTime        @default(now())
+  documents    Document[]
+  email        String          @unique
+  firstName    String?
+  id           String          @id @default(cuid())
+  lastName     String?
+  password     String
+  phoe         String
+  roles        Json
+  status       EnumUserStatus?
+  updatedAt    DateTime        @updatedAt
+  username     String          @unique
+}
+
+model Transaction {
+  accounts           Account[]
+  amount             Int
+  createdAt          DateTime                           @default(now())
+  fee                Float?
+  id                 String                             @id @default(cuid())
+  status             EnumTransactionStatus
+  transactionSubtype EnumTransactionTransactionSubtype?
+  transactionType    EnumTransactionTransactionType
+  updatedAt          DateTime                           @updatedAt
+}
+
+model Address {
+  address_1 String?
+  address_2 String?
+  city      String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  state     String?
+  updatedAt DateTime @updatedAt
+  zip       Int?
+}
+
+model Account {
+  availableBalance Float?
+  balance          Float?
+  createdAt        DateTime             @default(now())
+  currency         EnumAccountCurrency?
+  description      String?
+  id               String               @id @default(cuid())
+  name             String?
+  status           EnumAccountStatus?
+  transactions     Transaction[]
+  updatedAt        DateTime             @updatedAt
+  user             User?                @relation(fields: [userId], references: [id])
+  userId           String?
+}
+
+model Document {
+  createdAt    DateTime                 @default(now())
+  documentType EnumDocumentDocumentType
+  id           String                   @id @default(cuid())
+  status       EnumDocumentStatus?
+  updatedAt    DateTime                 @updatedAt
+  url          String                   @unique
+  user         User?                    @relation(fields: [userId], references: [id])
+  userId       String?
+}
+
+enum EnumUserStatus {
+  Approved
+  Pending
+  Rejected
+}
+
+enum EnumTransactionStatus {
+  Successful
+  Pending
+  Failed
+}
+
+enum EnumTransactionTransactionSubtype {
+  Momo
+  Bank
+  Cash
+  Crypto
+}
+
+enum EnumTransactionTransactionType {
+  Credit
+  Debit
+}
+
+enum EnumAccountCurrency {
+  Xof
+  Eur
+  Usd
+  Celo
+}
+
+enum EnumAccountStatus {
+  Approved
+  Pending
+  Blocked
+}
+
+enum EnumDocumentDocumentType {
+  Driverlicence
+  Passport
+  GovernmentId
+}
+
+enum EnumDocumentStatus {
+  Approved
+  Rejected
+}

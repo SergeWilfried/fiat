@@ -9,13 +9,13 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { registerEnumType } from '@nestjs/graphql';
+import { registerEnumType } from "@nestjs/graphql";
 
 export enum EnumTransactionTransactionType {
-  Credit = 'Credit',
-  Debit = 'Debit',
+  Credit = "Credit",
+  Debit = "Debit",
 }
 
 registerEnumType(EnumTransactionTransactionType, {
-  name: 'EnumTransactionTransactionType',
+  name: "EnumTransactionTransactionType",
 });

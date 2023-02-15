@@ -9,15 +9,15 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { EnumDocumentDocumentType } from './EnumDocumentDocumentType';
-import { IsEnum, IsOptional, ValidateNested } from 'class-validator';
-import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
-import { Type } from 'class-transformer';
-import { StringFilter } from '../../util/StringFilter';
-import { EnumDocumentStatus } from './EnumDocumentStatus';
-import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { IsEnum, IsOptional, ValidateNested } from "class-validator";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { Type } from "class-transformer";
+import { StringFilter } from "../../util/StringFilter";
+import { EnumDocumentStatus } from "./EnumDocumentStatus";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentWhereInput {
@@ -30,7 +30,7 @@ class DocumentWhereInput {
   @Field(() => EnumDocumentDocumentType, {
     nullable: true,
   })
-  documentType?: 'Driverlicence' | 'Passport' | 'GovernmentId';
+  documentType?: "Driverlicence" | "Passport" | "GovernmentId";
 
   @ApiProperty({
     required: false,
@@ -63,7 +63,7 @@ class DocumentWhereInput {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: 'Approved' | 'Rejected';
+  status?: "Approved" | "Rejected";
 
   @ApiProperty({
     required: false,

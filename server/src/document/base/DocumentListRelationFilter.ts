@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { DocumentWhereInput } from './DocumentWhereInput';
-import { ValidateNested, IsOptional } from 'class-validator';
-import { Type } from 'class-transformer';
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { DocumentWhereInput } from "./DocumentWhereInput";
+import { ValidateNested, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
 
 @InputType()
 class DocumentListRelationFilter {

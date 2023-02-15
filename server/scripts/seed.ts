@@ -1,8 +1,8 @@
-import * as dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
-import { Salt, parseSalt } from '../src/auth/password.service';
-import { hash } from 'bcrypt';
-import { customSeed } from './customSeed';
+import * as dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
+import { Salt, parseSalt } from "../src/auth/password.service";
+import { hash } from "bcrypt";
+import { customSeed } from "./customSeed";
 
 if (require.main === module) {
   dotenv.config();
@@ -10,32 +10,32 @@ if (require.main === module) {
   const { BCRYPT_SALT } = process.env;
 
   if (!BCRYPT_SALT) {
-    throw new Error('BCRYPT_SALT environment variable must be defined');
+    throw new Error("BCRYPT_SALT environment variable must be defined");
   }
 
   const salt = parseSalt(BCRYPT_SALT);
 
-  seed(salt).catch(error => {
+  seed(salt).catch((error) => {
     console.error(error);
     process.exit(1);
   });
 }
 
 async function seed(bcryptSalt: Salt) {
-  console.info('Seeding database...');
+  console.info("Seeding database...");
 
   const client = new PrismaClient();
   const data = {
-    username: 'admin',
-    password: await hash('admin', bcryptSalt),
-    roles: ['user'],
+    username: "admin",
+    password: await hash("admin", bcryptSalt),
+    roles: ["user"],
 
     address: {
-      foo: 'bar',
+      foo: "bar",
     },
 
-    email: 'example@example.com',
-    phoe: '',
+    email: "example@example.com",
+    phoe: "",
   };
   await client.user.upsert({
     where: { username: data.username },
@@ -44,8 +44,8 @@ async function seed(bcryptSalt: Salt) {
   });
   void client.$disconnect();
 
-  console.info('Seeding database with custom seed...');
+  console.info("Seeding database with custom seed...");
   customSeed();
 
-  console.info('Seeded database successfully');
+  console.info("Seeded database successfully");
 }

@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { TransactionWhereInput } from './TransactionWhereInput';
-import { Type } from 'class-transformer';
-import { TransactionOrderByInput } from './TransactionOrderByInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { TransactionWhereInput } from "./TransactionWhereInput";
+import { Type } from "class-transformer";
+import { TransactionOrderByInput } from "./TransactionOrderByInput";
 
 @ArgsType()
 class TransactionFindManyArgs {

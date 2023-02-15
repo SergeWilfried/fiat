@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { UserWhereUniqueInput } from './UserWhereUniqueInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 
 @ArgsType()
 class DeleteUserArgs {

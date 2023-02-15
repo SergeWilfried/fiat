@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { TransactionWhereUniqueInput } from './TransactionWhereUniqueInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { TransactionWhereUniqueInput } from "./TransactionWhereUniqueInput";
 
 @ArgsType()
 class DeleteTransactionArgs {

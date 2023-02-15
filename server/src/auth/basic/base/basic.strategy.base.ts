@@ -1,9 +1,9 @@
-import { UnauthorizedException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { BasicStrategy as Strategy } from 'passport-http';
-import { AuthService } from '../../auth.service';
-import { IAuthStrategy } from '../../IAuthStrategy';
-import { UserInfo } from '../../UserInfo';
+import { UnauthorizedException } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { BasicStrategy as Strategy } from "passport-http";
+import { AuthService } from "../../auth.service";
+import { IAuthStrategy } from "../../IAuthStrategy";
+import { UserInfo } from "../../UserInfo";
 
 export class BasicStrategyBase
   extends PassportStrategy(Strategy)

@@ -2,6 +2,7 @@ import { AccountListRelationFilter } from "../account/AccountListRelationFilter"
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { DocumentListRelationFilter } from "../document/DocumentListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { JsonFilter } from "../../util/JsonFilter";
 
 export type UserWhereInput = {
   accounts?: AccountListRelationFilter;
@@ -11,6 +12,7 @@ export type UserWhereInput = {
   firstName?: StringNullableFilter;
   id?: StringFilter;
   lastName?: StringNullableFilter;
+  messages?: JsonFilter;
   status?: "Approved" | "Pending" | "Rejected";
   username?: StringFilter;
 };

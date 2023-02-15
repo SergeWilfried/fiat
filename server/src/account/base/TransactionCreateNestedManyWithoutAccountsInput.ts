@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from '@nestjs/graphql';
-import { TransactionWhereUniqueInput } from '../../transaction/base/TransactionWhereUniqueInput';
-import { ApiProperty } from '@nestjs/swagger';
+import { InputType, Field } from "@nestjs/graphql";
+import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
+import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
 class TransactionCreateNestedManyWithoutAccountsInput {

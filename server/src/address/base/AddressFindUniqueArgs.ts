@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { AddressWhereUniqueInput } from './AddressWhereUniqueInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
 
 @ArgsType()
 class AddressFindUniqueArgs {

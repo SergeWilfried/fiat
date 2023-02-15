@@ -238,6 +238,8 @@ export class UserControllerBase {
     const results = await this.service.findAccounts(params.id, {
       ...query,
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,

@@ -4,7 +4,7 @@ import {
   SimpleForm,
   CreateProps,
   SelectInput,
-  TextInput,
+  DateInput,
   ReferenceInput,
 } from "react-admin";
 import { UserTitle } from "../user/UserTitle";
@@ -24,6 +24,7 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
+        <DateInput label="Expiring At" source="expiringAt" />
         <SelectInput
           source="status"
           label="Status"
@@ -35,7 +36,7 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <TextInput label="URL" source="url" />
+        <div />
         <ReferenceInput source="user.id" reference="User" label="User">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

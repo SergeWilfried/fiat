@@ -20,29 +20,29 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   createdAt: new Date(),
+  expiringAt: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
-  url: "exampleUrl",
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
+  expiringAt: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
-  url: "exampleUrl",
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
+    expiringAt: new Date(),
     id: "exampleId",
     updatedAt: new Date(),
-    url: "exampleUrl",
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
+  expiringAt: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
-  url: "exampleUrl",
 };
 
 const service = {
@@ -128,6 +128,7 @@ describe("Document", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        expiringAt: CREATE_RESULT.expiringAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -140,6 +141,7 @@ describe("Document", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          expiringAt: FIND_MANY_RESULT[0].expiringAt.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -163,6 +165,7 @@ describe("Document", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        expiringAt: FIND_ONE_RESULT.expiringAt.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -176,6 +179,7 @@ describe("Document", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        expiringAt: CREATE_RESULT.expiringAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })
       .then(function () {

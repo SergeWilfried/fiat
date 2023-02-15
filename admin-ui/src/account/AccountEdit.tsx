@@ -4,9 +4,9 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  NumberInput,
-  SelectInput,
   TextInput,
+  SelectInput,
+  NumberInput,
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceInput,
@@ -19,6 +19,19 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="AccountNumber" source="accountNumber" />
+        <SelectInput
+          source="accountType"
+          label="AccountType"
+          choices={[
+            { label: "MobileMoney", value: "MobileMoney" },
+            { label: "IBAN", value: "Iban" },
+            { label: "Wallet", value: "Wallet" },
+          ]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
         <NumberInput label="Available balance" source="availableBalance" />
         <NumberInput label="Balance" source="balance" />
         <SelectInput

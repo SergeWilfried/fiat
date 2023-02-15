@@ -4,9 +4,9 @@ import {
   Create,
   SimpleForm,
   CreateProps,
-  NumberInput,
-  SelectInput,
   TextInput,
+  SelectInput,
+  NumberInput,
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceInput,
@@ -19,6 +19,19 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="AccountNumber" source="accountNumber" />
+        <SelectInput
+          source="accountType"
+          label="AccountType"
+          choices={[
+            { label: "MobileMoney", value: "MobileMoney" },
+            { label: "IBAN", value: "Iban" },
+            { label: "Wallet", value: "Wallet" },
+          ]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
         <NumberInput label="Available balance" source="availableBalance" />
         <NumberInput label="Balance" source="balance" />
         <SelectInput

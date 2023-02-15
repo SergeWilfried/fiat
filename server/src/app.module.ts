@@ -1,21 +1,21 @@
-import { CacheModule, Module, Scope } from '@nestjs/common';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { MorganInterceptor, MorganModule } from 'nest-morgan';
-import { UserModule } from './user/user.module';
-import { TransactionModule } from './transaction/transaction.module';
-import { AddressModule } from './address/address.module';
-import { AccountModule } from './account/account.module';
-import { DocumentModule } from './document/document.module';
-import { ACLModule } from './auth/acl.module';
-import { AuthModule } from './auth/auth.module';
-import { HealthModule } from './health/health.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { SecretsManagerModule } from './providers/secrets/secretsManager.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { ServeStaticOptionsService } from './serveStaticOptions.service';
-import { GraphQLModule } from '@nestjs/graphql';
-import { redisStore } from 'cache-manager-redis-store';
+import { CacheModule, Module, Scope } from "@nestjs/common";
+import { APP_INTERCEPTOR } from "@nestjs/core";
+import { MorganInterceptor, MorganModule } from "nest-morgan";
+import { UserModule } from "./user/user.module";
+import { TransactionModule } from "./transaction/transaction.module";
+import { AddressModule } from "./address/address.module";
+import { AccountModule } from "./account/account.module";
+import { DocumentModule } from "./document/document.module";
+import { ACLModule } from "./auth/acl.module";
+import { AuthModule } from "./auth/auth.module";
+import { HealthModule } from "./health/health.module";
+import { PrismaModule } from "./prisma/prisma.module";
+import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
+import { KafkaModule } from "./kafka/kafka.module";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { ServeStaticOptionsService } from "./serveStaticOptions.service";
+import { GraphQLModule } from "@nestjs/graphql";
 
 @Module({
   controllers: [],
@@ -30,6 +30,7 @@ import { redisStore } from 'cache-manager-redis-store';
     HealthModule,
     PrismaModule,
     SecretsManagerModule,
+    KafkaModule,
     MorganModule,
     ConfigModule.forRoot({ isGlobal: true }),
     CacheModule.registerAsync({

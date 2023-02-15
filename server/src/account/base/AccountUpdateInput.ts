@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsOptional,
   IsEnum,
   IsNumber,
   ValidateNested,
-} from "class-validator";
-import { EnumAccountAccountType } from "./EnumAccountAccountType";
-import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { EnumAccountStatus } from "./EnumAccountStatus";
-import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
-import { Type } from "class-transformer";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+} from 'class-validator';
+import { EnumAccountAccountType } from './EnumAccountAccountType';
+import { EnumAccountCurrency } from './EnumAccountCurrency';
+import { EnumAccountStatus } from './EnumAccountStatus';
+import { TransactionUpdateManyWithoutAccountsInput } from './TransactionUpdateManyWithoutAccountsInput';
+import { Type } from 'class-transformer';
+import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
 
 @InputType()
 class AccountUpdateInput {
@@ -47,7 +47,7 @@ class AccountUpdateInput {
   @Field(() => EnumAccountAccountType, {
     nullable: true,
   })
-  accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
+  accountType?: 'MobileMoney' | 'Iban' | 'Wallet' | null;
 
   @ApiProperty({
     required: false,
@@ -80,7 +80,7 @@ class AccountUpdateInput {
   @Field(() => EnumAccountCurrency, {
     nullable: true,
   })
-  currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
+  currency?: 'Xof' | 'Eur' | 'Usd' | 'Celo' | null;
 
   @ApiProperty({
     required: false,
@@ -113,7 +113,7 @@ class AccountUpdateInput {
   @Field(() => EnumAccountStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Blocked" | null;
+  status?: 'Approved' | 'Pending' | 'Blocked' | null;
 
   @ApiProperty({
     required: false,

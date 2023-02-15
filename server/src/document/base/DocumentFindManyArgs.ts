@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { DocumentWhereInput } from "./DocumentWhereInput";
-import { Type } from "class-transformer";
-import { DocumentOrderByInput } from "./DocumentOrderByInput";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { DocumentWhereInput } from './DocumentWhereInput';
+import { Type } from 'class-transformer';
+import { DocumentOrderByInput } from './DocumentOrderByInput';
 
 @ArgsType()
 class DocumentFindManyArgs {

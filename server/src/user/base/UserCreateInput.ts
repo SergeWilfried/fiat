@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountCreateNestedManyWithoutUsersInput } from "./AccountCreateNestedManyWithoutUsersInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountCreateNestedManyWithoutUsersInput } from './AccountCreateNestedManyWithoutUsersInput';
 import {
   ValidateNested,
   IsOptional,
   IsJSON,
   IsString,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
-import { DocumentCreateNestedManyWithoutUsersInput } from "./DocumentCreateNestedManyWithoutUsersInput";
-import { EnumUserStatus } from "./EnumUserStatus";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { GraphQLJSON } from 'graphql-type-json';
+import { InputJsonValue } from '../../types';
+import { DocumentCreateNestedManyWithoutUsersInput } from './DocumentCreateNestedManyWithoutUsersInput';
+import { EnumUserStatus } from './EnumUserStatus';
 
 @InputType()
 class UserCreateInput {
@@ -131,7 +131,7 @@ class UserCreateInput {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Rejected" | null;
+  status?: 'Approved' | 'Pending' | 'Rejected' | null;
 
   @ApiProperty({
     required: true,

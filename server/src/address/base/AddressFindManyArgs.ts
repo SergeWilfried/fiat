@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AddressWhereInput } from "./AddressWhereInput";
-import { Type } from "class-transformer";
-import { AddressOrderByInput } from "./AddressOrderByInput";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AddressWhereInput } from './AddressWhereInput';
+import { Type } from 'class-transformer';
+import { AddressOrderByInput } from './AddressOrderByInput';
 
 @ArgsType()
 class AddressFindManyArgs {

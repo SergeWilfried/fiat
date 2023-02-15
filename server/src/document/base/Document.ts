@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDate,
   IsEnum,
@@ -18,13 +18,13 @@ import {
   IsString,
   IsJSON,
   ValidateNested,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
-import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { JsonValue } from "type-fest";
-import { User } from "../../user/base/User";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumDocumentDocumentType } from './EnumDocumentDocumentType';
+import { EnumDocumentStatus } from './EnumDocumentStatus';
+import { GraphQLJSON } from 'graphql-type-json';
+import { JsonValue } from 'type-fest';
+import { User } from '../../user/base/User';
 
 @ObjectType()
 class Document {
@@ -44,7 +44,7 @@ class Document {
   @Field(() => EnumDocumentDocumentType, {
     nullable: true,
   })
-  documentType?: "Driverlicence" | "Passport" | "GovernmentId";
+  documentType?: 'Driverlicence' | 'Passport' | 'GovernmentId';
 
   @ApiProperty({
     required: false,
@@ -74,7 +74,7 @@ class Document {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Rejected" | null;
+  status?: 'Approved' | 'Rejected' | null;
 
   @ApiProperty({
     required: true,

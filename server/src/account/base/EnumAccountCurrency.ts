@@ -9,15 +9,15 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { registerEnumType } from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum EnumAccountCurrency {
-  Xof = "Xof",
-  Eur = "Eur",
-  Usd = "Usd",
-  Celo = "Celo",
+  Xof = 'Xof',
+  Eur = 'Eur',
+  Usd = 'Usd',
+  Celo = 'Celo',
 }
 
 registerEnumType(EnumAccountCurrency, {
-  name: "EnumAccountCurrency",
+  name: 'EnumAccountCurrency',
 });

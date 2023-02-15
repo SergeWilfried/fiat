@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { registerEnumType } from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum EnumDocumentDocumentType {
-  Driverlicence = "Driverlicence",
-  Passport = "Passport",
-  GovernmentId = "GovernmentId",
+  Driverlicence = 'Driverlicence',
+  Passport = 'Passport',
+  GovernmentId = 'GovernmentId',
 }
 
 registerEnumType(EnumDocumentDocumentType, {
-  name: "EnumDocumentDocumentType",
+  name: 'EnumDocumentDocumentType',
 });

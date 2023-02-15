@@ -9,47 +9,47 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Transaction, Account } from "@prisma/client";
+import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma, Transaction, Account } from '@prisma/client';
 
 export class TransactionServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
   async count<T extends Prisma.TransactionFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionFindManyArgs>,
   ): Promise<number> {
     return this.prisma.transaction.count(args);
   }
 
   async findMany<T extends Prisma.TransactionFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionFindManyArgs>,
   ): Promise<Transaction[]> {
     return this.prisma.transaction.findMany(args);
   }
   async findOne<T extends Prisma.TransactionFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionFindUniqueArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionFindUniqueArgs>,
   ): Promise<Transaction | null> {
     return this.prisma.transaction.findUnique(args);
   }
   async create<T extends Prisma.TransactionCreateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionCreateArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionCreateArgs>,
   ): Promise<Transaction> {
     return this.prisma.transaction.create<T>(args);
   }
   async update<T extends Prisma.TransactionUpdateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionUpdateArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionUpdateArgs>,
   ): Promise<Transaction> {
     return this.prisma.transaction.update<T>(args);
   }
   async delete<T extends Prisma.TransactionDeleteArgs>(
-    args: Prisma.SelectSubset<T, Prisma.TransactionDeleteArgs>
+    args: Prisma.SelectSubset<T, Prisma.TransactionDeleteArgs>,
   ): Promise<Transaction> {
     return this.prisma.transaction.delete(args);
   }
 
   async findAccounts(
     parentId: string,
-    args: Prisma.AccountFindManyArgs
+    args: Prisma.AccountFindManyArgs,
   ): Promise<Account[]> {
     return this.prisma.transaction
       .findUniqueOrThrow({

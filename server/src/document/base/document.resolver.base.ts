@@ -9,41 +9,41 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as graphql from "@nestjs/graphql";
-import * as apollo from "apollo-server-express";
-import * as nestAccessControl from "nest-access-control";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
-import { isRecordNotFoundError } from "../../prisma.util";
-import { MetaQueryPayload } from "../../util/MetaQueryPayload";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { CreateDocumentArgs } from "./CreateDocumentArgs";
-import { UpdateDocumentArgs } from "./UpdateDocumentArgs";
-import { DeleteDocumentArgs } from "./DeleteDocumentArgs";
-import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
-import { DocumentFindUniqueArgs } from "./DocumentFindUniqueArgs";
-import { Document } from "./Document";
-import { User } from "../../user/base/User";
-import { DocumentService } from "../document.service";
+import * as common from '@nestjs/common';
+import * as graphql from '@nestjs/graphql';
+import * as apollo from 'apollo-server-express';
+import * as nestAccessControl from 'nest-access-control';
+import { GqlDefaultAuthGuard } from '../../auth/gqlDefaultAuth.guard';
+import * as gqlACGuard from '../../auth/gqlAC.guard';
+import { isRecordNotFoundError } from '../../prisma.util';
+import { MetaQueryPayload } from '../../util/MetaQueryPayload';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { CreateDocumentArgs } from './CreateDocumentArgs';
+import { UpdateDocumentArgs } from './UpdateDocumentArgs';
+import { DeleteDocumentArgs } from './DeleteDocumentArgs';
+import { DocumentFindManyArgs } from './DocumentFindManyArgs';
+import { DocumentFindUniqueArgs } from './DocumentFindUniqueArgs';
+import { Document } from './Document';
+import { User } from '../../user/base/User';
+import { DocumentService } from '../document.service';
 
 @graphql.Resolver(() => Document)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 export class DocumentResolverBase {
   constructor(
     protected readonly service: DocumentService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   async _documentsMeta(
-    @graphql.Args() args: DocumentFindManyArgs
+    @graphql.Args() args: DocumentFindManyArgs,
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -58,12 +58,12 @@ export class DocumentResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Document])
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   async documents(
-    @graphql.Args() args: DocumentFindManyArgs
+    @graphql.Args() args: DocumentFindManyArgs,
   ): Promise<Document[]> {
     return this.service.findMany(args);
   }
@@ -71,12 +71,12 @@ export class DocumentResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Document, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "own",
+    resource: 'Document',
+    action: 'read',
+    possession: 'own',
   })
   async document(
-    @graphql.Args() args: DocumentFindUniqueArgs
+    @graphql.Args() args: DocumentFindUniqueArgs,
   ): Promise<Document | null> {
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -88,12 +88,12 @@ export class DocumentResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Document)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "create",
-    possession: "any",
+    resource: 'Document',
+    action: 'create',
+    possession: 'any',
   })
   async createDocument(
-    @graphql.Args() args: CreateDocumentArgs
+    @graphql.Args() args: CreateDocumentArgs,
   ): Promise<Document> {
     return await this.service.create({
       ...args,
@@ -112,12 +112,12 @@ export class DocumentResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Document)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "update",
-    possession: "any",
+    resource: 'Document',
+    action: 'update',
+    possession: 'any',
   })
   async updateDocument(
-    @graphql.Args() args: UpdateDocumentArgs
+    @graphql.Args() args: UpdateDocumentArgs,
   ): Promise<Document | null> {
     try {
       return await this.service.update({
@@ -135,7 +135,7 @@ export class DocumentResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -144,19 +144,19 @@ export class DocumentResolverBase {
 
   @graphql.Mutation(() => Document)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "delete",
-    possession: "any",
+    resource: 'Document',
+    action: 'delete',
+    possession: 'any',
   })
   async deleteDocument(
-    @graphql.Args() args: DeleteDocumentArgs
+    @graphql.Args() args: DeleteDocumentArgs,
   ): Promise<Document | null> {
     try {
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -166,9 +166,9 @@ export class DocumentResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
+    resource: 'User',
+    action: 'read',
+    possession: 'any',
   })
   async user(@graphql.Parent() parent: Document): Promise<User | null> {
     const result = await this.service.getUser(parent.id);

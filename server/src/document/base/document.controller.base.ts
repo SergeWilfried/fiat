@@ -9,37 +9,37 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import { DocumentService } from "../document.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { DocumentCreateInput } from "./DocumentCreateInput";
-import { DocumentWhereInput } from "./DocumentWhereInput";
-import { DocumentWhereUniqueInput } from "./DocumentWhereUniqueInput";
-import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
-import { DocumentUpdateInput } from "./DocumentUpdateInput";
-import { Document } from "./Document";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import { DocumentService } from '../document.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { DocumentCreateInput } from './DocumentCreateInput';
+import { DocumentWhereInput } from './DocumentWhereInput';
+import { DocumentWhereUniqueInput } from './DocumentWhereUniqueInput';
+import { DocumentFindManyArgs } from './DocumentFindManyArgs';
+import { DocumentUpdateInput } from './DocumentUpdateInput';
+import { Document } from './Document';
 @swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class DocumentControllerBase {
   constructor(
     protected readonly service: DocumentService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "create",
-    possession: "any",
+    resource: 'Document',
+    action: 'create',
+    possession: 'any',
   })
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Document })
@@ -75,9 +75,9 @@ export class DocumentControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   @common.Get()
   @swagger.ApiOkResponse({ type: [Document] })
@@ -107,16 +107,16 @@ export class DocumentControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "own",
+    resource: 'Document',
+    action: 'read',
+    possession: 'own',
   })
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Document })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: DocumentWhereUniqueInput
+    @common.Param() params: DocumentWhereUniqueInput,
   ): Promise<Document | null> {
     const result = await this.service.findOne({
       where: params,
@@ -138,7 +138,7 @@ export class DocumentControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
@@ -146,17 +146,17 @@ export class DocumentControllerBase {
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "update",
-    possession: "any",
+    resource: 'Document',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Document })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
     @common.Param() params: DocumentWhereUniqueInput,
-    @common.Body() data: DocumentUpdateInput
+    @common.Body() data: DocumentUpdateInput,
   ): Promise<Document | null> {
     try {
       return await this.service.update({
@@ -189,7 +189,7 @@ export class DocumentControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
@@ -197,16 +197,16 @@ export class DocumentControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "delete",
-    possession: "any",
+    resource: 'Document',
+    action: 'delete',
+    possession: 'any',
   })
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Document })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async delete(
-    @common.Param() params: DocumentWhereUniqueInput
+    @common.Param() params: DocumentWhereUniqueInput,
   ): Promise<Document | null> {
     try {
       return await this.service.delete({
@@ -230,7 +230,7 @@ export class DocumentControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;

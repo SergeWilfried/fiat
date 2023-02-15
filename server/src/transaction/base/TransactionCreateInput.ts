@@ -9,20 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountCreateNestedManyWithoutTransactionsInput } from "./AccountCreateNestedManyWithoutTransactionsInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountCreateNestedManyWithoutTransactionsInput } from './AccountCreateNestedManyWithoutTransactionsInput';
 import {
   ValidateNested,
   IsOptional,
   IsInt,
   IsNumber,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumTransactionStatus } from './EnumTransactionStatus';
+import { EnumTransactionTransactionSubtype } from './EnumTransactionTransactionSubtype';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
 
 @InputType()
 class TransactionCreateInput {
@@ -63,7 +63,7 @@ class TransactionCreateInput {
   })
   @IsEnum(EnumTransactionStatus)
   @Field(() => EnumTransactionStatus)
-  status!: "Successful" | "Pending" | "Failed";
+  status!: 'Successful' | 'Pending' | 'Failed';
 
   @ApiProperty({
     required: false,
@@ -74,7 +74,7 @@ class TransactionCreateInput {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: "Fiat" | "Crypto" | null;
+  transactionSubtype?: 'Fiat' | 'Crypto' | null;
 
   @ApiProperty({
     required: true,
@@ -82,7 +82,7 @@ class TransactionCreateInput {
   })
   @IsEnum(EnumTransactionTransactionType)
   @Field(() => EnumTransactionTransactionType)
-  transactionType!: "Credit" | "Debit";
+  transactionType!: 'Credit' | 'Debit';
 }
 
 export { TransactionCreateInput };

@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { EnumDocumentDocumentType } from './EnumDocumentDocumentType';
 import {
   IsEnum,
   IsDate,
   IsOptional,
   IsJSON,
   ValidateNested,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumDocumentStatus } from './EnumDocumentStatus';
+import { GraphQLJSON } from 'graphql-type-json';
+import { InputJsonValue } from '../../types';
+import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
 
 @InputType()
 class DocumentCreateInput {
@@ -33,7 +33,7 @@ class DocumentCreateInput {
   })
   @IsEnum(EnumDocumentDocumentType)
   @Field(() => EnumDocumentDocumentType)
-  documentType!: "Driverlicence" | "Passport" | "GovernmentId";
+  documentType!: 'Driverlicence' | 'Passport' | 'GovernmentId';
 
   @ApiProperty({
     required: false,
@@ -55,7 +55,7 @@ class DocumentCreateInput {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Rejected" | null;
+  status?: 'Approved' | 'Rejected' | null;
 
   @ApiProperty({
     required: true,

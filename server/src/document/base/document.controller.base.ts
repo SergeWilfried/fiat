@@ -27,7 +27,7 @@ import { DocumentWhereUniqueInput } from "./DocumentWhereUniqueInput";
 import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
 import { DocumentUpdateInput } from "./DocumentUpdateInput";
 import { Document } from "./Document";
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class DocumentControllerBase {
   constructor(

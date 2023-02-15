@@ -52,7 +52,7 @@ class TransactionWhereInput {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: "Momo" | "Bank" | "Cash" | "Crypto";
+  transactionSubtype?: "Fiat" | "Crypto";
 
   @ApiProperty({
     required: false,

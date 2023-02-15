@@ -7,7 +7,7 @@ export type Transaction = {
   fee: number | null;
   id: string;
   status?: "Successful" | "Pending" | "Failed";
-  transactionSubtype?: "Momo" | "Bank" | "Cash" | "Crypto" | null;
+  transactionSubtype?: "Fiat" | "Crypto" | null;
   transactionType?: "Credit" | "Debit";
   updatedAt: Date;
 };

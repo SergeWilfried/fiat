@@ -96,12 +96,6 @@
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Transaction",
-    "action": "delete:any",
-    "attributes": "*"
-  },
-  {
     "role": "admin",
     "resource": "Transaction",
     "action": "delete:any",
@@ -273,12 +267,6 @@
     "role": "admin",
     "resource": "Document",
     "action": "update:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Document",
-    "action": "delete:any",
     "attributes": "*"
   },
   {

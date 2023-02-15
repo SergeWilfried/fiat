@@ -4,13 +4,13 @@ import {
   HttpException,
   HttpServer,
   HttpStatus,
-} from "@nestjs/common";
-import { BaseExceptionFilter } from "@nestjs/core";
+} from '@nestjs/common';
+import { BaseExceptionFilter } from '@nestjs/core';
 import {
   // @ts-ignore
   Prisma,
-} from "@prisma/client";
-import { Response } from "express";
+} from '@prisma/client';
+import { Response } from 'express';
 
 export type ErrorCodesStatusMapping = {
   [key: string]: number;
@@ -50,16 +50,16 @@ export class HttpExceptionFilter extends BaseExceptionFilter {
   catch(exception: Prisma.PrismaClientKnownRequestError, host: ArgumentsHost) {
     const statusCode = this.errorCodesStatusMapping[exception.code];
     let message;
-    if (host.getType() === "http") {
+    if (host.getType() === 'http') {
       // for http requests (REST)
       // Todo : Add all other exception types and also add mapping
       const ctx = host.switchToHttp();
       const response = ctx.getResponse<Response>();
-      if (exception.code === "P2002") {
+      if (exception.code === 'P2002') {
         // Handling Unique Key Constraint Violation Error
         const fields = (exception.meta as { target: string[] }).target;
         message = `Another record with the requested (${fields.join(
-          ", "
+          ', ',
         )}) already exists`;
       } else {
         message =
@@ -83,10 +83,10 @@ export class HttpExceptionFilter extends BaseExceptionFilter {
    * @returns short message for the exception
    */
   exceptionShortMessage(message: string): string {
-    const shortMessage = message.substring(message.indexOf("→"));
+    const shortMessage = message.substring(message.indexOf('→'));
     return shortMessage
-      .substring(shortMessage.indexOf("\n"))
-      .replace(/\n/g, "")
+      .substring(shortMessage.indexOf('\n'))
+      .replace(/\n/g, '')
       .trim();
   }
 }

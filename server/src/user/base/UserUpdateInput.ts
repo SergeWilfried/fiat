@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountUpdateManyWithoutUsersInput } from "./AccountUpdateManyWithoutUsersInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountUpdateManyWithoutUsersInput } from './AccountUpdateManyWithoutUsersInput';
 import {
   ValidateNested,
   IsOptional,
   IsJSON,
   IsString,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
-import { DocumentUpdateManyWithoutUsersInput } from "./DocumentUpdateManyWithoutUsersInput";
-import { EnumUserStatus } from "./EnumUserStatus";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { GraphQLJSON } from 'graphql-type-json';
+import { InputJsonValue } from '../../types';
+import { DocumentUpdateManyWithoutUsersInput } from './DocumentUpdateManyWithoutUsersInput';
+import { EnumUserStatus } from './EnumUserStatus';
 
 @InputType()
 class UserUpdateInput {
@@ -146,7 +146,7 @@ class UserUpdateInput {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Rejected" | null;
+  status?: 'Approved' | 'Pending' | 'Rejected' | null;
 
   @ApiProperty({
     required: false,

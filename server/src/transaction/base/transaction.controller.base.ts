@@ -9,46 +9,46 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import { TransactionService } from "../transaction.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { TransactionCreateInput } from "./TransactionCreateInput";
-import { TransactionWhereInput } from "./TransactionWhereInput";
-import { TransactionWhereUniqueInput } from "./TransactionWhereUniqueInput";
-import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
-import { TransactionUpdateInput } from "./TransactionUpdateInput";
-import { Transaction } from "./Transaction";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import { TransactionService } from '../transaction.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { TransactionCreateInput } from './TransactionCreateInput';
+import { TransactionWhereInput } from './TransactionWhereInput';
+import { TransactionWhereUniqueInput } from './TransactionWhereUniqueInput';
+import { TransactionFindManyArgs } from './TransactionFindManyArgs';
+import { TransactionUpdateInput } from './TransactionUpdateInput';
+import { Transaction } from './Transaction';
+import { AccountFindManyArgs } from '../../account/base/AccountFindManyArgs';
+import { Account } from '../../account/base/Account';
+import { AccountWhereUniqueInput } from '../../account/base/AccountWhereUniqueInput';
 @swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TransactionControllerBase {
   constructor(
     protected readonly service: TransactionService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "create",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'create',
+    possession: 'any',
   })
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Transaction })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(
-    @common.Body() data: TransactionCreateInput
+    @common.Body() data: TransactionCreateInput,
   ): Promise<Transaction> {
     return await this.service.create({
       data: data,
@@ -67,9 +67,9 @@ export class TransactionControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'read',
+    possession: 'any',
   })
   @common.Get()
   @swagger.ApiOkResponse({ type: [Transaction] })
@@ -94,16 +94,16 @@ export class TransactionControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "own",
+    resource: 'Transaction',
+    action: 'read',
+    possession: 'own',
   })
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: TransactionWhereUniqueInput
+    @common.Param() params: TransactionWhereUniqueInput,
   ): Promise<Transaction | null> {
     const result = await this.service.findOne({
       where: params,
@@ -120,7 +120,7 @@ export class TransactionControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
@@ -128,17 +128,17 @@ export class TransactionControllerBase {
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
     @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() data: TransactionUpdateInput
+    @common.Body() data: TransactionUpdateInput,
   ): Promise<Transaction | null> {
     try {
       return await this.service.update({
@@ -158,7 +158,7 @@ export class TransactionControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
@@ -166,16 +166,16 @@ export class TransactionControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "delete",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'delete',
+    possession: 'any',
   })
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async delete(
-    @common.Param() params: TransactionWhereUniqueInput
+    @common.Param() params: TransactionWhereUniqueInput,
   ): Promise<Transaction | null> {
     try {
       return await this.service.delete({
@@ -194,7 +194,7 @@ export class TransactionControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
@@ -203,15 +203,15 @@ export class TransactionControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
-  @common.Get("/:id/accounts")
+  @common.Get('/:id/accounts')
   @ApiNestedQuery(AccountFindManyArgs)
   async findManyAccounts(
     @common.Req() request: Request,
-    @common.Param() params: TransactionWhereUniqueInput
+    @common.Param() params: TransactionWhereUniqueInput,
   ): Promise<Account[]> {
     const query = plainToClass(AccountFindManyArgs, request.query);
     const results = await this.service.findAccounts(params.id, {
@@ -238,21 +238,21 @@ export class TransactionControllerBase {
     });
     if (results === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return results;
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Post("/:id/accounts")
+  @common.Post('/:id/accounts')
   async connectAccounts(
     @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       accounts: {
@@ -267,14 +267,14 @@ export class TransactionControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Patch("/:id/accounts")
+  @common.Patch('/:id/accounts')
   async updateAccounts(
     @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       accounts: {
@@ -289,14 +289,14 @@ export class TransactionControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Delete("/:id/accounts")
+  @common.Delete('/:id/accounts')
   async disconnectAccounts(
     @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       accounts: {

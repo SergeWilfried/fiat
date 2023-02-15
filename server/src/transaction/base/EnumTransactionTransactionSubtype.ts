@@ -9,13 +9,13 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { registerEnumType } from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum EnumTransactionTransactionSubtype {
-  Fiat = "Fiat",
-  Crypto = "Crypto",
+  Fiat = 'Fiat',
+  Crypto = 'Crypto',
 }
 
 registerEnumType(EnumTransactionTransactionSubtype, {
-  name: "EnumTransactionTransactionSubtype",
+  name: 'EnumTransactionTransactionSubtype',
 });

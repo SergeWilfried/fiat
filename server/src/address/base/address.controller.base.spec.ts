@@ -1,62 +1,62 @@
-import { Test } from "@nestjs/testing";
+import { Test } from '@nestjs/testing';
 import {
   INestApplication,
   HttpStatus,
   ExecutionContext,
   CallHandler,
-} from "@nestjs/common";
-import request from "supertest";
-import { MorganModule } from "nest-morgan";
-import { ACGuard } from "nest-access-control";
-import { DefaultAuthGuard } from "../../auth/defaultAuth.guard";
-import { ACLModule } from "../../auth/acl.module";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { map } from "rxjs";
-import { AddressController } from "../address.controller";
-import { AddressService } from "../address.service";
+} from '@nestjs/common';
+import request from 'supertest';
+import { MorganModule } from 'nest-morgan';
+import { ACGuard } from 'nest-access-control';
+import { DefaultAuthGuard } from '../../auth/defaultAuth.guard';
+import { ACLModule } from '../../auth/acl.module';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { map } from 'rxjs';
+import { AddressController } from '../address.controller';
+import { AddressService } from '../address.service';
 
-const nonExistingId = "nonExistingId";
-const existingId = "existingId";
+const nonExistingId = 'nonExistingId';
+const existingId = 'existingId';
 const CREATE_INPUT = {
-  address_1: "exampleAddress_1",
-  address_2: "exampleAddress_2",
-  city: "exampleCity",
+  address_1: 'exampleAddress_1',
+  address_2: 'exampleAddress_2',
+  city: 'exampleCity',
   createdAt: new Date(),
-  id: "exampleId",
-  state: "exampleState",
+  id: 'exampleId',
+  state: 'exampleState',
   updatedAt: new Date(),
   zip: 42,
 };
 const CREATE_RESULT = {
-  address_1: "exampleAddress_1",
-  address_2: "exampleAddress_2",
-  city: "exampleCity",
+  address_1: 'exampleAddress_1',
+  address_2: 'exampleAddress_2',
+  city: 'exampleCity',
   createdAt: new Date(),
-  id: "exampleId",
-  state: "exampleState",
+  id: 'exampleId',
+  state: 'exampleState',
   updatedAt: new Date(),
   zip: 42,
 };
 const FIND_MANY_RESULT = [
   {
-    address_1: "exampleAddress_1",
-    address_2: "exampleAddress_2",
-    city: "exampleCity",
+    address_1: 'exampleAddress_1',
+    address_2: 'exampleAddress_2',
+    city: 'exampleCity',
     createdAt: new Date(),
-    id: "exampleId",
-    state: "exampleState",
+    id: 'exampleId',
+    state: 'exampleState',
     updatedAt: new Date(),
     zip: 42,
   },
 ];
 const FIND_ONE_RESULT = {
-  address_1: "exampleAddress_1",
-  address_2: "exampleAddress_2",
-  city: "exampleCity",
+  address_1: 'exampleAddress_1',
+  address_2: 'exampleAddress_2',
+  city: 'exampleCity',
   createdAt: new Date(),
-  id: "exampleId",
-  state: "exampleState",
+  id: 'exampleId',
+  state: 'exampleState',
   updatedAt: new Date(),
   zip: 42,
 };
@@ -81,7 +81,7 @@ const basicAuthGuard = {
     const argumentHost = context.switchToHttp();
     const request = argumentHost.getRequest();
     request.user = {
-      roles: ["user"],
+      roles: ['user'],
     };
     return true;
   },
@@ -96,9 +96,9 @@ const acGuard = {
 const aclFilterResponseInterceptor = {
   intercept: (context: ExecutionContext, next: CallHandler) => {
     return next.handle().pipe(
-      map((data) => {
+      map(data => {
         return data;
-      })
+      }),
     );
   },
 };
@@ -108,7 +108,7 @@ const aclValidateRequestInterceptor = {
   },
 };
 
-describe("Address", () => {
+describe('Address', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -136,9 +136,9 @@ describe("Address", () => {
     await app.init();
   });
 
-  test("POST /addresses", async () => {
+  test('POST /addresses', async () => {
     await request(app.getHttpServer())
-      .post("/addresses")
+      .post('/addresses')
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -148,9 +148,9 @@ describe("Address", () => {
       });
   });
 
-  test("GET /addresses", async () => {
+  test('GET /addresses', async () => {
     await request(app.getHttpServer())
-      .get("/addresses")
+      .get('/addresses')
       .expect(HttpStatus.OK)
       .expect([
         {
@@ -161,20 +161,20 @@ describe("Address", () => {
       ]);
   });
 
-  test("GET /addresses/:id non existing", async () => {
+  test('GET /addresses/:id non existing', async () => {
     await request(app.getHttpServer())
-      .get(`${"/addresses"}/${nonExistingId}`)
+      .get(`${'/addresses'}/${nonExistingId}`)
       .expect(HttpStatus.NOT_FOUND)
       .expect({
         statusCode: HttpStatus.NOT_FOUND,
-        message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
-        error: "Not Found",
+        message: `No resource was found for {"${'id'}":"${nonExistingId}"}`,
+        error: 'Not Found',
       });
   });
 
-  test("GET /addresses/:id existing", async () => {
+  test('GET /addresses/:id existing', async () => {
     await request(app.getHttpServer())
-      .get(`${"/addresses"}/${existingId}`)
+      .get(`${'/addresses'}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
@@ -183,10 +183,10 @@ describe("Address", () => {
       });
   });
 
-  test("POST /addresses existing resource", async () => {
+  test('POST /addresses existing resource', async () => {
     let agent = request(app.getHttpServer());
     await agent
-      .post("/addresses")
+      .post('/addresses')
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -196,7 +196,7 @@ describe("Address", () => {
       })
       .then(function () {
         agent
-          .post("/addresses")
+          .post('/addresses')
           .send(CREATE_INPUT)
           .expect(HttpStatus.CONFLICT)
           .expect({

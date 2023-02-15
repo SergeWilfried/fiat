@@ -9,20 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountUpdateManyWithoutTransactionsInput } from "./AccountUpdateManyWithoutTransactionsInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountUpdateManyWithoutTransactionsInput } from './AccountUpdateManyWithoutTransactionsInput';
 import {
   ValidateNested,
   IsOptional,
   IsInt,
   IsNumber,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumTransactionStatus } from './EnumTransactionStatus';
+import { EnumTransactionTransactionSubtype } from './EnumTransactionTransactionSubtype';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
 
 @InputType()
 class TransactionUpdateInput {
@@ -69,7 +69,7 @@ class TransactionUpdateInput {
   @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  status?: "Successful" | "Pending" | "Failed";
+  status?: 'Successful' | 'Pending' | 'Failed';
 
   @ApiProperty({
     required: false,
@@ -80,7 +80,7 @@ class TransactionUpdateInput {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: "Fiat" | "Crypto" | null;
+  transactionSubtype?: 'Fiat' | 'Crypto' | null;
 
   @ApiProperty({
     required: false,
@@ -91,7 +91,7 @@ class TransactionUpdateInput {
   @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Credit" | "Debit";
+  transactionType?: 'Credit' | 'Debit';
 }
 
 export { TransactionUpdateInput };

@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsString,
   IsOptional,
@@ -18,13 +18,13 @@ import {
   IsNumber,
   IsDate,
   ValidateNested,
-} from "class-validator";
-import { EnumAccountAccountType } from "./EnumAccountAccountType";
-import { Type } from "class-transformer";
-import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { EnumAccountStatus } from "./EnumAccountStatus";
-import { Transaction } from "../../transaction/base/Transaction";
-import { User } from "../../user/base/User";
+} from 'class-validator';
+import { EnumAccountAccountType } from './EnumAccountAccountType';
+import { Type } from 'class-transformer';
+import { EnumAccountCurrency } from './EnumAccountCurrency';
+import { EnumAccountStatus } from './EnumAccountStatus';
+import { Transaction } from '../../transaction/base/Transaction';
+import { User } from '../../user/base/User';
 
 @ObjectType()
 class Account {
@@ -48,7 +48,7 @@ class Account {
   @Field(() => EnumAccountAccountType, {
     nullable: true,
   })
-  accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
+  accountType?: 'MobileMoney' | 'Iban' | 'Wallet' | null;
 
   @ApiProperty({
     required: false,
@@ -89,7 +89,7 @@ class Account {
   @Field(() => EnumAccountCurrency, {
     nullable: true,
   })
-  currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
+  currency?: 'Xof' | 'Eur' | 'Usd' | 'Celo' | null;
 
   @ApiProperty({
     required: false,
@@ -130,7 +130,7 @@ class Account {
   @Field(() => EnumAccountStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Blocked" | null;
+  status?: 'Approved' | 'Pending' | 'Blocked' | null;
 
   @ApiProperty({
     required: false,

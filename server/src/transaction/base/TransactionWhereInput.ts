@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
-import { StringFilter } from "../../util/StringFilter";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountListRelationFilter } from '../../account/base/AccountListRelationFilter';
+import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
+import { StringFilter } from '../../util/StringFilter';
+import { EnumTransactionTransactionSubtype } from './EnumTransactionTransactionSubtype';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
 
 @InputType()
 class TransactionWhereInput {
@@ -52,7 +52,7 @@ class TransactionWhereInput {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: "Fiat" | "Crypto";
+  transactionSubtype?: 'Fiat' | 'Crypto';
 
   @ApiProperty({
     required: false,
@@ -63,7 +63,7 @@ class TransactionWhereInput {
   @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Credit" | "Debit";
+  transactionType?: 'Credit' | 'Debit';
 }
 
 export { TransactionWhereInput };

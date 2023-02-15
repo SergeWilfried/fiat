@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { registerEnumType } from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum EnumAccountStatus {
-  Approved = "Approved",
-  Pending = "Pending",
-  Blocked = "Blocked",
+  Approved = 'Approved',
+  Pending = 'Pending',
+  Blocked = 'Blocked',
 }
 
 registerEnumType(EnumAccountStatus, {
-  name: "EnumAccountStatus",
+  name: 'EnumAccountStatus',
 });

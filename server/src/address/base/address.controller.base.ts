@@ -9,37 +9,37 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import { AddressService } from "../address.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AddressCreateInput } from "./AddressCreateInput";
-import { AddressWhereInput } from "./AddressWhereInput";
-import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
-import { AddressFindManyArgs } from "./AddressFindManyArgs";
-import { AddressUpdateInput } from "./AddressUpdateInput";
-import { Address } from "./Address";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import { AddressService } from '../address.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AddressCreateInput } from './AddressCreateInput';
+import { AddressWhereInput } from './AddressWhereInput';
+import { AddressWhereUniqueInput } from './AddressWhereUniqueInput';
+import { AddressFindManyArgs } from './AddressFindManyArgs';
+import { AddressUpdateInput } from './AddressUpdateInput';
+import { Address } from './Address';
 @swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AddressControllerBase {
   constructor(
     protected readonly service: AddressService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "create",
-    possession: "any",
+    resource: 'Address',
+    action: 'create',
+    possession: 'any',
   })
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Address })
@@ -62,9 +62,9 @@ export class AddressControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "any",
+    resource: 'Address',
+    action: 'read',
+    possession: 'any',
   })
   @common.Get()
   @swagger.ApiOkResponse({ type: [Address] })
@@ -89,16 +89,16 @@ export class AddressControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "own",
+    resource: 'Address',
+    action: 'read',
+    possession: 'own',
   })
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Address })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: AddressWhereUniqueInput
+    @common.Param() params: AddressWhereUniqueInput,
   ): Promise<Address | null> {
     const result = await this.service.findOne({
       where: params,
@@ -115,7 +115,7 @@ export class AddressControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
@@ -123,17 +123,17 @@ export class AddressControllerBase {
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "update",
-    possession: "any",
+    resource: 'Address',
+    action: 'update',
+    possession: 'any',
   })
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Address })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() data: AddressUpdateInput
+    @common.Body() data: AddressUpdateInput,
   ): Promise<Address | null> {
     try {
       return await this.service.update({
@@ -153,7 +153,7 @@ export class AddressControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
@@ -161,16 +161,16 @@ export class AddressControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "delete",
-    possession: "any",
+    resource: 'Address',
+    action: 'delete',
+    possession: 'any',
   })
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Address })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async delete(
-    @common.Param() params: AddressWhereUniqueInput
+    @common.Param() params: AddressWhereUniqueInput,
   ): Promise<Address | null> {
     try {
       return await this.service.delete({
@@ -189,7 +189,7 @@ export class AddressControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;

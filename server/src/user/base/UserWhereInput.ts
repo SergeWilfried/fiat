@@ -9,15 +9,15 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { DocumentListRelationFilter } from "../../document/base/DocumentListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { EnumUserStatus } from "./EnumUserStatus";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountListRelationFilter } from '../../account/base/AccountListRelationFilter';
+import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
+import { DocumentListRelationFilter } from '../../document/base/DocumentListRelationFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { EnumUserStatus } from './EnumUserStatus';
 
 @InputType()
 class UserWhereInput {
@@ -109,7 +109,7 @@ class UserWhereInput {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Rejected";
+  status?: 'Approved' | 'Pending' | 'Rejected';
 
   @ApiProperty({
     required: false,

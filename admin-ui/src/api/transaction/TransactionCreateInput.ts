@@ -5,6 +5,6 @@ export type TransactionCreateInput = {
   amount: number;
   fee?: number | null;
   status: "Successful" | "Pending" | "Failed";
-  transactionSubtype?: "Momo" | "Bank" | "Cash" | "Crypto" | null;
+  transactionSubtype?: "Fiat" | "Crypto" | null;
   transactionType: "Credit" | "Debit";
 };

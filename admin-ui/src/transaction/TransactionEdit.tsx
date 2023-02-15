@@ -41,9 +41,7 @@ export const TransactionEdit = (props: EditProps): React.ReactElement => {
           source="transactionSubtype"
           label="TransactionSubtype"
           choices={[
-            { label: "MOMO", value: "Momo" },
-            { label: "BANK", value: "Bank" },
-            { label: "CASH", value: "Cash" },
+            { label: "FIAT", value: "Fiat" },
             { label: "CRYPTO", value: "Crypto" },
           ]}
           optionText="label"

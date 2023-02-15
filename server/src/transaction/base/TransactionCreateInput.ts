@@ -74,7 +74,7 @@ class TransactionCreateInput {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: "Momo" | "Bank" | "Cash" | "Crypto" | null;
+  transactionSubtype?: "Fiat" | "Crypto" | null;
 
   @ApiProperty({
     required: true,

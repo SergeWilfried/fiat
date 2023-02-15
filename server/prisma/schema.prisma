@@ -90,9 +90,7 @@ enum EnumTransactionStatus {
 }
 
 enum EnumTransactionTransactionSubtype {
-  Momo
-  Bank
-  Cash
+  Fiat
   Crypto
 }
 

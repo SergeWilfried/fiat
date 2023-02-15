@@ -25,6 +25,24 @@ class AccountOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  accountNumber?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  accountType?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   availableBalance?: SortOrder;
 
   @ApiProperty({

@@ -12,12 +12,13 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsNumber,
+  IsString,
   IsOptional,
   IsEnum,
-  IsString,
+  IsNumber,
   ValidateNested,
 } from "class-validator";
+import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
@@ -26,6 +27,28 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class AccountUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  accountNumber?: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumAccountAccountType,
+  })
+  @IsEnum(EnumAccountAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountAccountType, {
+    nullable: true,
+  })
+  accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
+
   @ApiProperty({
     required: false,
     type: Number,

@@ -14,13 +14,16 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsDate,
   IsEnum,
-  IsString,
   IsOptional,
+  IsString,
+  IsJSON,
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
 import { User } from "../../user/base/User";
 
 @ObjectType()
@@ -42,6 +45,17 @@ class Document {
     nullable: true,
   })
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  expiringAt!: Date | null;
 
   @ApiProperty({
     required: true,
@@ -72,11 +86,10 @@ class Document {
 
   @ApiProperty({
     required: true,
-    type: String,
   })
-  @IsString()
-  @Field(() => String)
-  url!: string;
+  @IsJSON()
+  @Field(() => GraphQLJSON)
+  url!: JsonValue;
 
   @ApiProperty({
     required: false,

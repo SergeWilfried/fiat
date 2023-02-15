@@ -12,13 +12,14 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsNumber,
-  IsOptional,
-  IsDate,
-  IsEnum,
   IsString,
+  IsOptional,
+  IsEnum,
+  IsNumber,
+  IsDate,
   ValidateNested,
 } from "class-validator";
+import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { Type } from "class-transformer";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { EnumAccountStatus } from "./EnumAccountStatus";
@@ -27,6 +28,28 @@ import { User } from "../../user/base/User";
 
 @ObjectType()
 class Account {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  accountNumber!: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumAccountAccountType,
+  })
+  @IsEnum(EnumAccountAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountAccountType, {
+    nullable: true,
+  })
+  accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
+
   @ApiProperty({
     required: false,
     type: Number,

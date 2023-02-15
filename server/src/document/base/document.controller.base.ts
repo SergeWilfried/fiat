@@ -58,6 +58,7 @@ export class DocumentControllerBase {
       select: {
         createdAt: true,
         documentType: true,
+        expiringAt: true,
         id: true,
         status: true,
         updatedAt: true,
@@ -89,6 +90,7 @@ export class DocumentControllerBase {
       select: {
         createdAt: true,
         documentType: true,
+        expiringAt: true,
         id: true,
         status: true,
         updatedAt: true,
@@ -121,6 +123,7 @@ export class DocumentControllerBase {
       select: {
         createdAt: true,
         documentType: true,
+        expiringAt: true,
         id: true,
         status: true,
         updatedAt: true,
@@ -170,6 +173,7 @@ export class DocumentControllerBase {
         select: {
           createdAt: true,
           documentType: true,
+          expiringAt: true,
           id: true,
           status: true,
           updatedAt: true,
@@ -210,6 +214,7 @@ export class DocumentControllerBase {
         select: {
           createdAt: true,
           documentType: true,
+          expiringAt: true,
           id: true,
           status: true,
           updatedAt: true,

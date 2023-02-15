@@ -12,10 +12,18 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
-import { IsEnum, IsOptional, IsString, ValidateNested } from "class-validator";
-import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import {
+  IsEnum,
+  IsOptional,
+  IsDate,
+  IsJSON,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentStatus } from "./EnumDocumentStatus";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentUpdateInput {
@@ -32,6 +40,17 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  expiringAt?: Date | null;
+
+  @ApiProperty({
+    required: false,
     enum: EnumDocumentStatus,
   })
   @IsEnum(EnumDocumentStatus)
@@ -43,14 +62,13 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
   })
-  @IsString()
+  @IsJSON()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => GraphQLJSON, {
     nullable: true,
   })
-  url?: string;
+  url?: InputJsonValue;
 
   @ApiProperty({
     required: false,

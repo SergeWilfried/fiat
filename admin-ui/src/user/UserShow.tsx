@@ -35,6 +35,8 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Accounts"
         >
           <Datagrid rowClick="show">
+            <TextField label="AccountNumber" source="accountNumber" />
+            <TextField label="AccountType" source="accountType" />
             <TextField label="Available balance" source="availableBalance" />
             <TextField label="Balance" source="balance" />
             <DateField source="createdAt" label="Created At" />
@@ -57,6 +59,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
             <TextField label="DocumentType" source="documentType" />
+            <TextField label="Expiring At" source="expiringAt" />
             <TextField label="ID" source="id" />
             <TextField label="Status" source="status" />
             <DateField source="updatedAt" label="Updated At" />

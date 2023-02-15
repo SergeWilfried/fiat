@@ -30,7 +30,7 @@ import { Account } from "./Account";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AccountControllerBase {
   constructor(
@@ -59,6 +59,8 @@ export class AccountControllerBase {
           : undefined,
       },
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,
@@ -93,6 +95,8 @@ export class AccountControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,
@@ -128,6 +132,8 @@ export class AccountControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,
@@ -180,6 +186,8 @@ export class AccountControllerBase {
             : undefined,
         },
         select: {
+          accountNumber: true,
+          accountType: true,
           availableBalance: true,
           balance: true,
           createdAt: true,
@@ -223,6 +231,8 @@ export class AccountControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          accountNumber: true,
+          accountType: true,
           availableBalance: true,
           balance: true,
           createdAt: true,

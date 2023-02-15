@@ -2,6 +2,8 @@ import { Transaction } from "../transaction/Transaction";
 import { User } from "../user/User";
 
 export type Account = {
+  accountNumber: string | null;
+  accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
   availableBalance: number | null;
   balance: number | null;
   createdAt: Date;

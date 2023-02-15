@@ -11,11 +11,12 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, IsEnum, ValidateNested } from "class-validator";
+import { EnumAccountAccountType } from "./EnumAccountAccountType";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
@@ -23,6 +24,28 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class AccountWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  accountNumber?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumAccountAccountType,
+  })
+  @IsEnum(EnumAccountAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountAccountType, {
+    nullable: true,
+  })
+  accountType?: "MobileMoney" | "Iban" | "Wallet";
+
   @ApiProperty({
     required: false,
     type: FloatNullableFilter,

@@ -13,8 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { IsEnum, IsOptional, ValidateNested } from "class-validator";
-import { StringFilter } from "../../util/StringFilter";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { Type } from "class-transformer";
+import { StringFilter } from "../../util/StringFilter";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
@@ -30,6 +31,17 @@ class DocumentWhereInput {
     nullable: true,
   })
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  expiringAt?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -52,17 +64,6 @@ class DocumentWhereInput {
     nullable: true,
   })
   status?: "Approved" | "Rejected";
-
-  @ApiProperty({
-    required: false,
-    type: StringFilter,
-  })
-  @Type(() => StringFilter)
-  @IsOptional()
-  @Field(() => StringFilter, {
-    nullable: true,
-  })
-  url?: StringFilter;
 
   @ApiProperty({
     required: false,

@@ -30,7 +30,7 @@ import { Transaction } from "./Transaction";
 import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
 import { Account } from "../../account/base/Account";
 import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TransactionControllerBase {
   constructor(
@@ -217,6 +217,8 @@ export class TransactionControllerBase {
     const results = await this.service.findAccounts(params.id, {
       ...query,
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,

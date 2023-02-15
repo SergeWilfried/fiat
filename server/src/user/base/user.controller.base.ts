@@ -33,7 +33,7 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
 import { Document } from "../../document/base/Document";
 import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
   constructor(
@@ -238,6 +238,8 @@ export class UserControllerBase {
     const results = await this.service.findAccounts(params.id, {
       ...query,
       select: {
+        accountNumber: true,
+        accountType: true,
         availableBalance: true,
         balance: true,
         createdAt: true,
@@ -347,6 +349,7 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         documentType: true,
+        expiringAt: true,
         id: true,
         status: true,
         updatedAt: true,

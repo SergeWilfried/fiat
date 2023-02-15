@@ -9,18 +9,18 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { StringNullableFilter } from '../../util/StringNullableFilter';
-import { Type } from 'class-transformer';
-import { IsOptional, IsEnum, ValidateNested } from 'class-validator';
-import { EnumAccountAccountType } from './EnumAccountAccountType';
-import { FloatNullableFilter } from '../../util/FloatNullableFilter';
-import { EnumAccountCurrency } from './EnumAccountCurrency';
-import { StringFilter } from '../../util/StringFilter';
-import { EnumAccountStatus } from './EnumAccountStatus';
-import { TransactionListRelationFilter } from '../../transaction/base/TransactionListRelationFilter';
-import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional, IsEnum, ValidateNested } from "class-validator";
+import { EnumAccountAccountType } from "./EnumAccountAccountType";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { EnumAccountCurrency } from "./EnumAccountCurrency";
+import { StringFilter } from "../../util/StringFilter";
+import { EnumAccountStatus } from "./EnumAccountStatus";
+import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class AccountWhereInput {
@@ -44,7 +44,7 @@ class AccountWhereInput {
   @Field(() => EnumAccountAccountType, {
     nullable: true,
   })
-  accountType?: 'MobileMoney' | 'Iban' | 'Wallet';
+  accountType?: "MobileMoney" | "Iban" | "Wallet";
 
   @ApiProperty({
     required: false,
@@ -77,7 +77,7 @@ class AccountWhereInput {
   @Field(() => EnumAccountCurrency, {
     nullable: true,
   })
-  currency?: 'Xof' | 'Eur' | 'Usd' | 'Celo';
+  currency?: "Xof" | "Eur" | "Usd" | "Celo";
 
   @ApiProperty({
     required: false,
@@ -121,7 +121,7 @@ class AccountWhereInput {
   @Field(() => EnumAccountStatus, {
     nullable: true,
   })
-  status?: 'Approved' | 'Pending' | 'Blocked';
+  status?: "Approved" | "Pending" | "Blocked";
 
   @ApiProperty({
     required: false,

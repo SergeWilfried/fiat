@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { DocumentCreateInput } from './DocumentCreateInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { DocumentCreateInput } from "./DocumentCreateInput";
 
 @ArgsType()
 class CreateDocumentArgs {

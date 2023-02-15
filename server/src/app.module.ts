@@ -1,4 +1,4 @@
-import { CacheModule, Module, Scope } from "@nestjs/common";
+import { Module, Scope } from "@nestjs/common";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
@@ -33,25 +33,15 @@ import { GraphQLModule } from "@nestjs/graphql";
     KafkaModule,
     MorganModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        ttl: configService.get('CACHE_TTL'),
-        host: configService.get('CACHE_HOST'),
-        isGlobal: true,
-        port: configService.get('CACHE_PORT'),
-      }),
-      inject: [ConfigService],
-    }),
     ServeStaticModule.forRootAsync({
       useClass: ServeStaticOptionsService,
     }),
     GraphQLModule.forRootAsync({
-      useFactory: configService => {
-        const playground = configService.get('GRAPHQL_PLAYGROUND');
-        const introspection = configService.get('GRAPHQL_INTROSPECTION');
+      useFactory: (configService) => {
+        const playground = configService.get("GRAPHQL_PLAYGROUND");
+        const introspection = configService.get("GRAPHQL_INTROSPECTION");
         return {
-          autoSchemaFile: 'schema.graphql',
+          autoSchemaFile: "schema.graphql",
           sortSchema: true,
           playground,
           introspection: playground || introspection,
@@ -65,7 +55,7 @@ import { GraphQLModule } from "@nestjs/graphql";
     {
       provide: APP_INTERCEPTOR,
       scope: Scope.REQUEST,
-      useClass: MorganInterceptor('combined'),
+      useClass: MorganInterceptor("combined"),
     },
   ],
 })

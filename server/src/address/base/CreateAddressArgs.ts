@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from '@nestjs/graphql';
-import { AddressCreateInput } from './AddressCreateInput';
+import { ArgsType, Field } from "@nestjs/graphql";
+import { AddressCreateInput } from "./AddressCreateInput";
 
 @ArgsType()
 class CreateAddressArgs {

@@ -12,6 +12,7 @@ export type User = {
   firstName: string | null;
   id: string;
   lastName: string | null;
+  messages: JsonValue;
   phoe: string;
   roles: JsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;

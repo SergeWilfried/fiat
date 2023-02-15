@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { Account } from '../../account/base/Account';
+import { ObjectType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { Account } from "../../account/base/Account";
 import {
   ValidateNested,
   IsOptional,
@@ -20,11 +20,11 @@ import {
   IsNumber,
   IsString,
   IsEnum,
-} from 'class-validator';
-import { Type } from 'class-transformer';
-import { EnumTransactionStatus } from './EnumTransactionStatus';
-import { EnumTransactionTransactionSubtype } from './EnumTransactionTransactionSubtype';
-import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
+} from "class-validator";
+import { Type } from "class-transformer";
+import { EnumTransactionStatus } from "./EnumTransactionStatus";
+import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @ObjectType()
 class Transaction {
@@ -80,7 +80,7 @@ class Transaction {
   @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  status?: 'Successful' | 'Pending' | 'Failed';
+  status?: "Successful" | "Pending" | "Failed";
 
   @ApiProperty({
     required: false,
@@ -91,7 +91,7 @@ class Transaction {
   @Field(() => EnumTransactionTransactionSubtype, {
     nullable: true,
   })
-  transactionSubtype?: 'Fiat' | 'Crypto' | null;
+  transactionSubtype?: "Fiat" | "Crypto" | null;
 
   @ApiProperty({
     required: true,
@@ -101,7 +101,7 @@ class Transaction {
   @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: 'Credit' | 'Debit';
+  transactionType?: "Credit" | "Debit";
 
   @ApiProperty({
     required: true,

@@ -24,6 +24,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
         <TextField label="First Name" source="firstName" />
         <TextField label="ID" source="id" />
         <TextField label="Last Name" source="lastName" />
+        <TextField label="Messages" source="messages" />
         <TextField label="Phone" source="phoe" />
         <TextField label="Roles" source="roles" />
         <TextField label="Status" source="status" />

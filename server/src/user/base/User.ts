@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { Account } from '../../account/base/Account';
+import { ObjectType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { Account } from "../../account/base/Account";
 import {
   ValidateNested,
   IsOptional,
@@ -19,12 +19,12 @@ import {
   IsString,
   IsDate,
   IsEnum,
-} from 'class-validator';
-import { Type } from 'class-transformer';
-import { GraphQLJSON } from 'graphql-type-json';
-import { JsonValue } from 'type-fest';
-import { Document } from '../../document/base/Document';
-import { EnumUserStatus } from './EnumUserStatus';
+} from "class-validator";
+import { Type } from "class-transformer";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
+import { Document } from "../../document/base/Document";
+import { EnumUserStatus } from "./EnumUserStatus";
 
 @ObjectType()
 class User {
@@ -111,6 +111,16 @@ class User {
   lastName!: string | null;
 
   @ApiProperty({
+    required: false,
+  })
+  @IsJSON()
+  @IsOptional()
+  @Field(() => GraphQLJSON, {
+    nullable: true,
+  })
+  messages!: JsonValue;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -134,7 +144,7 @@ class User {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: 'Approved' | 'Pending' | 'Rejected' | null;
+  status?: "Approved" | "Pending" | "Rejected" | null;
 
   @ApiProperty({
     required: true,

@@ -9,15 +9,16 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
-import { AccountListRelationFilter } from '../../account/base/AccountListRelationFilter';
-import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
-import { Type } from 'class-transformer';
-import { StringNullableFilter } from '../../util/StringNullableFilter';
-import { DocumentListRelationFilter } from '../../document/base/DocumentListRelationFilter';
-import { StringFilter } from '../../util/StringFilter';
-import { EnumUserStatus } from './EnumUserStatus';
+import { InputType, Field } from "@nestjs/graphql";
+import { ApiProperty } from "@nestjs/swagger";
+import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
+import { Type } from "class-transformer";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { DocumentListRelationFilter } from "../../document/base/DocumentListRelationFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { JsonFilter } from "../../util/JsonFilter";
+import { EnumUserStatus } from "./EnumUserStatus";
 
 @InputType()
 class UserWhereInput {
@@ -102,6 +103,17 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
+    type: JsonFilter,
+  })
+  @Type(() => JsonFilter)
+  @IsOptional()
+  @Field(() => JsonFilter, {
+    nullable: true,
+  })
+  messages?: JsonFilter;
+
+  @ApiProperty({
+    required: false,
     enum: EnumUserStatus,
   })
   @IsEnum(EnumUserStatus)
@@ -109,7 +121,7 @@ class UserWhereInput {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: 'Approved' | 'Pending' | 'Rejected';
+  status?: "Approved" | "Pending" | "Rejected";
 
   @ApiProperty({
     required: false,

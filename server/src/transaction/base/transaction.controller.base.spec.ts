@@ -1,35 +1,35 @@
-import { Test } from '@nestjs/testing';
+import { Test } from "@nestjs/testing";
 import {
   INestApplication,
   HttpStatus,
   ExecutionContext,
   CallHandler,
-} from '@nestjs/common';
-import request from 'supertest';
-import { MorganModule } from 'nest-morgan';
-import { ACGuard } from 'nest-access-control';
-import { DefaultAuthGuard } from '../../auth/defaultAuth.guard';
-import { ACLModule } from '../../auth/acl.module';
-import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
-import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
-import { map } from 'rxjs';
-import { TransactionController } from '../transaction.controller';
-import { TransactionService } from '../transaction.service';
+} from "@nestjs/common";
+import request from "supertest";
+import { MorganModule } from "nest-morgan";
+import { ACGuard } from "nest-access-control";
+import { DefaultAuthGuard } from "../../auth/defaultAuth.guard";
+import { ACLModule } from "../../auth/acl.module";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { map } from "rxjs";
+import { TransactionController } from "../transaction.controller";
+import { TransactionService } from "../transaction.service";
 
-const nonExistingId = 'nonExistingId';
-const existingId = 'existingId';
+const nonExistingId = "nonExistingId";
+const existingId = "existingId";
 const CREATE_INPUT = {
   amount: 42,
   createdAt: new Date(),
   fee: 42.42,
-  id: 'exampleId',
+  id: "exampleId",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   amount: 42,
   createdAt: new Date(),
   fee: 42.42,
-  id: 'exampleId',
+  id: "exampleId",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -37,7 +37,7 @@ const FIND_MANY_RESULT = [
     amount: 42,
     createdAt: new Date(),
     fee: 42.42,
-    id: 'exampleId',
+    id: "exampleId",
     updatedAt: new Date(),
   },
 ];
@@ -45,7 +45,7 @@ const FIND_ONE_RESULT = {
   amount: 42,
   createdAt: new Date(),
   fee: 42.42,
-  id: 'exampleId',
+  id: "exampleId",
   updatedAt: new Date(),
 };
 
@@ -69,7 +69,7 @@ const basicAuthGuard = {
     const argumentHost = context.switchToHttp();
     const request = argumentHost.getRequest();
     request.user = {
-      roles: ['user'],
+      roles: ["user"],
     };
     return true;
   },
@@ -84,9 +84,9 @@ const acGuard = {
 const aclFilterResponseInterceptor = {
   intercept: (context: ExecutionContext, next: CallHandler) => {
     return next.handle().pipe(
-      map(data => {
+      map((data) => {
         return data;
-      }),
+      })
     );
   },
 };
@@ -96,7 +96,7 @@ const aclValidateRequestInterceptor = {
   },
 };
 
-describe('Transaction', () => {
+describe("Transaction", () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -124,9 +124,9 @@ describe('Transaction', () => {
     await app.init();
   });
 
-  test('POST /transactions', async () => {
+  test("POST /transactions", async () => {
     await request(app.getHttpServer())
-      .post('/transactions')
+      .post("/transactions")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -136,9 +136,9 @@ describe('Transaction', () => {
       });
   });
 
-  test('GET /transactions', async () => {
+  test("GET /transactions", async () => {
     await request(app.getHttpServer())
-      .get('/transactions')
+      .get("/transactions")
       .expect(HttpStatus.OK)
       .expect([
         {
@@ -149,20 +149,20 @@ describe('Transaction', () => {
       ]);
   });
 
-  test('GET /transactions/:id non existing', async () => {
+  test("GET /transactions/:id non existing", async () => {
     await request(app.getHttpServer())
-      .get(`${'/transactions'}/${nonExistingId}`)
+      .get(`${"/transactions"}/${nonExistingId}`)
       .expect(HttpStatus.NOT_FOUND)
       .expect({
         statusCode: HttpStatus.NOT_FOUND,
-        message: `No resource was found for {"${'id'}":"${nonExistingId}"}`,
-        error: 'Not Found',
+        message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
+        error: "Not Found",
       });
   });
 
-  test('GET /transactions/:id existing', async () => {
+  test("GET /transactions/:id existing", async () => {
     await request(app.getHttpServer())
-      .get(`${'/transactions'}/${existingId}`)
+      .get(`${"/transactions"}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
@@ -171,10 +171,10 @@ describe('Transaction', () => {
       });
   });
 
-  test('POST /transactions existing resource', async () => {
+  test("POST /transactions existing resource", async () => {
     let agent = request(app.getHttpServer());
     await agent
-      .post('/transactions')
+      .post("/transactions")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -184,7 +184,7 @@ describe('Transaction', () => {
       })
       .then(function () {
         agent
-          .post('/transactions')
+          .post("/transactions")
           .send(CREATE_INPUT)
           .expect(HttpStatus.CONFLICT)
           .expect({

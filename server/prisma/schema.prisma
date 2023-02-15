@@ -17,6 +17,7 @@ model User {
   firstName    String?
   id           String          @id @default(cuid())
   lastName     String?
+  messages     Json?
   password     String
   phoe         String
   roles        Json

@@ -9,42 +9,42 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from '@nestjs/common';
-import * as graphql from '@nestjs/graphql';
-import * as apollo from 'apollo-server-express';
-import * as nestAccessControl from 'nest-access-control';
-import { GqlDefaultAuthGuard } from '../../auth/gqlDefaultAuth.guard';
-import * as gqlACGuard from '../../auth/gqlAC.guard';
-import { isRecordNotFoundError } from '../../prisma.util';
-import { MetaQueryPayload } from '../../util/MetaQueryPayload';
-import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
-import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
-import { CreateTransactionArgs } from './CreateTransactionArgs';
-import { UpdateTransactionArgs } from './UpdateTransactionArgs';
-import { DeleteTransactionArgs } from './DeleteTransactionArgs';
-import { TransactionFindManyArgs } from './TransactionFindManyArgs';
-import { TransactionFindUniqueArgs } from './TransactionFindUniqueArgs';
-import { Transaction } from './Transaction';
-import { AccountFindManyArgs } from '../../account/base/AccountFindManyArgs';
-import { Account } from '../../account/base/Account';
-import { TransactionService } from '../transaction.service';
+import * as common from "@nestjs/common";
+import * as graphql from "@nestjs/graphql";
+import * as apollo from "apollo-server-express";
+import * as nestAccessControl from "nest-access-control";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { isRecordNotFoundError } from "../../prisma.util";
+import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { CreateTransactionArgs } from "./CreateTransactionArgs";
+import { UpdateTransactionArgs } from "./UpdateTransactionArgs";
+import { DeleteTransactionArgs } from "./DeleteTransactionArgs";
+import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
+import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
+import { Transaction } from "./Transaction";
+import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
+import { Account } from "../../account/base/Account";
+import { TransactionService } from "../transaction.service";
 
 @graphql.Resolver(() => Transaction)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 export class TransactionResolverBase {
   constructor(
     protected readonly service: TransactionService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'read',
-    possession: 'any',
+    resource: "Transaction",
+    action: "read",
+    possession: "any",
   })
   async _transactionsMeta(
-    @graphql.Args() args: TransactionFindManyArgs,
+    @graphql.Args() args: TransactionFindManyArgs
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -59,12 +59,12 @@ export class TransactionResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Transaction])
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'read',
-    possession: 'any',
+    resource: "Transaction",
+    action: "read",
+    possession: "any",
   })
   async transactions(
-    @graphql.Args() args: TransactionFindManyArgs,
+    @graphql.Args() args: TransactionFindManyArgs
   ): Promise<Transaction[]> {
     return this.service.findMany(args);
   }
@@ -72,12 +72,12 @@ export class TransactionResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Transaction, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'read',
-    possession: 'own',
+    resource: "Transaction",
+    action: "read",
+    possession: "own",
   })
   async transaction(
-    @graphql.Args() args: TransactionFindUniqueArgs,
+    @graphql.Args() args: TransactionFindUniqueArgs
   ): Promise<Transaction | null> {
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -89,12 +89,12 @@ export class TransactionResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Transaction)
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'create',
-    possession: 'any',
+    resource: "Transaction",
+    action: "create",
+    possession: "any",
   })
   async createTransaction(
-    @graphql.Args() args: CreateTransactionArgs,
+    @graphql.Args() args: CreateTransactionArgs
   ): Promise<Transaction> {
     return await this.service.create({
       ...args,
@@ -105,12 +105,12 @@ export class TransactionResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Transaction)
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'update',
-    possession: 'any',
+    resource: "Transaction",
+    action: "update",
+    possession: "any",
   })
   async updateTransaction(
-    @graphql.Args() args: UpdateTransactionArgs,
+    @graphql.Args() args: UpdateTransactionArgs
   ): Promise<Transaction | null> {
     try {
       return await this.service.update({
@@ -120,7 +120,7 @@ export class TransactionResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`,
+          `No resource was found for ${JSON.stringify(args.where)}`
         );
       }
       throw error;
@@ -129,19 +129,19 @@ export class TransactionResolverBase {
 
   @graphql.Mutation(() => Transaction)
   @nestAccessControl.UseRoles({
-    resource: 'Transaction',
-    action: 'delete',
-    possession: 'any',
+    resource: "Transaction",
+    action: "delete",
+    possession: "any",
   })
   async deleteTransaction(
-    @graphql.Args() args: DeleteTransactionArgs,
+    @graphql.Args() args: DeleteTransactionArgs
   ): Promise<Transaction | null> {
     try {
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`,
+          `No resource was found for ${JSON.stringify(args.where)}`
         );
       }
       throw error;
@@ -151,13 +151,13 @@ export class TransactionResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Account])
   @nestAccessControl.UseRoles({
-    resource: 'Account',
-    action: 'read',
-    possession: 'any',
+    resource: "Account",
+    action: "read",
+    possession: "any",
   })
   async accounts(
     @graphql.Parent() parent: Transaction,
-    @graphql.Args() args: AccountFindManyArgs,
+    @graphql.Args() args: AccountFindManyArgs
   ): Promise<Account[]> {
     const results = await this.service.findAccounts(parent.id, args);
 

@@ -10,6 +10,7 @@ export type UserCreateInput = {
   email: string;
   firstName?: string | null;
   lastName?: string | null;
+  messages?: InputJsonValue;
   password: string;
   phoe: string;
   roles: InputJsonValue;

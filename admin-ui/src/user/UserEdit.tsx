@@ -40,6 +40,7 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
         <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
+        <div />
         <PasswordInput label="Password" source="password" />
         <TextInput label="Phone" source="phoe" />
         <SelectArrayInput

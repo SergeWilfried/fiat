@@ -11,27 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { Type } from "class-transformer";
+import { IsOptional, IsEnum } from "class-validator";
 import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
 class TransactionWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => AccountListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => AccountListRelationFilter)
-  @IsOptional()
-  @Field(() => AccountListRelationFilter, {
-    nullable: true,
-  })
-  accounts?: AccountListRelationFilter;
-
   @ApiProperty({
     required: false,
     type: StringFilter,

@@ -11,16 +11,29 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
-import { IsEnum, IsOptional, ValidateNested } from "class-validator";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => AccountListRelationFilter)
+  @IsOptional()
+  @Field(() => AccountListRelationFilter, {
+    nullable: true,
+  })
+  accounts?: AccountListRelationFilter;
+
   @ApiProperty({
     required: false,
     enum: EnumDocumentDocumentType,

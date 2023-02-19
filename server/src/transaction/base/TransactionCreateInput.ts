@@ -27,7 +27,7 @@ import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType
 @InputType()
 class TransactionCreateInput {
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => AccountCreateNestedManyWithoutTransactionsInput,
   })
   @ValidateNested()

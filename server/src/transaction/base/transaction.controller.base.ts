@@ -224,6 +224,13 @@ export class TransactionControllerBase {
         createdAt: true,
         currency: true,
         description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         status: true,

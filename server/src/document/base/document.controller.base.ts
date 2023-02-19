@@ -27,6 +27,9 @@ import { DocumentWhereUniqueInput } from "./DocumentWhereUniqueInput";
 import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
 import { DocumentUpdateInput } from "./DocumentUpdateInput";
 import { Document } from "./Document";
+import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
+import { Account } from "../../account/base/Account";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 @swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class DocumentControllerBase {
@@ -235,5 +238,121 @@ export class DocumentControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/accounts")
+  @ApiNestedQuery(AccountFindManyArgs)
+  async findManyAccounts(
+    @common.Req() request: Request,
+    @common.Param() params: DocumentWhereUniqueInput
+  ): Promise<Account[]> {
+    const query = plainToClass(AccountFindManyArgs, request.query);
+    const results = await this.service.findAccounts(params.id, {
+      ...query,
+      select: {
+        accountNumber: true,
+        accountType: true,
+        availableBalance: true,
+        balance: true,
+        createdAt: true,
+        currency: true,
+        description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+        name: true,
+        status: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/accounts")
+  async connectAccounts(
+    @common.Param() params: DocumentWhereUniqueInput,
+    @common.Body() body: AccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      accounts: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/accounts")
+  async updateAccounts(
+    @common.Param() params: DocumentWhereUniqueInput,
+    @common.Body() body: AccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      accounts: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/accounts")
+  async disconnectAccounts(
+    @common.Param() params: DocumentWhereUniqueInput,
+    @common.Body() body: AccountWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      accounts: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

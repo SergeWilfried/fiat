@@ -62,6 +62,8 @@ model Account {
   createdAt        DateTime                @default(now())
   currency         EnumAccountCurrency?
   description      String?
+  document         Document                @relation(fields: [documentId], references: [id])
+  documentId       String
   id               String                  @id @default(cuid())
   name             String?
   status           EnumAccountStatus?
@@ -72,6 +74,7 @@ model Account {
 }
 
 model Document {
+  accounts     Account[]
   createdAt    DateTime                 @default(now())
   documentType EnumDocumentDocumentType
   expiringAt   DateTime?

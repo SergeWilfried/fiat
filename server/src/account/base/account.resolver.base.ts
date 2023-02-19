@@ -27,6 +27,7 @@ import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
+import { Document } from "../../document/base/Document";
 import { User } from "../../user/base/User";
 import { AccountService } from "../account.service";
 
@@ -102,6 +103,10 @@ export class AccountResolverBase {
       data: {
         ...args.data,
 
+        document: {
+          connect: args.data.document,
+        },
+
         user: args.data.user
           ? {
               connect: args.data.user,
@@ -126,6 +131,10 @@ export class AccountResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          document: {
+            connect: args.data.document,
+          },
 
           user: args.data.user
             ? {
@@ -183,6 +192,22 @@ export class AccountResolverBase {
     }
 
     return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Document, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "read",
+    possession: "any",
+  })
+  async document(@graphql.Parent() parent: Account): Promise<Document | null> {
+    const result = await this.service.getDocument(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

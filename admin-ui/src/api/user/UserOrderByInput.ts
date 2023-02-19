@@ -8,11 +8,15 @@ export type UserOrderByInput = {
   firstName?: SortOrder;
   id?: SortOrder;
   lastName?: SortOrder;
+  legalTermVersions?: SortOrder;
   messages?: SortOrder;
   password?: SortOrder;
+  password2?: SortOrder;
   phoe?: SortOrder;
+  privacyPolicy?: SortOrder;
   roles?: SortOrder;
   status?: SortOrder;
+  termsAndConditions?: SortOrder;
   updatedAt?: SortOrder;
   username?: SortOrder;
 };

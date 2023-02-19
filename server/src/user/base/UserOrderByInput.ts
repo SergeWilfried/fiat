@@ -88,6 +88,15 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  legalTermVersions?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   messages?: SortOrder;
 
   @ApiProperty({
@@ -106,7 +115,25 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  password2?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   phoe?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  privacyPolicy?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -125,6 +152,15 @@ class UserOrderByInput {
     nullable: true,
   })
   status?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  termsAndConditions?: SortOrder;
 
   @ApiProperty({
     required: false,

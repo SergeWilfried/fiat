@@ -8,22 +8,26 @@ generator client {
 }
 
 model User {
-  accounts     Account[]
-  address      Json
-  businessName String?         @unique
-  createdAt    DateTime        @default(now())
-  documents    Document[]
-  email        String          @unique
-  firstName    String?
-  id           String          @id @default(cuid())
-  lastName     String?
-  messages     Json?
-  password     String
-  phoe         String
-  roles        Json
-  status       EnumUserStatus?
-  updatedAt    DateTime        @updatedAt
-  username     String          @unique
+  accounts           Account[]
+  address            Json
+  businessName       String?         @unique
+  createdAt          DateTime        @default(now())
+  documents          Document[]
+  email              String          @unique
+  firstName          String?
+  id                 String          @id @default(cuid())
+  lastName           String?
+  legalTermVersions  String
+  messages           Json?
+  password           String
+  password2          String
+  phoe               String
+  privacyPolicy      Boolean
+  roles              Json
+  status             EnumUserStatus?
+  termsAndConditions Boolean
+  updatedAt          DateTime        @updatedAt
+  username           String          @unique
 }
 
 model Transaction {

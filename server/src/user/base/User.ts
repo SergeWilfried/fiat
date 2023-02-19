@@ -18,6 +18,7 @@ import {
   IsJSON,
   IsString,
   IsDate,
+  IsBoolean,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
@@ -111,6 +112,14 @@ class User {
   lastName!: string | null;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  legalTermVersions!: string;
+
+  @ApiProperty({
     required: false,
   })
   @IsJSON()
@@ -126,7 +135,23 @@ class User {
   })
   @IsString()
   @Field(() => String)
+  password2!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
   phoe!: string;
+
+  @ApiProperty({
+    required: true,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @Field(() => Boolean)
+  privacyPolicy!: boolean;
 
   @ApiProperty({
     required: true,
@@ -145,6 +170,14 @@ class User {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Rejected" | null;
+
+  @ApiProperty({
+    required: true,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @Field(() => Boolean)
+  termsAndConditions!: boolean;
 
   @ApiProperty({
     required: true,

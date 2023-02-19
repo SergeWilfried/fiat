@@ -35,7 +35,11 @@ async function seed(bcryptSalt: Salt) {
     },
 
     email: "example@example.com",
+    legalTermVersions: "",
+    password2: "",
     phoe: "",
+    privacyPolicy: false,
+    termsAndConditions: false,
   };
   await client.user.upsert({
     where: { username: data.username },

@@ -17,14 +17,11 @@ import {
   IsOptional,
   IsDate,
   IsEnum,
-  IsString,
-  IsJSON,
+  IsString
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { JsonValue } from "type-fest";
 import { User } from "../../user/base/User";
 
 @ObjectType()
@@ -76,6 +73,14 @@ class Document {
   id!: string;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  image!: string;
+
+  @ApiProperty({
     required: false,
     enum: EnumDocumentStatus,
   })
@@ -87,6 +92,17 @@ class Document {
   status?: "Approved" | "Rejected" | null;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  tags!: string | null;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -96,19 +112,19 @@ class Document {
 
   @ApiProperty({
     required: true,
+    type: String,
   })
-  @IsJSON()
-  @Field(() => GraphQLJSON)
-  url!: JsonValue;
+  @IsString()
+  @Field(() => String)
+  url!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => User,
   })
   @ValidateNested()
   @Type(() => User)
-  @IsOptional()
-  user?: User | null;
+  user?: User;
 }
 
 export { Document };

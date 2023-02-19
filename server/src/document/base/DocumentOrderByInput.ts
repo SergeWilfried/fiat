@@ -61,7 +61,25 @@ class DocumentOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  image?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   status?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  tags?: SortOrder;
 
   @ApiProperty({
     required: false,

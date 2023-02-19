@@ -22,7 +22,9 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
         <TextField label="DocumentType" source="documentType" />
         <TextField label="Expiring At" source="expiringAt" />
         <TextField label="ID" source="id" />
+        <TextField label="Image" source="image" />
         <TextField label="Status" source="status" />
+        <TextField label="Tags" source="tags" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="URL" source="url" />
         <ReferenceField label="User" source="user.id" reference="User">

@@ -1,5 +1,4 @@
 import { Account } from "../account/Account";
-import { JsonValue } from "type-fest";
 import { User } from "../user/User";
 
 export type Document = {
@@ -8,8 +7,10 @@ export type Document = {
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
   expiringAt: Date | null;
   id: string;
+  image: string;
   status?: "Approved" | "Rejected" | null;
+  tags: string | null;
   updatedAt: Date;
-  url: JsonValue;
-  user?: User | null;
+  url: string;
+  user?: User;
 };

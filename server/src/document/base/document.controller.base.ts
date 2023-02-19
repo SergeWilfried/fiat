@@ -52,18 +52,18 @@ export class DocumentControllerBase {
       data: {
         ...data,
 
-        user: data.user
-          ? {
-              connect: data.user,
-            }
-          : undefined,
+        user: {
+          connect: data.user,
+        },
       },
       select: {
         createdAt: true,
         documentType: true,
         expiringAt: true,
         id: true,
+        image: true,
         status: true,
+        tags: true,
         updatedAt: true,
         url: true,
 
@@ -95,7 +95,9 @@ export class DocumentControllerBase {
         documentType: true,
         expiringAt: true,
         id: true,
+        image: true,
         status: true,
+        tags: true,
         updatedAt: true,
         url: true,
 
@@ -128,7 +130,9 @@ export class DocumentControllerBase {
         documentType: true,
         expiringAt: true,
         id: true,
+        image: true,
         status: true,
+        tags: true,
         updatedAt: true,
         url: true,
 
@@ -167,18 +171,18 @@ export class DocumentControllerBase {
         data: {
           ...data,
 
-          user: data.user
-            ? {
-                connect: data.user,
-              }
-            : undefined,
+          user: {
+            connect: data.user,
+          },
         },
         select: {
           createdAt: true,
           documentType: true,
           expiringAt: true,
           id: true,
+          image: true,
           status: true,
+          tags: true,
           updatedAt: true,
           url: true,
 
@@ -219,7 +223,9 @@ export class DocumentControllerBase {
           documentType: true,
           expiringAt: true,
           id: true,
+          image: true,
           status: true,
+          tags: true,
           updatedAt: true,
           url: true,
 

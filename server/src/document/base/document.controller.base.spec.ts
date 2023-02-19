@@ -22,27 +22,39 @@ const CREATE_INPUT = {
   createdAt: new Date(),
   expiringAt: new Date(),
   id: "exampleId",
+  image: "exampleImage",
+  tags: "exampleTags",
   updatedAt: new Date(),
+  url: "exampleUrl",
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
   expiringAt: new Date(),
   id: "exampleId",
+  image: "exampleImage",
+  tags: "exampleTags",
   updatedAt: new Date(),
+  url: "exampleUrl",
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
     expiringAt: new Date(),
     id: "exampleId",
+    image: "exampleImage",
+    tags: "exampleTags",
     updatedAt: new Date(),
+    url: "exampleUrl",
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
   expiringAt: new Date(),
   id: "exampleId",
+  image: "exampleImage",
+  tags: "exampleTags",
   updatedAt: new Date(),
+  url: "exampleUrl",
 };
 
 const service = {

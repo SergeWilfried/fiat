@@ -383,7 +383,9 @@ export class UserControllerBase {
         documentType: true,
         expiringAt: true,
         id: true,
+        image: true,
         status: true,
+        tags: true,
         updatedAt: true,
         url: true,
 

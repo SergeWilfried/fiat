@@ -8,6 +8,7 @@ import {
   SelectArrayInput,
   SelectInput,
   DateInput,
+  TextInput,
   ReferenceInput,
 } from "react-admin";
 
@@ -38,6 +39,7 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           optionValue="value"
         />
         <DateInput label="Expiring At" source="expiringAt" />
+        <TextInput label="Image" source="image" />
         <SelectInput
           source="status"
           label="Status"
@@ -49,7 +51,8 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <div />
+        <TextInput label="Tags" source="tags" />
+        <TextInput label="URL" source="url" />
         <ReferenceInput source="user.id" reference="User" label="User">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

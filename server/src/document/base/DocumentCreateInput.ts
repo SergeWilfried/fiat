@@ -17,13 +17,11 @@ import {
   IsOptional,
   IsEnum,
   IsDate,
-  IsJSON,
+  IsString
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -60,6 +58,14 @@ class DocumentCreateInput {
   expiringAt?: Date | null;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  image!: string;
+
+  @ApiProperty({
     required: false,
     enum: EnumDocumentStatus,
   })
@@ -71,23 +77,32 @@ class DocumentCreateInput {
   status?: "Approved" | "Rejected" | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
+    type: String,
   })
-  @IsJSON()
-  @Field(() => GraphQLJSON)
-  url!: InputJsonValue;
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  tags?: string | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  url!: string;
+
+  @ApiProperty({
+    required: true,
     type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput | null;
+  @Field(() => UserWhereUniqueInput)
+  user!: UserWhereUniqueInput;
 }
 
 export { DocumentCreateInput };

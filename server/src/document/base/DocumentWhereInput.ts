@@ -18,6 +18,7 @@ import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -69,6 +70,17 @@ class DocumentWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  image?: StringFilter;
+
+  @ApiProperty({
+    required: false,
     enum: EnumDocumentStatus,
   })
   @IsEnum(EnumDocumentStatus)
@@ -77,6 +89,28 @@ class DocumentWhereInput {
     nullable: true,
   })
   status?: "Approved" | "Rejected";
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  tags?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  url?: StringFilter;
 
   @ApiProperty({
     required: false,

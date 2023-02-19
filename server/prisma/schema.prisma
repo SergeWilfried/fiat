@@ -46,6 +46,7 @@ model Address {
   address_1 String?
   address_2 String?
   city      String?
+  country   String
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   state     String?

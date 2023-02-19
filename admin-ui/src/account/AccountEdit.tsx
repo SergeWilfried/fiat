@@ -7,11 +7,12 @@ import {
   TextInput,
   SelectInput,
   NumberInput,
+  ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  ReferenceInput,
 } from "react-admin";
 
+import { DocumentTitle } from "../document/DocumentTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 import { UserTitle } from "../user/UserTitle";
 
@@ -48,6 +49,13 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           optionValue="value"
         />
         <TextInput label="Description" multiline source="description" />
+        <ReferenceInput
+          source="document.id"
+          reference="Document"
+          label="Document"
+        >
+          <SelectInput optionText={DocumentTitle} />
+        </ReferenceInput>
         <TextInput label="Name" source="name" />
         <SelectInput
           source="status"

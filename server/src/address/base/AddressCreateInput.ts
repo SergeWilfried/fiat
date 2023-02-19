@@ -49,6 +49,14 @@ class AddressCreateInput {
   city?: string | null;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  country!: string;
+
+  @ApiProperty({
     required: false,
     type: String,
   })

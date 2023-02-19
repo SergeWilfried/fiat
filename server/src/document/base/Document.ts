@@ -11,13 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { Account } from "../../account/base/Account";
 import {
+  ValidateNested,
+  IsOptional,
   IsDate,
   IsEnum,
-  IsOptional,
   IsString,
   IsJSON,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
@@ -28,6 +29,15 @@ import { User } from "../../user/base/User";
 
 @ObjectType()
 class Document {
+  @ApiProperty({
+    required: false,
+    type: () => [Account],
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  accounts?: Array<Account>;
+
   @ApiProperty({
     required: true,
   })

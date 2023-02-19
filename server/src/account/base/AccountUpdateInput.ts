@@ -20,9 +20,10 @@ import {
 } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
+import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
+import { Type } from "class-transformer";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
-import { Type } from "class-transformer";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -92,6 +93,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   description?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => DocumentWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => DocumentWhereUniqueInput)
+  @IsOptional()
+  @Field(() => DocumentWhereUniqueInput, {
+    nullable: true,
+  })
+  document?: DocumentWhereUniqueInput;
 
   @ApiProperty({
     required: false,

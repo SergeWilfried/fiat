@@ -11,15 +11,16 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { AccountUpdateManyWithoutDocumentsInput } from "./AccountUpdateManyWithoutDocumentsInput";
 import {
-  IsEnum,
+  ValidateNested,
   IsOptional,
+  IsEnum,
   IsDate,
   IsJSON,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -27,6 +28,18 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountUpdateManyWithoutDocumentsInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountUpdateManyWithoutDocumentsInput)
+  @IsOptional()
+  @Field(() => AccountUpdateManyWithoutDocumentsInput, {
+    nullable: true,
+  })
+  accounts?: AccountUpdateManyWithoutDocumentsInput;
+
   @ApiProperty({
     required: false,
     enum: EnumDocumentDocumentType,

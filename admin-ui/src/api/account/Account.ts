@@ -1,3 +1,4 @@
+import { Document } from "../document/Document";
 import { Transaction } from "../transaction/Transaction";
 import { User } from "../user/User";
 
@@ -9,6 +10,7 @@ export type Account = {
   createdAt: Date;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
   description: string | null;
+  document?: Document;
   id: string;
   name: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;

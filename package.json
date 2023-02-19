@@ -9,8 +9,16 @@
     "postinstall-client": "cd packages/admin && npm install && npm run build",
     "postinstall-server": "cd packages/server && npm install",
     "start": "if [ $CLIENT_ENV ]; then npm run start-client; elif [ $SERVER_ENV ]; then npm run start-server; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
-    "start-client": "cd packages/admin && npm run start",
-    "start-server": "cd packages/server && npm run start:prod"
+    "start-client": "cd packages/admin && node scripts/start.js",
+    "start-server": "cd packages/server && node dist/main"
+  },
+  "dependencies": {
+    "react-scripts": "3.4.1"
+  },
+  "overrides": {
+    "react-scripts": {
+      "@svgr/webpack": "6.5.1"
+    }
   },
   "repository": {
     "type": "git",

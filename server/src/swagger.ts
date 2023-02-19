@@ -9,6 +9,7 @@ export const swaggerDocumentOptions = new DocumentBuilder()
   )
   .setVersion("drpn7alr")
   .addBearerAuth()
+
   .build();
 
 export const swaggerSetupOptions: SwaggerCustomOptions = {

@@ -1,4 +1,5 @@
 import { AccountCreateNestedManyWithoutDocumentsInput } from "./AccountCreateNestedManyWithoutDocumentsInput";
+
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type DocumentCreateInput = {

@@ -1,4 +1,5 @@
 import { AccountUpdateManyWithoutDocumentsInput } from "./AccountUpdateManyWithoutDocumentsInput";
+
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type DocumentUpdateInput = {

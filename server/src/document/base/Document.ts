@@ -17,7 +17,7 @@ import {
   IsOptional,
   IsDate,
   IsEnum,
-  IsString,
+  IsString
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";

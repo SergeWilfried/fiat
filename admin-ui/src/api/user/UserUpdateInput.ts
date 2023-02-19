@@ -10,10 +10,14 @@ export type UserUpdateInput = {
   email?: string;
   firstName?: string | null;
   lastName?: string | null;
+  legalTermVersions?: string;
   messages?: InputJsonValue;
   password?: string;
+  password2?: string;
   phoe?: string;
+  privacyPolicy?: boolean;
   roles?: InputJsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;
+  termsAndConditions?: boolean;
   username?: string;
 };

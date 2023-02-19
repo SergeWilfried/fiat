@@ -8,6 +8,7 @@ import {
   SelectArrayInput,
   TextInput,
   PasswordInput,
+  BooleanInput,
   SelectInput,
 } from "react-admin";
 
@@ -40,9 +41,12 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
+        <TextInput label="Legal Term Versions" source="legalTermVersions" />
         <div />
         <PasswordInput label="Password" source="password" />
+        <TextInput label="Password2" source="password2" />
         <TextInput label="Phone" source="phoe" />
+        <BooleanInput label="Privacy Policy" source="privacyPolicy" />
         <SelectArrayInput
           source="roles"
           choices={ROLES_OPTIONS}
@@ -60,6 +64,10 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           allowEmpty
           optionValue="value"
+        />
+        <BooleanInput
+          label="Terms and Conditions  "
+          source="termsAndConditions"
         />
         <TextInput label="Username" source="username" />
       </SimpleForm>

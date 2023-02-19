@@ -17,6 +17,7 @@ import {
   IsOptional,
   IsJSON,
   IsString,
+  IsBoolean,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
@@ -107,6 +108,17 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  legalTermVersions?: string;
+
+  @ApiProperty({
+    required: false,
   })
   @IsJSON()
   @IsOptional()
@@ -135,7 +147,29 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
+  password2?: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
   phoe?: string;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  privacyPolicy?: boolean;
 
   @ApiProperty({
     required: false,
@@ -157,6 +191,17 @@ class UserUpdateInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Rejected" | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  termsAndConditions?: boolean;
 
   @ApiProperty({
     required: false,

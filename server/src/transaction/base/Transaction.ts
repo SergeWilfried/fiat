@@ -29,7 +29,7 @@ import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType
 @ObjectType()
 class Transaction {
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => [Account],
   })
   @ValidateNested()

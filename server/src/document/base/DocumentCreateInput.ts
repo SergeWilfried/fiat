@@ -11,15 +11,16 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { AccountCreateNestedManyWithoutDocumentsInput } from "./AccountCreateNestedManyWithoutDocumentsInput";
 import {
+  ValidateNested,
+  IsOptional,
   IsEnum,
   IsDate,
-  IsOptional,
   IsJSON,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -27,6 +28,18 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountCreateNestedManyWithoutDocumentsInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountCreateNestedManyWithoutDocumentsInput)
+  @IsOptional()
+  @Field(() => AccountCreateNestedManyWithoutDocumentsInput, {
+    nullable: true,
+  })
+  accounts?: AccountCreateNestedManyWithoutDocumentsInput;
+
   @ApiProperty({
     required: true,
     enum: EnumDocumentDocumentType,

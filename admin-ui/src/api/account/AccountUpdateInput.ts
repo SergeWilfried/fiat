@@ -1,3 +1,4 @@
+import { DocumentWhereUniqueInput } from "../document/DocumentWhereUniqueInput";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
@@ -8,6 +9,7 @@ export type AccountUpdateInput = {
   balance?: number | null;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
   description?: string | null;
+  document?: DocumentWhereUniqueInput;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
   transactions?: TransactionUpdateManyWithoutAccountsInput;

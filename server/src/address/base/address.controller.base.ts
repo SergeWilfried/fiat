@@ -27,7 +27,7 @@ import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
 import { AddressFindManyArgs } from "./AddressFindManyArgs";
 import { AddressUpdateInput } from "./AddressUpdateInput";
 import { Address } from "./Address";
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AddressControllerBase {
   constructor(
@@ -51,6 +51,7 @@ export class AddressControllerBase {
         address_1: true,
         address_2: true,
         city: true,
+        country: true,
         createdAt: true,
         id: true,
         state: true,
@@ -78,6 +79,7 @@ export class AddressControllerBase {
         address_1: true,
         address_2: true,
         city: true,
+        country: true,
         createdAt: true,
         id: true,
         state: true,
@@ -106,6 +108,7 @@ export class AddressControllerBase {
         address_1: true,
         address_2: true,
         city: true,
+        country: true,
         createdAt: true,
         id: true,
         state: true,
@@ -143,6 +146,7 @@ export class AddressControllerBase {
           address_1: true,
           address_2: true,
           city: true,
+          country: true,
           createdAt: true,
           id: true,
           state: true,
@@ -179,6 +183,7 @@ export class AddressControllerBase {
           address_1: true,
           address_2: true,
           city: true,
+          country: true,
           createdAt: true,
           id: true,
           state: true,

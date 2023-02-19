@@ -30,7 +30,7 @@ import { Account } from "./Account";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AccountControllerBase {
   constructor(
@@ -52,6 +52,10 @@ export class AccountControllerBase {
       data: {
         ...data,
 
+        document: {
+          connect: data.document,
+        },
+
         user: data.user
           ? {
               connect: data.user,
@@ -66,6 +70,13 @@ export class AccountControllerBase {
         createdAt: true,
         currency: true,
         description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         status: true,
@@ -102,6 +113,13 @@ export class AccountControllerBase {
         createdAt: true,
         currency: true,
         description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         status: true,
@@ -139,6 +157,13 @@ export class AccountControllerBase {
         createdAt: true,
         currency: true,
         description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         status: true,
@@ -179,6 +204,10 @@ export class AccountControllerBase {
         data: {
           ...data,
 
+          document: {
+            connect: data.document,
+          },
+
           user: data.user
             ? {
                 connect: data.user,
@@ -193,6 +222,13 @@ export class AccountControllerBase {
           createdAt: true,
           currency: true,
           description: true,
+
+          document: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           name: true,
           status: true,
@@ -238,6 +274,13 @@ export class AccountControllerBase {
           createdAt: true,
           currency: true,
           description: true,
+
+          document: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           name: true,
           status: true,

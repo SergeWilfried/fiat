@@ -25,6 +25,8 @@ import { DeleteDocumentArgs } from "./DeleteDocumentArgs";
 import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
 import { DocumentFindUniqueArgs } from "./DocumentFindUniqueArgs";
 import { Document } from "./Document";
+import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
+import { Account } from "../../account/base/Account";
 import { User } from "../../user/base/User";
 import { DocumentService } from "../document.service";
 
@@ -100,11 +102,9 @@ export class DocumentResolverBase {
       data: {
         ...args.data,
 
-        user: args.data.user
-          ? {
-              connect: args.data.user,
-            }
-          : undefined,
+        user: {
+          connect: args.data.user,
+        },
       },
     });
   }
@@ -125,11 +125,9 @@ export class DocumentResolverBase {
         data: {
           ...args.data,
 
-          user: args.data.user
-            ? {
-                connect: args.data.user,
-              }
-            : undefined,
+          user: {
+            connect: args.data.user,
+          },
         },
       });
     } catch (error) {
@@ -161,6 +159,26 @@ export class DocumentResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Account])
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async accounts(
+    @graphql.Parent() parent: Document,
+    @graphql.Args() args: AccountFindManyArgs
+  ): Promise<Account[]> {
+    const results = await this.service.findAccounts(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

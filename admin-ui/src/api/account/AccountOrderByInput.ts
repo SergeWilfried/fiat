@@ -8,6 +8,7 @@ export type AccountOrderByInput = {
   createdAt?: SortOrder;
   currency?: SortOrder;
   description?: SortOrder;
+  documentId?: SortOrder;
   id?: SortOrder;
   name?: SortOrder;
   status?: SortOrder;

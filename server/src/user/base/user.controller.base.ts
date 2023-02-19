@@ -33,7 +33,7 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
 import { Document } from "../../document/base/Document";
 import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-@swagger.ApiBasicAuth()
+@swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
   constructor(
@@ -270,6 +270,13 @@ export class UserControllerBase {
         createdAt: true,
         currency: true,
         description: true,
+
+        document: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         status: true,
@@ -376,7 +383,9 @@ export class UserControllerBase {
         documentType: true,
         expiringAt: true,
         id: true,
+        image: true,
         status: true,
+        tags: true,
         updatedAt: true,
         url: true,
 

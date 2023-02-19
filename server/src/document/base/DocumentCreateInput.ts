@@ -11,22 +11,33 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { AccountCreateNestedManyWithoutDocumentsInput } from "./AccountCreateNestedManyWithoutDocumentsInput";
 import {
+  ValidateNested,
+  IsOptional,
   IsEnum,
   IsDate,
-  IsOptional,
-  IsJSON,
-  ValidateNested,
+  IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountCreateNestedManyWithoutDocumentsInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountCreateNestedManyWithoutDocumentsInput)
+  @IsOptional()
+  @Field(() => AccountCreateNestedManyWithoutDocumentsInput, {
+    nullable: true,
+  })
+  accounts?: AccountCreateNestedManyWithoutDocumentsInput;
+
   @ApiProperty({
     required: true,
     enum: EnumDocumentDocumentType,
@@ -47,6 +58,14 @@ class DocumentCreateInput {
   expiringAt?: Date | null;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  image!: string;
+
+  @ApiProperty({
     required: false,
     enum: EnumDocumentStatus,
   })
@@ -58,23 +77,32 @@ class DocumentCreateInput {
   status?: "Approved" | "Rejected" | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
+    type: String,
   })
-  @IsJSON()
-  @Field(() => GraphQLJSON)
-  url!: InputJsonValue;
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  tags?: string | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  url!: string;
+
+  @ApiProperty({
+    required: true,
     type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput | null;
+  @Field(() => UserWhereUniqueInput)
+  user!: UserWhereUniqueInput;
 }
 
 export { DocumentCreateInput };

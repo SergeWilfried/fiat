@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Document, User } from "@prisma/client";
+import { Prisma, Document, Account, User } from "@prisma/client";
 
 export class DocumentServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,6 +45,17 @@ export class DocumentServiceBase {
     args: Prisma.SelectSubset<T, Prisma.DocumentDeleteArgs>
   ): Promise<Document> {
     return this.prisma.document.delete(args);
+  }
+
+  async findAccounts(
+    parentId: string,
+    args: Prisma.AccountFindManyArgs
+  ): Promise<Account[]> {
+    return this.prisma.document
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .accounts(args);
   }
 
   async getUser(parentId: string): Promise<User | null> {

@@ -11,23 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { Account } from "../../account/base/Account";
 import {
+  ValidateNested,
+  IsOptional,
   IsDate,
   IsEnum,
-  IsOptional,
   IsString,
-  IsJSON,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { JsonValue } from "type-fest";
 import { User } from "../../user/base/User";
 
 @ObjectType()
 class Document {
+  @ApiProperty({
+    required: false,
+    type: () => [Account],
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  accounts?: Array<Account>;
+
   @ApiProperty({
     required: true,
   })
@@ -66,6 +73,14 @@ class Document {
   id!: string;
 
   @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  image!: string;
+
+  @ApiProperty({
     required: false,
     enum: EnumDocumentStatus,
   })
@@ -77,6 +92,17 @@ class Document {
   status?: "Approved" | "Rejected" | null;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  tags!: string | null;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -86,19 +112,19 @@ class Document {
 
   @ApiProperty({
     required: true,
+    type: String,
   })
-  @IsJSON()
-  @Field(() => GraphQLJSON)
-  url!: JsonValue;
+  @IsString()
+  @Field(() => String)
+  url!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => User,
   })
   @ValidateNested()
   @Type(() => User)
-  @IsOptional()
-  user?: User | null;
+  user?: User;
 }
 
 export { Document };

@@ -5,7 +5,9 @@ export type DocumentOrderByInput = {
   documentType?: SortOrder;
   expiringAt?: SortOrder;
   id?: SortOrder;
+  image?: SortOrder;
   status?: SortOrder;
+  tags?: SortOrder;
   updatedAt?: SortOrder;
   url?: SortOrder;
   userId?: SortOrder;

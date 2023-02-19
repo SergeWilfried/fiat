@@ -11,22 +11,33 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
+import { AccountUpdateManyWithoutDocumentsInput } from "./AccountUpdateManyWithoutDocumentsInput";
 import {
-  IsEnum,
-  IsOptional,
-  IsDate,
-  IsJSON,
   ValidateNested,
+  IsOptional,
+  IsEnum,
+  IsDate,
+  IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { GraphQLJSON } from "graphql-type-json";
-import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountUpdateManyWithoutDocumentsInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountUpdateManyWithoutDocumentsInput)
+  @IsOptional()
+  @Field(() => AccountUpdateManyWithoutDocumentsInput, {
+    nullable: true,
+  })
+  accounts?: AccountUpdateManyWithoutDocumentsInput;
+
   @ApiProperty({
     required: false,
     enum: EnumDocumentDocumentType,
@@ -51,6 +62,17 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  image?: string;
+
+  @ApiProperty({
+    required: false,
     enum: EnumDocumentStatus,
   })
   @IsEnum(EnumDocumentStatus)
@@ -62,13 +84,25 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
   })
-  @IsJSON()
+  @IsString()
   @IsOptional()
-  @Field(() => GraphQLJSON, {
+  @Field(() => String, {
     nullable: true,
   })
-  url?: InputJsonValue;
+  tags?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  url?: string;
 
   @ApiProperty({
     required: false,
@@ -80,7 +114,7 @@ class DocumentUpdateInput {
   @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  user?: UserWhereUniqueInput | null;
+  user?: UserWhereUniqueInput;
 }
 
 export { DocumentUpdateInput };

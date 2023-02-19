@@ -1,18 +1,32 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
   CreateProps,
+  ReferenceArrayInput,
+  SelectArrayInput,
   SelectInput,
   DateInput,
+  TextInput,
   ReferenceInput,
 } from "react-admin";
+
+import { AccountTitle } from "../account/AccountTitle";
 import { UserTitle } from "../user/UserTitle";
 
 export const DocumentCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <ReferenceArrayInput
+          source="accounts"
+          reference="Account"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={AccountTitle} />
+        </ReferenceArrayInput>
         <SelectInput
           source="documentType"
           label="DocumentType"
@@ -25,6 +39,7 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           optionValue="value"
         />
         <DateInput label="Expiring At" source="expiringAt" />
+        <TextInput label="Image" source="image" />
         <SelectInput
           source="status"
           label="Status"
@@ -36,7 +51,8 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <div />
+        <TextInput label="Tags" source="tags" />
+        <TextInput label="URL" source="url" />
         <ReferenceInput source="user.id" reference="User" label="User">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

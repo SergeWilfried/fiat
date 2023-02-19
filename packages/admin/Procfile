@@ -1,0 +1,1 @@
+web: cd packages/admin && npm run start

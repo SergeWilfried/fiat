@@ -88,6 +88,15 @@ model Document {
   userId       String
 }
 
+model Bank {
+  createdAt       DateTime               @default(now())
+  currency        String
+  id              String                 @id @default(cuid())
+  institutionName String                 @unique
+  instutionType   EnumBankInstutionType?
+  updatedAt       DateTime               @updatedAt
+}
+
 enum EnumUserStatus {
   Approved
   Pending
@@ -138,4 +147,9 @@ enum EnumDocumentDocumentType {
 enum EnumDocumentStatus {
   Approved
   Rejected
+}
+
+enum EnumBankInstutionType {
+  MobileMoney
+  Bank
 }

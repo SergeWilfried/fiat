@@ -6,12 +6,12 @@ import { TransactionModule } from "./transaction/transaction.module";
 import { AddressModule } from "./address/address.module";
 import { AccountModule } from "./account/account.module";
 import { DocumentModule } from "./document/document.module";
+import { BankModule } from "./bank/bank.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
-import { KafkaModule } from "./kafka/kafka.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { ServeStaticOptionsService } from "./serveStaticOptions.service";
@@ -25,12 +25,12 @@ import { GraphQLModule } from "@nestjs/graphql";
     AddressModule,
     AccountModule,
     DocumentModule,
+    BankModule,
     ACLModule,
     AuthModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,
-    KafkaModule,
     MorganModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRootAsync({

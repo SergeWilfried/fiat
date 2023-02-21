@@ -25,6 +25,10 @@ import { DocumentList } from "./document/DocumentList";
 import { DocumentCreate } from "./document/DocumentCreate";
 import { DocumentEdit } from "./document/DocumentEdit";
 import { DocumentShow } from "./document/DocumentShow";
+import { BankList } from "./bank/BankList";
+import { BankCreate } from "./bank/BankCreate";
+import { BankEdit } from "./bank/BankEdit";
+import { BankShow } from "./bank/BankShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -85,6 +89,13 @@ const App = (): React.ReactElement => {
           edit={DocumentEdit}
           create={DocumentCreate}
           show={DocumentShow}
+        />
+        <Resource
+          name="Bank"
+          list={BankList}
+          edit={BankEdit}
+          create={BankCreate}
+          show={BankShow}
         />
       </Admin>
     </div>

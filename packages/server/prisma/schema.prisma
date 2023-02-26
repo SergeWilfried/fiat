@@ -8,11 +8,10 @@ generator client {
 }
 
 model User {
-  accounts           Account[]
   address            Json
   businessName       String?         @unique
   createdAt          DateTime        @default(now())
-  documents          Document[]
+  customer           Customer[]
   email              String          @unique
   firstName          String?
   id                 String          @id @default(cuid())
@@ -26,20 +25,25 @@ model User {
   roles              Json
   status             EnumUserStatus?
   termsAndConditions Boolean
+  transactions       Transaction[]
   updatedAt          DateTime        @updatedAt
   username           String          @unique
 }
 
 model Transaction {
-  accounts           Account[]
-  amount             Int
-  createdAt          DateTime                           @default(now())
-  fee                Float?
-  id                 String                             @id @default(cuid())
-  status             EnumTransactionStatus
-  transactionSubtype EnumTransactionTransactionSubtype?
-  transactionType    EnumTransactionTransactionType
-  updatedAt          DateTime                           @updatedAt
+  account         Account                        @relation(fields: [accountId], references: [id])
+  accountId       String
+  amount          Int
+  createdAt       DateTime                       @default(now())
+  currency        String
+  fee             Float?
+  id              String                         @id @default(cuid())
+  metadata        String?
+  status          EnumTransactionStatus?
+  transactionType EnumTransactionTransactionType
+  updatedAt       DateTime                       @updatedAt
+  user            User                           @relation(fields: [userId], references: [id])
+  userId          String
 }
 
 model Address {
@@ -47,10 +51,11 @@ model Address {
   address_2 String?
   city      String?
   country   String
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
+  createdAt DateTime   @default(now())
+  customers Customer[]
+  id        String     @id @default(cuid())
   state     String?
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime   @updatedAt
   zip       Int?
 }
 
@@ -61,6 +66,7 @@ model Account {
   balance          Float?
   createdAt        DateTime                @default(now())
   currency         EnumAccountCurrency?
+  customers        Customer[]
   description      String?
   document         Document                @relation(fields: [documentId], references: [id])
   documentId       String
@@ -69,13 +75,13 @@ model Account {
   status           EnumAccountStatus?
   transactions     Transaction[]
   updatedAt        DateTime                @updatedAt
-  user             User?                   @relation(fields: [userId], references: [id])
-  userId           String?
 }
 
 model Document {
   accounts     Account[]
   createdAt    DateTime                 @default(now())
+  customer     Customer?                @relation(fields: [customerId], references: [id])
+  customerId   String?
   documentType EnumDocumentDocumentType
   expiringAt   DateTime?
   id           String                   @id @default(cuid())
@@ -84,8 +90,6 @@ model Document {
   tags         String?
   updatedAt    DateTime                 @updatedAt
   url          String                   @unique
-  user         User                     @relation(fields: [userId], references: [id])
-  userId       String
 }
 
 model Bank {
@@ -95,6 +99,23 @@ model Bank {
   institutionName String                 @unique
   instutionType   EnumBankInstutionType?
   updatedAt       DateTime               @updatedAt
+}
+
+model Customer {
+  Account   Account[]
+  address   Address?            @relation(fields: [addressId], references: [id])
+  addressId String?
+  createdAt DateTime            @default(now())
+  dob       DateTime?
+  documents Document[]
+  email     String?             @unique
+  enitities User[]
+  firstname String?
+  id        String              @id @default(cuid())
+  lastname  String?
+  phone     String              @unique
+  status    EnumCustomerStatus?
+  updatedAt DateTime            @updatedAt
 }
 
 enum EnumUserStatus {
@@ -107,11 +128,6 @@ enum EnumTransactionStatus {
   Successful
   Pending
   Failed
-}
-
-enum EnumTransactionTransactionSubtype {
-  Fiat
-  Crypto
 }
 
 enum EnumTransactionTransactionType {
@@ -152,4 +168,10 @@ enum EnumDocumentStatus {
 enum EnumBankInstutionType {
   MobileMoney
   Bank
+}
+
+enum EnumCustomerStatus {
+  Approved
+  Failed
+  Pending
 }

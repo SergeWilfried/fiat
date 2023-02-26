@@ -7,14 +7,14 @@ import {
   TextInput,
   SelectInput,
   NumberInput,
-  ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  ReferenceInput,
 } from "react-admin";
 
+import { CustomerTitle } from "../customer/CustomerTitle";
 import { DocumentTitle } from "../document/DocumentTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
-import { UserTitle } from "../user/UserTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -48,6 +48,14 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
+        <ReferenceArrayInput
+          source="customers"
+          reference="Customer"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={CustomerTitle} />
+        </ReferenceArrayInput>
         <TextInput label="Description" multiline source="description" />
         <ReferenceInput
           source="document.id"
@@ -77,9 +85,6 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={TransactionTitle} />
         </ReferenceArrayInput>
-        <ReferenceInput source="user.id" reference="User" label="User">
-          <SelectInput optionText={UserTitle} />
-        </ReferenceInput>
       </SimpleForm>
     </Create>
   );

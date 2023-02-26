@@ -14,28 +14,27 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Account } from "../../account/base/Account";
 import {
   ValidateNested,
-  IsOptional,
   IsInt,
   IsDate,
-  IsNumber,
   IsString,
+  IsNumber,
+  IsOptional,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+import { User } from "../../user/base/User";
 
 @ObjectType()
 class Transaction {
   @ApiProperty({
     required: true,
-    type: () => [Account],
+    type: () => Account,
   })
   @ValidateNested()
   @Type(() => Account)
-  @IsOptional()
-  accounts?: Array<Account>;
+  account?: Account;
 
   @ApiProperty({
     required: true,
@@ -52,6 +51,14 @@ class Transaction {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  currency!: string;
 
   @ApiProperty({
     required: false,
@@ -73,25 +80,26 @@ class Transaction {
   id!: string;
 
   @ApiProperty({
-    required: true,
-    enum: EnumTransactionStatus,
+    required: false,
+    type: String,
   })
-  @IsEnum(EnumTransactionStatus)
-  @Field(() => EnumTransactionStatus, {
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
     nullable: true,
   })
-  status?: "Successful" | "Pending" | "Failed";
+  metadata!: string | null;
 
   @ApiProperty({
     required: false,
-    enum: EnumTransactionTransactionSubtype,
+    enum: EnumTransactionStatus,
   })
-  @IsEnum(EnumTransactionTransactionSubtype)
+  @IsEnum(EnumTransactionStatus)
   @IsOptional()
-  @Field(() => EnumTransactionTransactionSubtype, {
+  @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  transactionSubtype?: "Fiat" | "Crypto" | null;
+  status?: "Successful" | "Pending" | "Failed" | null;
 
   @ApiProperty({
     required: true,
@@ -110,6 +118,14 @@ class Transaction {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: true,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  user?: User;
 }
 
-export { Transaction };
+export { Transaction as Transaction };

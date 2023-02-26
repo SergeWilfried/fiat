@@ -53,4 +53,4 @@ class DocumentListRelationFilter {
   })
   none?: DocumentWhereInput;
 }
-export { DocumentListRelationFilter };
+export { DocumentListRelationFilter as DocumentListRelationFilter };

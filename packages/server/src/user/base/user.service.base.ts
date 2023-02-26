@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, User, Account, Document } from "@prisma/client";
+import { Prisma, User, Customer, Transaction } from "@prisma/client";
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
 
@@ -39,32 +39,12 @@ export class UserServiceBase {
   async create<T extends Prisma.UserCreateArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserCreateArgs>
   ): Promise<User> {
-    return this.prisma.user.create<T>({
-      ...args,
-
-      data: {
-        ...args.data,
-        password: await this.passwordService.hash(args.data.password),
-      },
-    });
+    return this.prisma.user.create<T>(args);
   }
   async update<T extends Prisma.UserUpdateArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserUpdateArgs>
   ): Promise<User> {
-    return this.prisma.user.update<T>({
-      ...args,
-
-      data: {
-        ...args.data,
-
-        password:
-          args.data.password &&
-          (await transformStringFieldUpdateInput(
-            args.data.password,
-            (password) => this.passwordService.hash(password)
-          )),
-      },
-    });
+    return this.prisma.user.update<T>(args);
   }
   async delete<T extends Prisma.UserDeleteArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>
@@ -72,25 +52,25 @@ export class UserServiceBase {
     return this.prisma.user.delete(args);
   }
 
-  async findAccounts(
+  async findCustomer(
     parentId: string,
-    args: Prisma.AccountFindManyArgs
-  ): Promise<Account[]> {
+    args: Prisma.CustomerFindManyArgs
+  ): Promise<Customer[]> {
     return this.prisma.user
       .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .accounts(args);
+      .customer(args);
   }
 
-  async findDocuments(
+  async findTransactions(
     parentId: string,
-    args: Prisma.DocumentFindManyArgs
-  ): Promise<Document[]> {
+    args: Prisma.TransactionFindManyArgs
+  ): Promise<Transaction[]> {
     return this.prisma.user
       .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .documents(args);
+      .transactions(args);
   }
 }

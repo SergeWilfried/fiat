@@ -1,9 +1,10 @@
 import { Account } from "../account/Account";
-import { User } from "../user/User";
+import { Customer } from "../customer/Customer";
 
 export type Document = {
   accounts?: Array<Account>;
   createdAt: Date;
+  customer?: Customer | null;
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
   expiringAt: Date | null;
   id: string;
@@ -12,5 +13,4 @@ export type Document = {
   tags: string | null;
   updatedAt: Date;
   url: string;
-  user?: User;
 };

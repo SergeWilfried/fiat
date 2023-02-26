@@ -18,4 +18,4 @@ class BankFindUniqueArgs {
   where!: BankWhereUniqueInput;
 }
 
-export { BankFindUniqueArgs };
+export { BankFindUniqueArgs as BankFindUniqueArgs };

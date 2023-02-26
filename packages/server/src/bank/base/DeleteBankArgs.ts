@@ -18,4 +18,4 @@ class DeleteBankArgs {
   where!: BankWhereUniqueInput;
 }
 
-export { DeleteBankArgs };
+export { DeleteBankArgs as DeleteBankArgs };

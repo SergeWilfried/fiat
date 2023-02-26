@@ -25,6 +25,15 @@ class TransactionOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  accountId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   amount?: SortOrder;
 
   @ApiProperty({
@@ -35,6 +44,15 @@ class TransactionOrderByInput {
     nullable: true,
   })
   createdAt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  currency?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -61,7 +79,7 @@ class TransactionOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  status?: SortOrder;
+  metadata?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -70,7 +88,7 @@ class TransactionOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  transactionSubtype?: SortOrder;
+  status?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -89,6 +107,15 @@ class TransactionOrderByInput {
     nullable: true,
   })
   updatedAt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  userId?: SortOrder;
 }
 
-export { TransactionOrderByInput };
+export { TransactionOrderByInput as TransactionOrderByInput };

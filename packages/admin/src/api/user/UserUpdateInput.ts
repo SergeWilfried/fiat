@@ -1,12 +1,11 @@
-import { AccountUpdateManyWithoutUsersInput } from "./AccountUpdateManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
-import { DocumentUpdateManyWithoutUsersInput } from "./DocumentUpdateManyWithoutUsersInput";
+import { CustomerUpdateManyWithoutUsersInput } from "./CustomerUpdateManyWithoutUsersInput";
+import { TransactionUpdateManyWithoutUsersInput } from "./TransactionUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
-  accounts?: AccountUpdateManyWithoutUsersInput;
   address?: InputJsonValue;
   businessName?: string | null;
-  documents?: DocumentUpdateManyWithoutUsersInput;
+  customer?: CustomerUpdateManyWithoutUsersInput;
   email?: string;
   firstName?: string | null;
   lastName?: string | null;
@@ -19,5 +18,6 @@ export type UserUpdateInput = {
   roles?: InputJsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;
   termsAndConditions?: boolean;
+  transactions?: TransactionUpdateManyWithoutUsersInput;
   username?: string;
 };

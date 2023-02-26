@@ -11,13 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { TransactionService } from "../transaction.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
@@ -27,9 +27,7 @@ import { TransactionWhereUniqueInput } from "./TransactionWhereUniqueInput";
 import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionUpdateInput } from "./TransactionUpdateInput";
 import { Transaction } from "./Transaction";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TransactionControllerBase {
@@ -37,85 +35,139 @@ export class TransactionControllerBase {
     protected readonly service: TransactionService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
-
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Post()
+  @swagger.ApiCreatedResponse({ type: Transaction })
   @nestAccessControl.UseRoles({
     resource: "Transaction",
     action: "create",
     possession: "any",
   })
-  @common.Post()
-  @swagger.ApiCreatedResponse({ type: Transaction })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async create(
     @common.Body() data: TransactionCreateInput
   ): Promise<Transaction> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        account: {
+          connect: data.account,
+        },
+
+        user: {
+          connect: data.user,
+        },
+      },
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         amount: true,
         createdAt: true,
+        currency: true,
         fee: true,
         id: true,
+        metadata: true,
         status: true,
-        transactionSubtype: true,
         transactionType: true,
         updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get()
+  @swagger.ApiOkResponse({ type: [Transaction] })
+  @ApiNestedQuery(TransactionFindManyArgs)
   @nestAccessControl.UseRoles({
     resource: "Transaction",
     action: "read",
     possession: "any",
   })
-  @common.Get()
-  @swagger.ApiOkResponse({ type: [Transaction] })
-  @swagger.ApiForbiddenResponse()
-  @ApiNestedQuery(TransactionFindManyArgs)
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findMany(@common.Req() request: Request): Promise<Transaction[]> {
     const args = plainToClass(TransactionFindManyArgs, request.query);
     return this.service.findMany({
       ...args,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         amount: true,
         createdAt: true,
+        currency: true,
         fee: true,
         id: true,
+        metadata: true,
         status: true,
-        transactionSubtype: true,
         transactionType: true,
         updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id")
+  @swagger.ApiOkResponse({ type: Transaction })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Transaction",
     action: "read",
     possession: "own",
   })
-  @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: Transaction })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findOne(
     @common.Param() params: TransactionWhereUniqueInput
   ): Promise<Transaction | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         amount: true,
         createdAt: true,
+        currency: true,
         fee: true,
         id: true,
+        metadata: true,
         status: true,
-        transactionSubtype: true,
         transactionType: true,
         updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -127,15 +179,17 @@ export class TransactionControllerBase {
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Patch("/:id")
+  @swagger.ApiOkResponse({ type: Transaction })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Transaction",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: Transaction })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async update(
     @common.Param() params: TransactionWhereUniqueInput,
     @common.Body() data: TransactionUpdateInput
@@ -143,16 +197,39 @@ export class TransactionControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          account: {
+            connect: data.account,
+          },
+
+          user: {
+            connect: data.user,
+          },
+        },
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
           amount: true,
           createdAt: true,
+          currency: true,
           fee: true,
           id: true,
+          metadata: true,
           status: true,
-          transactionSubtype: true,
           transactionType: true,
           updatedAt: true,
+
+          user: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -165,15 +242,17 @@ export class TransactionControllerBase {
     }
   }
 
+  @common.Delete("/:id")
+  @swagger.ApiOkResponse({ type: Transaction })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Transaction",
     action: "delete",
     possession: "any",
   })
-  @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: Transaction })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async delete(
     @common.Param() params: TransactionWhereUniqueInput
   ): Promise<Transaction | null> {
@@ -181,14 +260,27 @@ export class TransactionControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
           amount: true,
           createdAt: true,
+          currency: true,
           fee: true,
           id: true,
+          metadata: true,
           status: true,
-          transactionSubtype: true,
           transactionType: true,
           updatedAt: true,
+
+          user: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -199,121 +291,5 @@ export class TransactionControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
-  })
-  @common.Get("/:id/accounts")
-  @ApiNestedQuery(AccountFindManyArgs)
-  async findManyAccounts(
-    @common.Req() request: Request,
-    @common.Param() params: TransactionWhereUniqueInput
-  ): Promise<Account[]> {
-    const query = plainToClass(AccountFindManyArgs, request.query);
-    const results = await this.service.findAccounts(params.id, {
-      ...query,
-      select: {
-        accountNumber: true,
-        accountType: true,
-        availableBalance: true,
-        balance: true,
-        createdAt: true,
-        currency: true,
-        description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-        name: true,
-        status: true,
-        updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
-  })
-  @common.Post("/:id/accounts")
-  async connectAccounts(
-    @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
-  })
-  @common.Patch("/:id/accounts")
-  async updateAccounts(
-    @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
-  })
-  @common.Delete("/:id/accounts")
-  async disconnectAccounts(
-    @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

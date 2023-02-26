@@ -14,12 +14,12 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
 import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentWhereInput {
@@ -34,6 +34,18 @@ class DocumentWhereInput {
     nullable: true,
   })
   accounts?: AccountListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CustomerWhereUniqueInput, {
+    nullable: true,
+  })
+  customer?: CustomerWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -111,18 +123,6 @@ class DocumentWhereInput {
     nullable: true,
   })
   url?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput;
 }
 
-export { DocumentWhereInput };
+export { DocumentWhereInput as DocumentWhereInput };

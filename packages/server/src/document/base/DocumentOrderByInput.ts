@@ -34,6 +34,15 @@ class DocumentOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  customerId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   documentType?: SortOrder;
 
   @ApiProperty({
@@ -98,15 +107,6 @@ class DocumentOrderByInput {
     nullable: true,
   })
   url?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  userId?: SortOrder;
 }
 
-export { DocumentOrderByInput };
+export { DocumentOrderByInput as DocumentOrderByInput };

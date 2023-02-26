@@ -1,14 +1,13 @@
-import { AccountListRelationFilter } from "../account/AccountListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { DocumentListRelationFilter } from "../document/DocumentListRelationFilter";
+import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { BooleanFilter } from "../../util/BooleanFilter";
+import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type UserWhereInput = {
-  accounts?: AccountListRelationFilter;
   businessName?: StringNullableFilter;
-  documents?: DocumentListRelationFilter;
+  customer?: CustomerListRelationFilter;
   email?: StringFilter;
   firstName?: StringNullableFilter;
   id?: StringFilter;
@@ -17,5 +16,6 @@ export type UserWhereInput = {
   privacyPolicy?: BooleanFilter;
   status?: "Approved" | "Pending" | "Rejected";
   termsAndConditions?: BooleanFilter;
+  transactions?: TransactionListRelationFilter;
   username?: StringFilter;
 };

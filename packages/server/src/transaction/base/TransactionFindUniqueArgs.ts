@@ -18,4 +18,4 @@ class TransactionFindUniqueArgs {
   where!: TransactionWhereUniqueInput;
 }
 
-export { TransactionFindUniqueArgs };
+export { TransactionFindUniqueArgs as TransactionFindUniqueArgs };

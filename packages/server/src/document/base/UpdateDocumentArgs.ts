@@ -21,4 +21,4 @@ class UpdateDocumentArgs {
   data!: DocumentUpdateInput;
 }
 
-export { UpdateDocumentArgs };
+export { UpdateDocumentArgs as UpdateDocumentArgs };

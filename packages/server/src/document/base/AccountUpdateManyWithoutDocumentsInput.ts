@@ -43,4 +43,4 @@ class AccountUpdateManyWithoutDocumentsInput {
   set?: Array<AccountWhereUniqueInput>;
 }
 
-export { AccountUpdateManyWithoutDocumentsInput };
+export { AccountUpdateManyWithoutDocumentsInput as AccountUpdateManyWithoutDocumentsInput };

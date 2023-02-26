@@ -53,4 +53,4 @@ class AccountListRelationFilter {
   })
   none?: AccountWhereInput;
 }
-export { AccountListRelationFilter };
+export { AccountListRelationFilter as AccountListRelationFilter };

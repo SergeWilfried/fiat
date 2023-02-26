@@ -11,35 +11,23 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountCreateNestedManyWithoutUsersInput } from "./AccountCreateNestedManyWithoutUsersInput";
 import {
-  ValidateNested,
-  IsOptional,
   IsJSON,
   IsString,
+  IsOptional,
+  ValidateNested,
   IsBoolean,
   IsEnum,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
-import { DocumentCreateNestedManyWithoutUsersInput } from "./DocumentCreateNestedManyWithoutUsersInput";
+import { CustomerCreateNestedManyWithoutUsersInput } from "./CustomerCreateNestedManyWithoutUsersInput";
+import { Type } from "class-transformer";
 import { EnumUserStatus } from "./EnumUserStatus";
+import { TransactionCreateNestedManyWithoutUsersInput } from "./TransactionCreateNestedManyWithoutUsersInput";
 
 @InputType()
 class UserCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => AccountCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => AccountCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => AccountCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  accounts?: AccountCreateNestedManyWithoutUsersInput;
-
   @ApiProperty({
     required: true,
   })
@@ -60,15 +48,15 @@ class UserCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => DocumentCreateNestedManyWithoutUsersInput,
+    type: () => CustomerCreateNestedManyWithoutUsersInput,
   })
   @ValidateNested()
-  @Type(() => DocumentCreateNestedManyWithoutUsersInput)
+  @Type(() => CustomerCreateNestedManyWithoutUsersInput)
   @IsOptional()
-  @Field(() => DocumentCreateNestedManyWithoutUsersInput, {
+  @Field(() => CustomerCreateNestedManyWithoutUsersInput, {
     nullable: true,
   })
-  documents?: DocumentCreateNestedManyWithoutUsersInput;
+  customer?: CustomerCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,
@@ -177,6 +165,18 @@ class UserCreateInput {
   termsAndConditions!: boolean;
 
   @ApiProperty({
+    required: false,
+    type: () => TransactionCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TransactionCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  transactions?: TransactionCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -185,4 +185,4 @@ class UserCreateInput {
   username!: string;
 }
 
-export { UserCreateInput };
+export { UserCreateInput as UserCreateInput };

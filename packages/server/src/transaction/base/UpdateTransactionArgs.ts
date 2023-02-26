@@ -21,4 +21,4 @@ class UpdateTransactionArgs {
   data!: TransactionUpdateInput;
 }
 
-export { UpdateTransactionArgs };
+export { UpdateTransactionArgs as UpdateTransactionArgs };

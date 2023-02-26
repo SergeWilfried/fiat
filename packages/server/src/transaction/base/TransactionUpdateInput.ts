@@ -11,32 +11,33 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountUpdateManyWithoutTransactionsInput } from "./AccountUpdateManyWithoutTransactionsInput";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import {
   ValidateNested,
   IsOptional,
   IsInt,
+  IsString,
   IsNumber,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class TransactionUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => AccountUpdateManyWithoutTransactionsInput,
+    type: () => AccountWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => AccountUpdateManyWithoutTransactionsInput)
+  @Type(() => AccountWhereUniqueInput)
   @IsOptional()
-  @Field(() => AccountUpdateManyWithoutTransactionsInput, {
+  @Field(() => AccountWhereUniqueInput, {
     nullable: true,
   })
-  accounts?: AccountUpdateManyWithoutTransactionsInput;
+  account?: AccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -51,6 +52,17 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  currency?: string;
+
+  @ApiProperty({
+    required: false,
     type: Number,
   })
   @IsNumber()
@@ -62,6 +74,17 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  metadata?: string | null;
+
+  @ApiProperty({
+    required: false,
     enum: EnumTransactionStatus,
   })
   @IsEnum(EnumTransactionStatus)
@@ -69,18 +92,7 @@ class TransactionUpdateInput {
   @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  status?: "Successful" | "Pending" | "Failed";
-
-  @ApiProperty({
-    required: false,
-    enum: EnumTransactionTransactionSubtype,
-  })
-  @IsEnum(EnumTransactionTransactionSubtype)
-  @IsOptional()
-  @Field(() => EnumTransactionTransactionSubtype, {
-    nullable: true,
-  })
-  transactionSubtype?: "Fiat" | "Crypto" | null;
+  status?: "Successful" | "Pending" | "Failed" | null;
 
   @ApiProperty({
     required: false,
@@ -92,6 +104,18 @@ class TransactionUpdateInput {
     nullable: true,
   })
   transactionType?: "Credit" | "Debit";
+
+  @ApiProperty({
+    required: false,
+    type: () => UserWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UserWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UserWhereUniqueInput, {
+    nullable: true,
+  })
+  user?: UserWhereUniqueInput;
 }
 
-export { TransactionUpdateInput };
+export { TransactionUpdateInput as TransactionUpdateInput };

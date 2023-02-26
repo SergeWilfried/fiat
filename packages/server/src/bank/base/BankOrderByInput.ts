@@ -73,4 +73,4 @@ class BankOrderByInput {
   updatedAt?: SortOrder;
 }
 
-export { BankOrderByInput };
+export { BankOrderByInput as BankOrderByInput };

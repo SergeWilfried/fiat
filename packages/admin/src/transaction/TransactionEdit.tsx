@@ -4,28 +4,30 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  ReferenceArrayInput,
-  SelectArrayInput,
-  NumberInput,
+  ReferenceInput,
   SelectInput,
+  NumberInput,
+  TextInput,
 } from "react-admin";
 
 import { AccountTitle } from "../account/AccountTitle";
+import { UserTitle } from "../user/UserTitle";
 
 export const TransactionEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceArrayInput
-          source="accounts"
+        <ReferenceInput
+          source="account.id"
           reference="Account"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
+          label="Recipient"
         >
-          <SelectArrayInput optionText={AccountTitle} />
-        </ReferenceArrayInput>
+          <SelectInput optionText={AccountTitle} />
+        </ReferenceInput>
         <NumberInput step={1} label="Amount" source="amount" />
+        <TextInput label="Currency" source="currency" />
         <NumberInput label="Fee" source="fee" />
+        <TextInput label="Metadata" source="metadata" />
         <SelectInput
           source="status"
           label="Status"
@@ -33,16 +35,6 @@ export const TransactionEdit = (props: EditProps): React.ReactElement => {
             { label: "SUCCESSFUL", value: "Successful" },
             { label: "PENDING", value: "Pending" },
             { label: "FAILED", value: "Failed" },
-          ]}
-          optionText="label"
-          optionValue="value"
-        />
-        <SelectInput
-          source="transactionSubtype"
-          label="TransactionSubtype"
-          choices={[
-            { label: "FIAT", value: "Fiat" },
-            { label: "CRYPTO", value: "Crypto" },
           ]}
           optionText="label"
           allowEmpty
@@ -58,6 +50,9 @@ export const TransactionEdit = (props: EditProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
+        <ReferenceInput source="user.id" reference="User" label="Enitity">
+          <SelectInput optionText={UserTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );

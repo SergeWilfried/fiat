@@ -1,12 +1,11 @@
-import { AccountCreateNestedManyWithoutUsersInput } from "./AccountCreateNestedManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
-import { DocumentCreateNestedManyWithoutUsersInput } from "./DocumentCreateNestedManyWithoutUsersInput";
+import { CustomerCreateNestedManyWithoutUsersInput } from "./CustomerCreateNestedManyWithoutUsersInput";
+import { TransactionCreateNestedManyWithoutUsersInput } from "./TransactionCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
-  accounts?: AccountCreateNestedManyWithoutUsersInput;
   address: InputJsonValue;
   businessName?: string | null;
-  documents?: DocumentCreateNestedManyWithoutUsersInput;
+  customer?: CustomerCreateNestedManyWithoutUsersInput;
   email: string;
   firstName?: string | null;
   lastName?: string | null;
@@ -19,5 +18,6 @@ export type UserCreateInput = {
   roles: InputJsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;
   termsAndConditions: boolean;
+  transactions?: TransactionCreateNestedManyWithoutUsersInput;
   username: string;
 };

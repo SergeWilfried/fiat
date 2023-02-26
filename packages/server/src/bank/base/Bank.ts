@@ -69,4 +69,4 @@ class Bank {
   updatedAt!: Date;
 }
 
-export { Bank };
+export { Bank as Bank };

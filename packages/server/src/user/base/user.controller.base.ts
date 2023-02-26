@@ -11,13 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { UserService } from "../user.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
@@ -27,12 +27,13 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
-import { Document } from "../../document/base/Document";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
+import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
+import { Customer } from "../../customer/base/Customer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
+import { Transaction } from "../../transaction/base/Transaction";
+import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
+
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -40,16 +41,17 @@ export class UserControllerBase {
     protected readonly service: UserService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
-
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Post()
+  @swagger.ApiCreatedResponse({ type: User })
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "create",
     possession: "any",
   })
-  @common.Post()
-  @swagger.ApiCreatedResponse({ type: User })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.create({
       data: data,
@@ -76,15 +78,17 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get()
+  @swagger.ApiOkResponse({ type: [User] })
+  @ApiNestedQuery(UserFindManyArgs)
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
     possession: "any",
   })
-  @common.Get()
-  @swagger.ApiOkResponse({ type: [User] })
-  @swagger.ApiForbiddenResponse()
-  @ApiNestedQuery(UserFindManyArgs)
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findMany(@common.Req() request: Request): Promise<User[]> {
     const args = plainToClass(UserFindManyArgs, request.query);
     return this.service.findMany({
@@ -112,15 +116,17 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id")
+  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
     possession: "own",
   })
-  @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: User })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findOne(
     @common.Param() params: UserWhereUniqueInput
   ): Promise<User | null> {
@@ -155,15 +161,17 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Patch("/:id")
+  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: User })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async update(
     @common.Param() params: UserWhereUniqueInput,
     @common.Body() data: UserUpdateInput
@@ -202,15 +210,17 @@ export class UserControllerBase {
     }
   }
 
+  @common.Delete("/:id")
+  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "delete",
     possession: "any",
   })
-  @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: User })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async delete(
     @common.Param() params: UserWhereUniqueInput
   ): Promise<User | null> {
@@ -248,45 +258,36 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/customer")
+  @ApiNestedQuery(CustomerFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Account",
+    resource: "Customer",
     action: "read",
     possession: "any",
   })
-  @common.Get("/:id/accounts")
-  @ApiNestedQuery(AccountFindManyArgs)
-  async findManyAccounts(
+  async findManyCustomer(
     @common.Req() request: Request,
     @common.Param() params: UserWhereUniqueInput
-  ): Promise<Account[]> {
-    const query = plainToClass(AccountFindManyArgs, request.query);
-    const results = await this.service.findAccounts(params.id, {
+  ): Promise<Customer[]> {
+    const query = plainToClass(CustomerFindManyArgs, request.query);
+    const results = await this.service.findCustomer(params.id, {
       ...query,
       select: {
-        accountNumber: true,
-        accountType: true,
-        availableBalance: true,
-        balance: true,
-        createdAt: true,
-        currency: true,
-        description: true,
-
-        document: {
+        address: {
           select: {
             id: true,
           },
         },
 
+        createdAt: true,
+        dob: true,
+        email: true,
+        firstname: true,
         id: true,
-        name: true,
+        lastname: true,
+        phone: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (results === null) {
@@ -297,18 +298,18 @@ export class UserControllerBase {
     return results;
   }
 
+  @common.Post("/:id/customer")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Post("/:id/accounts")
-  async connectAccounts(
+  async connectCustomer(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: CustomerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      accounts: {
+      customer: {
         connect: body,
       },
     };
@@ -319,18 +320,18 @@ export class UserControllerBase {
     });
   }
 
+  @common.Patch("/:id/customer")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id/accounts")
-  async updateAccounts(
+  async updateCustomer(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: CustomerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      accounts: {
+      customer: {
         set: body,
       },
     };
@@ -341,18 +342,18 @@ export class UserControllerBase {
     });
   }
 
+  @common.Delete("/:id/customer")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Delete("/:id/accounts")
-  async disconnectAccounts(
+  async disconnectCustomer(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: CustomerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      accounts: {
+      customer: {
         disconnect: body,
       },
     };
@@ -364,30 +365,36 @@ export class UserControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/transactions")
+  @ApiNestedQuery(TransactionFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Document",
+    resource: "Transaction",
     action: "read",
     possession: "any",
   })
-  @common.Get("/:id/documents")
-  @ApiNestedQuery(DocumentFindManyArgs)
-  async findManyDocuments(
+  async findManyTransactions(
     @common.Req() request: Request,
     @common.Param() params: UserWhereUniqueInput
-  ): Promise<Document[]> {
-    const query = plainToClass(DocumentFindManyArgs, request.query);
-    const results = await this.service.findDocuments(params.id, {
+  ): Promise<Transaction[]> {
+    const query = plainToClass(TransactionFindManyArgs, request.query);
+    const results = await this.service.findTransactions(params.id, {
       ...query,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
+        amount: true,
         createdAt: true,
-        documentType: true,
-        expiringAt: true,
+        currency: true,
+        fee: true,
         id: true,
-        image: true,
+        metadata: true,
         status: true,
-        tags: true,
+        transactionType: true,
         updatedAt: true,
-        url: true,
 
         user: {
           select: {
@@ -404,18 +411,18 @@ export class UserControllerBase {
     return results;
   }
 
+  @common.Post("/:id/transactions")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Post("/:id/documents")
-  async connectDocuments(
+  async connectTransactions(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: TransactionWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      documents: {
+      transactions: {
         connect: body,
       },
     };
@@ -426,18 +433,18 @@ export class UserControllerBase {
     });
   }
 
+  @common.Patch("/:id/transactions")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id/documents")
-  async updateDocuments(
+  async updateTransactions(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: TransactionWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      documents: {
+      transactions: {
         set: body,
       },
     };
@@ -448,18 +455,18 @@ export class UserControllerBase {
     });
   }
 
+  @common.Delete("/:id/transactions")
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "update",
     possession: "any",
   })
-  @common.Delete("/:id/documents")
-  async disconnectDocuments(
+  async disconnectTransactions(
     @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: TransactionWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      documents: {
+      transactions: {
         disconnect: body,
       },
     };

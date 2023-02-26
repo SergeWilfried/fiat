@@ -11,30 +11,18 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { DocumentListRelationFilter } from "../../document/base/DocumentListRelationFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { BooleanFilter } from "../../util/BooleanFilter";
 import { EnumUserStatus } from "./EnumUserStatus";
+import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class UserWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => AccountListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => AccountListRelationFilter)
-  @IsOptional()
-  @Field(() => AccountListRelationFilter, {
-    nullable: true,
-  })
-  accounts?: AccountListRelationFilter;
-
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -48,15 +36,15 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => DocumentListRelationFilter,
+    type: () => CustomerListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => DocumentListRelationFilter)
+  @Type(() => CustomerListRelationFilter)
   @IsOptional()
-  @Field(() => DocumentListRelationFilter, {
+  @Field(() => CustomerListRelationFilter, {
     nullable: true,
   })
-  documents?: DocumentListRelationFilter;
+  customer?: CustomerListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -148,6 +136,18 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => TransactionListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TransactionListRelationFilter)
+  @IsOptional()
+  @Field(() => TransactionListRelationFilter, {
+    nullable: true,
+  })
+  transactions?: TransactionListRelationFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -158,4 +158,4 @@ class UserWhereInput {
   username?: StringFilter;
 }
 
-export { UserWhereInput };
+export { UserWhereInput as UserWhereInput };

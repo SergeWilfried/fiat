@@ -50,4 +50,4 @@ class BankFindManyArgs {
   take?: number;
 }
 
-export { BankFindManyArgs };
+export { BankFindManyArgs as BankFindManyArgs };

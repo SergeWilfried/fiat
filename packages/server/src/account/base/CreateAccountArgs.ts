@@ -18,4 +18,4 @@ class CreateAccountArgs {
   data!: AccountCreateInput;
 }
 
-export { CreateAccountArgs };
+export { CreateAccountArgs as CreateAccountArgs };

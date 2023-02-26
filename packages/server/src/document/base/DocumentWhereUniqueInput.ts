@@ -24,4 +24,4 @@ class DocumentWhereUniqueInput {
   id!: string;
 }
 
-export { DocumentWhereUniqueInput };
+export { DocumentWhereUniqueInput as DocumentWhereUniqueInput };

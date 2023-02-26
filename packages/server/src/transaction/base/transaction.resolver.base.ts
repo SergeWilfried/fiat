@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
 import * as graphql from "@nestjs/graphql";
 import * as apollo from "apollo-server-express";
-import * as nestAccessControl from "nest-access-control";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateTransactionArgs } from "./CreateTransactionArgs";
@@ -25,12 +25,11 @@ import { DeleteTransactionArgs } from "./DeleteTransactionArgs";
 import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { Transaction } from "./Transaction";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
 import { Account } from "../../account/base/Account";
+import { User } from "../../user/base/User";
 import { TransactionService } from "../transaction.service";
-
-@graphql.Resolver(() => Transaction)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
+@graphql.Resolver(() => Transaction)
 export class TransactionResolverBase {
   constructor(
     protected readonly service: TransactionService,
@@ -98,7 +97,17 @@ export class TransactionResolverBase {
   ): Promise<Transaction> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        account: {
+          connect: args.data.account,
+        },
+
+        user: {
+          connect: args.data.user,
+        },
+      },
     });
   }
 
@@ -115,7 +124,17 @@ export class TransactionResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          account: {
+            connect: args.data.account,
+          },
+
+          user: {
+            connect: args.data.user,
+          },
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -149,22 +168,36 @@ export class TransactionResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Account])
+  @graphql.ResolveField(() => Account, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Account",
     action: "read",
     possession: "any",
   })
-  async accounts(
-    @graphql.Parent() parent: Transaction,
-    @graphql.Args() args: AccountFindManyArgs
-  ): Promise<Account[]> {
-    const results = await this.service.findAccounts(parent.id, args);
+  async account(
+    @graphql.Parent() parent: Transaction
+  ): Promise<Account | null> {
+    const result = await this.service.getAccount(parent.id);
 
-    if (!results) {
-      return [];
+    if (!result) {
+      return null;
     }
+    return result;
+  }
 
-    return results;
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async user(@graphql.Parent() parent: Transaction): Promise<User | null> {
+    const result = await this.service.getUser(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

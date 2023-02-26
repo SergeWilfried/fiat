@@ -1,11 +1,12 @@
 import { AccountListRelationFilter } from "../account/AccountListRelationFilter";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type DocumentWhereInput = {
   accounts?: AccountListRelationFilter;
+  customer?: CustomerWhereUniqueInput;
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
   expiringAt?: DateTimeNullableFilter;
   id?: StringFilter;
@@ -13,5 +14,4 @@ export type DocumentWhereInput = {
   status?: "Approved" | "Rejected";
   tags?: StringNullableFilter;
   url?: StringFilter;
-  user?: UserWhereUniqueInput;
 };

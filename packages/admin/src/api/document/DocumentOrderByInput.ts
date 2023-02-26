@@ -2,6 +2,7 @@ import { SortOrder } from "../../util/SortOrder";
 
 export type DocumentOrderByInput = {
   createdAt?: SortOrder;
+  customerId?: SortOrder;
   documentType?: SortOrder;
   expiringAt?: SortOrder;
   id?: SortOrder;
@@ -10,5 +11,4 @@ export type DocumentOrderByInput = {
   tags?: SortOrder;
   updatedAt?: SortOrder;
   url?: SortOrder;
-  userId?: SortOrder;
 };

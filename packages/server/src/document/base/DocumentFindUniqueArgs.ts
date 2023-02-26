@@ -18,4 +18,4 @@ class DocumentFindUniqueArgs {
   where!: DocumentWhereUniqueInput;
 }
 
-export { DocumentFindUniqueArgs };
+export { DocumentFindUniqueArgs as DocumentFindUniqueArgs };

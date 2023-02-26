@@ -21,31 +21,39 @@ const existingId = "existingId";
 const CREATE_INPUT = {
   amount: 42,
   createdAt: new Date(),
+  currency: "exampleCurrency",
   fee: 42.42,
   id: "exampleId",
+  metadata: "exampleMetadata",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   amount: 42,
   createdAt: new Date(),
+  currency: "exampleCurrency",
   fee: 42.42,
   id: "exampleId",
+  metadata: "exampleMetadata",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
     amount: 42,
     createdAt: new Date(),
+    currency: "exampleCurrency",
     fee: 42.42,
     id: "exampleId",
+    metadata: "exampleMetadata",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
   amount: 42,
   createdAt: new Date(),
+  currency: "exampleCurrency",
   fee: 42.42,
   id: "exampleId",
+  metadata: "exampleMetadata",
   updatedAt: new Date(),
 };
 

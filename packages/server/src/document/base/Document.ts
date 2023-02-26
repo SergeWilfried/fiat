@@ -20,9 +20,9 @@ import {
   IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { User } from "../../user/base/User";
 
 @ObjectType()
 class Document {
@@ -42,6 +42,15 @@ class Document {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => Customer,
+  })
+  @ValidateNested()
+  @Type(() => Customer)
+  @IsOptional()
+  customer?: Customer | null;
 
   @ApiProperty({
     required: true,
@@ -117,14 +126,6 @@ class Document {
   @IsString()
   @Field(() => String)
   url!: string;
-
-  @ApiProperty({
-    required: true,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  user?: User;
 }
 
-export { Document };
+export { Document as Document };

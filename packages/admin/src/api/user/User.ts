@@ -1,13 +1,12 @@
-import { Account } from "../account/Account";
 import { JsonValue } from "type-fest";
-import { Document } from "../document/Document";
+import { Customer } from "../customer/Customer";
+import { Transaction } from "../transaction/Transaction";
 
 export type User = {
-  accounts?: Array<Account>;
   address: JsonValue;
   businessName: string | null;
   createdAt: Date;
-  documents?: Array<Document>;
+  customer?: Array<Customer>;
   email: string;
   firstName: string | null;
   id: string;
@@ -20,6 +19,7 @@ export type User = {
   roles: JsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;
   termsAndConditions: boolean;
+  transactions?: Array<Transaction>;
   updatedAt: Date;
   username: string;
 };

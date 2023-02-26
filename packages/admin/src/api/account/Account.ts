@@ -1,6 +1,6 @@
+import { Customer } from "../customer/Customer";
 import { Document } from "../document/Document";
 import { Transaction } from "../transaction/Transaction";
-import { User } from "../user/User";
 
 export type Account = {
   accountNumber: string | null;
@@ -9,6 +9,7 @@ export type Account = {
   balance: number | null;
   createdAt: Date;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
+  customers?: Array<Customer>;
   description: string | null;
   document?: Document;
   id: string;
@@ -16,5 +17,4 @@ export type Account = {
   status?: "Approved" | "Pending" | "Blocked" | null;
   transactions?: Array<Transaction>;
   updatedAt: Date;
-  user?: User | null;
 };

@@ -1,8 +1,6 @@
-import { Account } from "../account/Account";
 import { User } from "../user/User";
 
 export type Transaction = {
-  account?: Account;
   amount: number;
   createdAt: Date;
   currency: string;

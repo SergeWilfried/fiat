@@ -25,7 +25,6 @@ import { DeleteTransactionArgs } from "./DeleteTransactionArgs";
 import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { Transaction } from "./Transaction";
-import { Account } from "../../account/base/Account";
 import { User } from "../../user/base/User";
 import { TransactionService } from "../transaction.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -100,10 +99,6 @@ export class TransactionResolverBase {
       data: {
         ...args.data,
 
-        account: {
-          connect: args.data.account,
-        },
-
         user: {
           connect: args.data.user,
         },
@@ -126,10 +121,6 @@ export class TransactionResolverBase {
         ...args,
         data: {
           ...args.data,
-
-          account: {
-            connect: args.data.account,
-          },
 
           user: {
             connect: args.data.user,
@@ -165,24 +156,6 @@ export class TransactionResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Account, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
-  })
-  async account(
-    @graphql.Parent() parent: Transaction
-  ): Promise<Account | null> {
-    const result = await this.service.getAccount(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

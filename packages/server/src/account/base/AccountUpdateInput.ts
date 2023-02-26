@@ -20,11 +20,10 @@ import {
 } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { CustomerUpdateManyWithoutAccountsInput } from "./CustomerUpdateManyWithoutAccountsInput";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { EnumAccountStatus } from "./EnumAccountStatus";
-import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
 class AccountUpdateInput {
@@ -85,15 +84,15 @@ class AccountUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerUpdateManyWithoutAccountsInput,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => CustomerUpdateManyWithoutAccountsInput)
+  @Type(() => CustomerWhereUniqueInput)
   @IsOptional()
-  @Field(() => CustomerUpdateManyWithoutAccountsInput, {
+  @Field(() => CustomerWhereUniqueInput, {
     nullable: true,
   })
-  customers?: CustomerUpdateManyWithoutAccountsInput;
+  customers?: CustomerWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -139,18 +138,6 @@ class AccountUpdateInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionUpdateManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionUpdateManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => TransactionUpdateManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  transactions?: TransactionUpdateManyWithoutAccountsInput;
 }
 
 export { AccountUpdateInput as AccountUpdateInput };

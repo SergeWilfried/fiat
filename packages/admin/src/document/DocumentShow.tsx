@@ -11,8 +11,8 @@ import {
   Datagrid,
 } from "react-admin";
 
-import { DOCUMENT_TITLE_FIELD } from "./DocumentTitle";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
+import { DOCUMENT_TITLE_FIELD } from "./DocumentTitle";
 
 export const DocumentShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -46,6 +46,13 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
             <TextField label="Balance" source="balance" />
             <DateField source="createdAt" label="Created At" />
             <TextField label="Currency" source="currency" />
+            <ReferenceField
+              label="Customers"
+              source="customer.id"
+              reference="Customer"
+            >
+              <TextField source={CUSTOMER_TITLE_FIELD} />
+            </ReferenceField>
             <TextField label="Description" source="description" />
             <ReferenceField
               label="Document"

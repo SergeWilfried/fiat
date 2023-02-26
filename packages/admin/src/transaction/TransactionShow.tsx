@@ -3,24 +3,16 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  ReferenceField,
   TextField,
   DateField,
+  ReferenceField,
 } from "react-admin";
-import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const TransactionShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <ReferenceField
-          label="Recipient"
-          source="account.id"
-          reference="Account"
-        >
-          <TextField source={ACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="Amount" source="amount" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="Currency" source="currency" />

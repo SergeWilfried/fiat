@@ -12,7 +12,6 @@ import {
   ReferenceField,
 } from "react-admin";
 
-import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { USER_TITLE_FIELD } from "./UserTitle";
 
 export const UserShow = (props: ShowProps): React.ReactElement => {
@@ -45,13 +44,6 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Transactions"
         >
           <Datagrid rowClick="show">
-            <ReferenceField
-              label="Recipient"
-              source="account.id"
-              reference="Account"
-            >
-              <TextField source={ACCOUNT_TITLE_FIELD} />
-            </ReferenceField>
             <TextField label="Amount" source="amount" />
             <DateField source="createdAt" label="Created At" />
             <TextField label="Currency" source="currency" />

@@ -1,6 +1,5 @@
-import { CustomerUpdateManyWithoutAccountsInput } from "./CustomerUpdateManyWithoutAccountsInput";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { DocumentWhereUniqueInput } from "../document/DocumentWhereUniqueInput";
-import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 export type AccountUpdateInput = {
   accountNumber?: string | null;
@@ -8,10 +7,9 @@ export type AccountUpdateInput = {
   availableBalance?: number | null;
   balance?: number | null;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
-  customers?: CustomerUpdateManyWithoutAccountsInput;
+  customers?: CustomerWhereUniqueInput;
   description?: string | null;
   document?: DocumentWhereUniqueInput;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
-  transactions?: TransactionUpdateManyWithoutAccountsInput;
 };

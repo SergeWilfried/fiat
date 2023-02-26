@@ -25,7 +25,6 @@ import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { Customer } from "../../customer/base/Customer";
 import { Document } from "../../document/base/Document";
 import { EnumAccountStatus } from "./EnumAccountStatus";
-import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Account {
@@ -93,13 +92,12 @@ class Account {
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
 
   @ApiProperty({
-    required: false,
-    type: () => [Customer],
+    required: true,
+    type: () => Customer,
   })
   @ValidateNested()
   @Type(() => Customer)
-  @IsOptional()
-  customers?: Array<Customer>;
+  customers?: Customer;
 
   @ApiProperty({
     required: false,
@@ -149,15 +147,6 @@ class Account {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Transaction],
-  })
-  @ValidateNested()
-  @Type(() => Transaction)
-  @IsOptional()
-  transactions?: Array<Transaction>;
 
   @ApiProperty({
     required: true,

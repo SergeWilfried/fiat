@@ -17,10 +17,9 @@ import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumAccountStatus } from "./EnumAccountStatus";
-import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class AccountWhereInput {
@@ -81,15 +80,15 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerListRelationFilter,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => CustomerListRelationFilter)
+  @Type(() => CustomerWhereUniqueInput)
   @IsOptional()
-  @Field(() => CustomerListRelationFilter, {
+  @Field(() => CustomerWhereUniqueInput, {
     nullable: true,
   })
-  customers?: CustomerListRelationFilter;
+  customers?: CustomerWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -134,18 +133,6 @@ class AccountWhereInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked";
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => TransactionListRelationFilter)
-  @IsOptional()
-  @Field(() => TransactionListRelationFilter, {
-    nullable: true,
-  })
-  transactions?: TransactionListRelationFilter;
 }
 
 export { AccountWhereInput as AccountWhereInput };

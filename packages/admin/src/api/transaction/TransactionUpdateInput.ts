@@ -1,8 +1,6 @@
-import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type TransactionUpdateInput = {
-  account?: AccountWhereUniqueInput;
   amount?: number;
   currency?: string;
   fee?: number | null;

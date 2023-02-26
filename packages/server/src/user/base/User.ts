@@ -11,33 +11,24 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "../../account/base/Account";
 import {
-  ValidateNested,
-  IsOptional,
   IsJSON,
   IsString,
+  IsOptional,
   IsDate,
+  ValidateNested,
   IsBoolean,
   IsEnum,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
-import { Document } from "../../document/base/Document";
+import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 import { EnumUserStatus } from "./EnumUserStatus";
+import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class User {
-  @ApiProperty({
-    required: false,
-    type: () => [Account],
-  })
-  @ValidateNested()
-  @Type(() => Account)
-  @IsOptional()
-  accounts?: Array<Account>;
-
   @ApiProperty({
     required: true,
   })
@@ -66,12 +57,12 @@ class User {
 
   @ApiProperty({
     required: false,
-    type: () => [Document],
+    type: () => [Customer],
   })
   @ValidateNested()
-  @Type(() => Document)
+  @Type(() => Customer)
   @IsOptional()
-  documents?: Array<Document>;
+  customer?: Array<Customer>;
 
   @ApiProperty({
     required: true,
@@ -180,6 +171,15 @@ class User {
   termsAndConditions!: boolean;
 
   @ApiProperty({
+    required: false,
+    type: () => [Transaction],
+  })
+  @ValidateNested()
+  @Type(() => Transaction)
+  @IsOptional()
+  transactions?: Array<Transaction>;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -196,4 +196,4 @@ class User {
   username!: string;
 }
 
-export { User };
+export { User as User };

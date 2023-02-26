@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
 import * as graphql from "@nestjs/graphql";
 import * as apollo from "apollo-server-express";
-import * as nestAccessControl from "nest-access-control";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateUserArgs } from "./CreateUserArgs";
@@ -25,14 +25,13 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
-import { Document } from "../../document/base/Document";
+import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
+import { Customer } from "../../customer/base/Customer";
+import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
+import { Transaction } from "../../transaction/base/Transaction";
 import { UserService } from "../user.service";
-
-@graphql.Resolver(() => User)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
+@graphql.Resolver(() => User)
 export class UserResolverBase {
   constructor(
     protected readonly service: UserService,
@@ -141,17 +140,17 @@ export class UserResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Account])
+  @graphql.ResolveField(() => [Customer])
   @nestAccessControl.UseRoles({
-    resource: "Account",
+    resource: "Customer",
     action: "read",
     possession: "any",
   })
-  async accounts(
+  async customer(
     @graphql.Parent() parent: User,
-    @graphql.Args() args: AccountFindManyArgs
-  ): Promise<Account[]> {
-    const results = await this.service.findAccounts(parent.id, args);
+    @graphql.Args() args: CustomerFindManyArgs
+  ): Promise<Customer[]> {
+    const results = await this.service.findCustomer(parent.id, args);
 
     if (!results) {
       return [];
@@ -161,17 +160,17 @@ export class UserResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Document])
+  @graphql.ResolveField(() => [Transaction])
   @nestAccessControl.UseRoles({
-    resource: "Document",
+    resource: "Transaction",
     action: "read",
     possession: "any",
   })
-  async documents(
+  async transactions(
     @graphql.Parent() parent: User,
-    @graphql.Args() args: DocumentFindManyArgs
-  ): Promise<Document[]> {
-    const results = await this.service.findDocuments(parent.id, args);
+    @graphql.Args() args: TransactionFindManyArgs
+  ): Promise<Transaction[]> {
+    const results = await this.service.findTransactions(parent.id, args);
 
     if (!results) {
       return [];

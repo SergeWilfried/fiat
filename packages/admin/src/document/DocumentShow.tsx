@@ -5,20 +5,27 @@ import {
   SimpleShowLayout,
   ShowProps,
   DateField,
-  TextField,
   ReferenceField,
+  TextField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
 
 import { DOCUMENT_TITLE_FIELD } from "./DocumentTitle";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
+import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
 
 export const DocumentShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
+        <ReferenceField
+          label="Customer"
+          source="customer.id"
+          reference="Customer"
+        >
+          <TextField source={CUSTOMER_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="DocumentType" source="documentType" />
         <TextField label="Expiring At" source="expiringAt" />
         <TextField label="ID" source="id" />
@@ -27,9 +34,6 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
         <TextField label="Tags" source="tags" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="URL" source="url" />
-        <ReferenceField label="User" source="user.id" reference="User">
-          <TextField source={USER_TITLE_FIELD} />
-        </ReferenceField>
         <ReferenceManyField
           reference="Account"
           target="DocumentId"
@@ -54,9 +58,6 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
             <TextField label="Name" source="name" />
             <TextField label="Status" source="status" />
             <DateField source="updatedAt" label="Updated At" />
-            <ReferenceField label="User" source="user.id" reference="User">
-              <TextField source={USER_TITLE_FIELD} />
-            </ReferenceField>
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

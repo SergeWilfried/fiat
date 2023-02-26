@@ -1,13 +1,13 @@
 import { AccountCreateNestedManyWithoutDocumentsInput } from "./AccountCreateNestedManyWithoutDocumentsInput";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 
 export type DocumentCreateInput = {
   accounts?: AccountCreateNestedManyWithoutDocumentsInput;
+  customer?: CustomerWhereUniqueInput | null;
   documentType: "Driverlicence" | "Passport" | "GovernmentId";
   expiringAt?: Date | null;
   image: string;
   status?: "Approved" | "Rejected" | null;
   tags?: string | null;
   url: string;
-  user: UserWhereUniqueInput;
 };

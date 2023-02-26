@@ -25,4 +25,4 @@ class AccountCreateNestedManyWithoutDocumentsInput {
   connect?: Array<AccountWhereUniqueInput>;
 }
 
-export { AccountCreateNestedManyWithoutDocumentsInput };
+export { AccountCreateNestedManyWithoutDocumentsInput as AccountCreateNestedManyWithoutDocumentsInput };

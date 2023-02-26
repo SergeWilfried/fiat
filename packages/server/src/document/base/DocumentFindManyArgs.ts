@@ -50,4 +50,4 @@ class DocumentFindManyArgs {
   take?: number;
 }
 
-export { DocumentFindManyArgs };
+export { DocumentFindManyArgs as DocumentFindManyArgs };

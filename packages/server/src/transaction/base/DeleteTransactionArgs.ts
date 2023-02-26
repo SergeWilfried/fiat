@@ -18,4 +18,4 @@ class DeleteTransactionArgs {
   where!: TransactionWhereUniqueInput;
 }
 
-export { DeleteTransactionArgs };
+export { DeleteTransactionArgs as DeleteTransactionArgs };

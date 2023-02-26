@@ -20,9 +20,9 @@ import {
   IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
 import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class DocumentCreateInput {
@@ -37,6 +37,18 @@ class DocumentCreateInput {
     nullable: true,
   })
   accounts?: AccountCreateNestedManyWithoutDocumentsInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CustomerWhereUniqueInput, {
+    nullable: true,
+  })
+  customer?: CustomerWhereUniqueInput | null;
 
   @ApiProperty({
     required: true,
@@ -94,15 +106,6 @@ class DocumentCreateInput {
   @IsString()
   @Field(() => String)
   url!: string;
-
-  @ApiProperty({
-    required: true,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @Field(() => UserWhereUniqueInput)
-  user!: UserWhereUniqueInput;
 }
 
-export { DocumentCreateInput };
+export { DocumentCreateInput as DocumentCreateInput };

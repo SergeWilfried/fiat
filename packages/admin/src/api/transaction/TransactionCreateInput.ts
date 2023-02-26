@@ -1,10 +1,13 @@
-import { AccountCreateNestedManyWithoutTransactionsInput } from "./AccountCreateNestedManyWithoutTransactionsInput";
+import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type TransactionCreateInput = {
-  accounts?: AccountCreateNestedManyWithoutTransactionsInput;
+  account: AccountWhereUniqueInput;
   amount: number;
+  currency: string;
   fee?: number | null;
-  status: "Successful" | "Pending" | "Failed";
-  transactionSubtype?: "Fiat" | "Crypto" | null;
+  metadata?: string | null;
+  status?: "Successful" | "Pending" | "Failed" | null;
   transactionType: "Credit" | "Debit";
+  user: UserWhereUniqueInput;
 };

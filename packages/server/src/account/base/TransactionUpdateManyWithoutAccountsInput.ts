@@ -43,4 +43,4 @@ class TransactionUpdateManyWithoutAccountsInput {
   set?: Array<TransactionWhereUniqueInput>;
 }
 
-export { TransactionUpdateManyWithoutAccountsInput };
+export { TransactionUpdateManyWithoutAccountsInput as TransactionUpdateManyWithoutAccountsInput };

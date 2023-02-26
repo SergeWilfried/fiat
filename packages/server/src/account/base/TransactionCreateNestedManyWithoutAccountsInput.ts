@@ -25,4 +25,4 @@ class TransactionCreateNestedManyWithoutAccountsInput {
   connect?: Array<TransactionWhereUniqueInput>;
 }
 
-export { TransactionCreateNestedManyWithoutAccountsInput };
+export { TransactionCreateNestedManyWithoutAccountsInput as TransactionCreateNestedManyWithoutAccountsInput };

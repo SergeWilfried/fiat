@@ -53,4 +53,4 @@ class TransactionListRelationFilter {
   })
   none?: TransactionWhereInput;
 }
-export { TransactionListRelationFilter };
+export { TransactionListRelationFilter as TransactionListRelationFilter };

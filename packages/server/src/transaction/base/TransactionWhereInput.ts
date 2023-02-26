@@ -13,12 +13,23 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
-import { IsOptional, IsEnum } from "class-validator";
-import { EnumTransactionTransactionSubtype } from "./EnumTransactionTransactionSubtype";
+import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class TransactionWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  currency?: StringFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -32,17 +43,6 @@ class TransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    enum: EnumTransactionTransactionSubtype,
-  })
-  @IsEnum(EnumTransactionTransactionSubtype)
-  @IsOptional()
-  @Field(() => EnumTransactionTransactionSubtype, {
-    nullable: true,
-  })
-  transactionSubtype?: "Fiat" | "Crypto";
-
-  @ApiProperty({
-    required: false,
     enum: EnumTransactionTransactionType,
   })
   @IsEnum(EnumTransactionTransactionType)
@@ -51,6 +51,18 @@ class TransactionWhereInput {
     nullable: true,
   })
   transactionType?: "Credit" | "Debit";
+
+  @ApiProperty({
+    required: false,
+    type: () => UserWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UserWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UserWhereUniqueInput, {
+    nullable: true,
+  })
+  user?: UserWhereUniqueInput;
 }
 
-export { TransactionWhereInput };
+export { TransactionWhereInput as TransactionWhereInput };

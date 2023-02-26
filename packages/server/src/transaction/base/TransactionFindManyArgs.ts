@@ -50,4 +50,4 @@ class TransactionFindManyArgs {
   take?: number;
 }
 
-export { TransactionFindManyArgs };
+export { TransactionFindManyArgs as TransactionFindManyArgs };

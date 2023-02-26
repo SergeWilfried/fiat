@@ -21,4 +21,4 @@ class UpdateBankArgs {
   data!: BankUpdateInput;
 }
 
-export { UpdateBankArgs };
+export { UpdateBankArgs as UpdateBankArgs };

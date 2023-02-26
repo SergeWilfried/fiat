@@ -13,5 +13,4 @@ export type AccountOrderByInput = {
   name?: SortOrder;
   status?: SortOrder;
   updatedAt?: SortOrder;
-  userId?: SortOrder;
 };

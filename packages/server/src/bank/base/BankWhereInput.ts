@@ -63,4 +63,4 @@ class BankWhereInput {
   instutionType?: "MobileMoney" | "Bank";
 }
 
-export { BankWhereInput };
+export { BankWhereInput as BankWhereInput };

@@ -18,4 +18,4 @@ class DeleteAccountArgs {
   where!: AccountWhereUniqueInput;
 }
 
-export { DeleteAccountArgs };
+export { DeleteAccountArgs as DeleteAccountArgs };

@@ -18,4 +18,4 @@ class CreateBankArgs {
   data!: BankCreateInput;
 }
 
-export { CreateBankArgs };
+export { CreateBankArgs as CreateBankArgs };

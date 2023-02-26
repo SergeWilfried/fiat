@@ -50,4 +50,4 @@ class BankUpdateInput {
   instutionType?: "MobileMoney" | "Bank" | null;
 }
 
-export { BankUpdateInput };
+export { BankUpdateInput as BankUpdateInput };

@@ -4,39 +4,31 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  TextInput,
   PasswordInput,
   BooleanInput,
   SelectInput,
 } from "react-admin";
 
-import { AccountTitle } from "../account/AccountTitle";
-import { DocumentTitle } from "../document/DocumentTitle";
+import { CustomerTitle } from "../customer/CustomerTitle";
+import { TransactionTitle } from "../transaction/TransactionTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceArrayInput
-          source="accounts"
-          reference="Account"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={AccountTitle} />
-        </ReferenceArrayInput>
         <div />
         <TextInput label="Business Name" source="businessName" />
         <ReferenceArrayInput
-          source="documents"
-          reference="Document"
+          source="customer"
+          reference="Customer"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectArrayInput optionText={DocumentTitle} />
+          <SelectArrayInput optionText={CustomerTitle} />
         </ReferenceArrayInput>
         <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
@@ -69,6 +61,14 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           label="Terms and Conditions  "
           source="termsAndConditions"
         />
+        <ReferenceArrayInput
+          source="transactions"
+          reference="Transaction"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={TransactionTitle} />
+        </ReferenceArrayInput>
         <TextInput label="Username" source="username" />
       </SimpleForm>
     </Create>

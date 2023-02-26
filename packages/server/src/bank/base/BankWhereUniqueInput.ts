@@ -24,4 +24,4 @@ class BankWhereUniqueInput {
   id!: string;
 }
 
-export { BankWhereUniqueInput };
+export { BankWhereUniqueInput as BankWhereUniqueInput };

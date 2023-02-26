@@ -53,4 +53,4 @@ class BankListRelationFilter {
   })
   none?: BankWhereInput;
 }
-export { BankListRelationFilter };
+export { BankListRelationFilter as BankListRelationFilter };

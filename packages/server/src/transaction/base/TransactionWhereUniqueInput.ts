@@ -24,4 +24,4 @@ class TransactionWhereUniqueInput {
   id!: string;
 }
 
-export { TransactionWhereUniqueInput };
+export { TransactionWhereUniqueInput as TransactionWhereUniqueInput };

@@ -22,10 +22,10 @@ import {
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { Type } from "class-transformer";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
+import { Customer } from "../../customer/base/Customer";
 import { Document } from "../../document/base/Document";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { Transaction } from "../../transaction/base/Transaction";
-import { User } from "../../user/base/User";
 
 @ObjectType()
 class Account {
@@ -94,6 +94,15 @@ class Account {
 
   @ApiProperty({
     required: false,
+    type: () => [Customer],
+  })
+  @ValidateNested()
+  @Type(() => Customer)
+  @IsOptional()
+  customers?: Array<Customer>;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -157,15 +166,6 @@ class Account {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  @IsOptional()
-  user?: User | null;
 }
 
-export { Account };
+export { Account as Account };

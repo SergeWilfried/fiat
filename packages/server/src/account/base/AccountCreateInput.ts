@@ -20,11 +20,11 @@ import {
 } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
+import { CustomerCreateNestedManyWithoutAccountsInput } from "./CustomerCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
+import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class AccountCreateInput {
@@ -85,6 +85,18 @@ class AccountCreateInput {
 
   @ApiProperty({
     required: false,
+    type: () => CustomerCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => CustomerCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  customers?: CustomerCreateNestedManyWithoutAccountsInput;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -136,18 +148,6 @@ class AccountCreateInput {
     nullable: true,
   })
   transactions?: TransactionCreateNestedManyWithoutAccountsInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput | null;
 }
 
-export { AccountCreateInput };
+export { AccountCreateInput as AccountCreateInput };

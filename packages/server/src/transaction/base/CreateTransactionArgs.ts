@@ -18,4 +18,4 @@ class CreateTransactionArgs {
   data!: TransactionCreateInput;
 }
 
-export { CreateTransactionArgs };
+export { CreateTransactionArgs as CreateTransactionArgs };

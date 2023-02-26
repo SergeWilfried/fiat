@@ -6,14 +6,14 @@ import {
   EditProps,
   ReferenceArrayInput,
   SelectArrayInput,
+  ReferenceInput,
   SelectInput,
   DateInput,
   TextInput,
-  ReferenceInput,
 } from "react-admin";
 
 import { AccountTitle } from "../account/AccountTitle";
-import { UserTitle } from "../user/UserTitle";
+import { CustomerTitle } from "../customer/CustomerTitle";
 
 export const DocumentEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -27,6 +27,13 @@ export const DocumentEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={AccountTitle} />
         </ReferenceArrayInput>
+        <ReferenceInput
+          source="customer.id"
+          reference="Customer"
+          label="Customer"
+        >
+          <SelectInput optionText={CustomerTitle} />
+        </ReferenceInput>
         <SelectInput
           source="documentType"
           label="DocumentType"
@@ -53,9 +60,6 @@ export const DocumentEdit = (props: EditProps): React.ReactElement => {
         />
         <TextInput label="Tags" source="tags" />
         <TextInput label="URL" source="url" />
-        <ReferenceInput source="user.id" reference="User" label="User">
-          <SelectInput optionText={UserTitle} />
-        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );

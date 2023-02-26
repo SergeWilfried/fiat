@@ -21,4 +21,4 @@ class UpdateAccountArgs {
   data!: AccountUpdateInput;
 }
 
-export { UpdateAccountArgs };
+export { UpdateAccountArgs as UpdateAccountArgs };

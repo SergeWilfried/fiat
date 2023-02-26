@@ -11,13 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { DocumentService } from "../document.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
@@ -30,6 +30,7 @@ import { Document } from "./Document";
 import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
 import { Account } from "../../account/base/Account";
 import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class DocumentControllerBase {
@@ -37,27 +38,37 @@ export class DocumentControllerBase {
     protected readonly service: DocumentService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
-
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Post()
+  @swagger.ApiCreatedResponse({ type: Document })
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "create",
     possession: "any",
   })
-  @common.Post()
-  @swagger.ApiCreatedResponse({ type: Document })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async create(@common.Body() data: DocumentCreateInput): Promise<Document> {
     return await this.service.create({
       data: {
         ...data,
 
-        user: {
-          connect: data.user,
-        },
+        customer: data.customer
+          ? {
+              connect: data.customer,
+            }
+          : undefined,
       },
       select: {
         createdAt: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         documentType: true,
         expiringAt: true,
         id: true,
@@ -66,32 +77,35 @@ export class DocumentControllerBase {
         tags: true,
         updatedAt: true,
         url: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get()
+  @swagger.ApiOkResponse({ type: [Document] })
+  @ApiNestedQuery(DocumentFindManyArgs)
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "read",
     possession: "any",
   })
-  @common.Get()
-  @swagger.ApiOkResponse({ type: [Document] })
-  @swagger.ApiForbiddenResponse()
-  @ApiNestedQuery(DocumentFindManyArgs)
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findMany(@common.Req() request: Request): Promise<Document[]> {
     const args = plainToClass(DocumentFindManyArgs, request.query);
     return this.service.findMany({
       ...args,
       select: {
         createdAt: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         documentType: true,
         expiringAt: true,
         id: true,
@@ -100,26 +114,22 @@ export class DocumentControllerBase {
         tags: true,
         updatedAt: true,
         url: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id")
+  @swagger.ApiOkResponse({ type: Document })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "read",
     possession: "own",
   })
-  @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: Document })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async findOne(
     @common.Param() params: DocumentWhereUniqueInput
   ): Promise<Document | null> {
@@ -127,6 +137,13 @@ export class DocumentControllerBase {
       where: params,
       select: {
         createdAt: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         documentType: true,
         expiringAt: true,
         id: true,
@@ -135,12 +152,6 @@ export class DocumentControllerBase {
         tags: true,
         updatedAt: true,
         url: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (result === null) {
@@ -152,15 +163,17 @@ export class DocumentControllerBase {
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
+  @common.Patch("/:id")
+  @swagger.ApiOkResponse({ type: Document })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: Document })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async update(
     @common.Param() params: DocumentWhereUniqueInput,
     @common.Body() data: DocumentUpdateInput
@@ -171,12 +184,21 @@ export class DocumentControllerBase {
         data: {
           ...data,
 
-          user: {
-            connect: data.user,
-          },
+          customer: data.customer
+            ? {
+                connect: data.customer,
+              }
+            : undefined,
         },
         select: {
           createdAt: true,
+
+          customer: {
+            select: {
+              id: true,
+            },
+          },
+
           documentType: true,
           expiringAt: true,
           id: true,
@@ -185,12 +207,6 @@ export class DocumentControllerBase {
           tags: true,
           updatedAt: true,
           url: true,
-
-          user: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -203,15 +219,17 @@ export class DocumentControllerBase {
     }
   }
 
+  @common.Delete("/:id")
+  @swagger.ApiOkResponse({ type: Document })
+  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "delete",
     possession: "any",
   })
-  @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: Document })
-  @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
-  @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async delete(
     @common.Param() params: DocumentWhereUniqueInput
   ): Promise<Document | null> {
@@ -220,6 +238,13 @@ export class DocumentControllerBase {
         where: params,
         select: {
           createdAt: true,
+
+          customer: {
+            select: {
+              id: true,
+            },
+          },
+
           documentType: true,
           expiringAt: true,
           id: true,
@@ -228,12 +253,6 @@ export class DocumentControllerBase {
           tags: true,
           updatedAt: true,
           url: true,
-
-          user: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -247,13 +266,13 @@ export class DocumentControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/accounts")
+  @ApiNestedQuery(AccountFindManyArgs)
   @nestAccessControl.UseRoles({
     resource: "Account",
     action: "read",
     possession: "any",
   })
-  @common.Get("/:id/accounts")
-  @ApiNestedQuery(AccountFindManyArgs)
   async findManyAccounts(
     @common.Req() request: Request,
     @common.Param() params: DocumentWhereUniqueInput
@@ -280,12 +299,6 @@ export class DocumentControllerBase {
         name: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (results === null) {
@@ -296,12 +309,12 @@ export class DocumentControllerBase {
     return results;
   }
 
+  @common.Post("/:id/accounts")
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "update",
     possession: "any",
   })
-  @common.Post("/:id/accounts")
   async connectAccounts(
     @common.Param() params: DocumentWhereUniqueInput,
     @common.Body() body: AccountWhereUniqueInput[]
@@ -318,12 +331,12 @@ export class DocumentControllerBase {
     });
   }
 
+  @common.Patch("/:id/accounts")
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id/accounts")
   async updateAccounts(
     @common.Param() params: DocumentWhereUniqueInput,
     @common.Body() body: AccountWhereUniqueInput[]
@@ -340,12 +353,12 @@ export class DocumentControllerBase {
     });
   }
 
+  @common.Delete("/:id/accounts")
   @nestAccessControl.UseRoles({
     resource: "Document",
     action: "update",
     possession: "any",
   })
-  @common.Delete("/:id/accounts")
   async disconnectAccounts(
     @common.Param() params: DocumentWhereUniqueInput,
     @common.Body() body: AccountWhereUniqueInput[]

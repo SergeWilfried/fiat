@@ -18,4 +18,4 @@ class CreateDocumentArgs {
   data!: DocumentCreateInput;
 }
 
-export { CreateDocumentArgs };
+export { CreateDocumentArgs as CreateDocumentArgs };

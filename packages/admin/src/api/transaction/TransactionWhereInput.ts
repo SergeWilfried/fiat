@@ -1,7 +1,9 @@
 import { StringFilter } from "../../util/StringFilter";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type TransactionWhereInput = {
+  currency?: StringFilter;
   id?: StringFilter;
-  transactionSubtype?: "Fiat" | "Crypto";
   transactionType?: "Credit" | "Debit";
+  user?: UserWhereUniqueInput;
 };

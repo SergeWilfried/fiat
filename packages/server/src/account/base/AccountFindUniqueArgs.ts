@@ -18,4 +18,4 @@ class AccountFindUniqueArgs {
   where!: AccountWhereUniqueInput;
 }
 
-export { AccountFindUniqueArgs };
+export { AccountFindUniqueArgs as AccountFindUniqueArgs };

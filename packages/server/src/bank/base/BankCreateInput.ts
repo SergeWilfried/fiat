@@ -44,4 +44,4 @@ class BankCreateInput {
   instutionType?: "MobileMoney" | "Bank" | null;
 }
 
-export { BankCreateInput };
+export { BankCreateInput as BankCreateInput };

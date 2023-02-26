@@ -17,10 +17,10 @@ import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
+import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class AccountWhereInput {
@@ -81,6 +81,18 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => CustomerListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => CustomerListRelationFilter)
+  @IsOptional()
+  @Field(() => CustomerListRelationFilter, {
+    nullable: true,
+  })
+  customers?: CustomerListRelationFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -134,18 +146,6 @@ class AccountWhereInput {
     nullable: true,
   })
   transactions?: TransactionListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput;
 }
 
-export { AccountWhereInput };
+export { AccountWhereInput as AccountWhereInput };

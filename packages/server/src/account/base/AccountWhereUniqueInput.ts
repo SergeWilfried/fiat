@@ -24,4 +24,4 @@ class AccountWhereUniqueInput {
   id!: string;
 }
 
-export { AccountWhereUniqueInput };
+export { AccountWhereUniqueInput as AccountWhereUniqueInput };

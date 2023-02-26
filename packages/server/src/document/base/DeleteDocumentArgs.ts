@@ -18,4 +18,4 @@ class DeleteDocumentArgs {
   where!: DocumentWhereUniqueInput;
 }
 
-export { DeleteDocumentArgs };
+export { DeleteDocumentArgs as DeleteDocumentArgs };

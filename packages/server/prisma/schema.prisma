@@ -31,8 +31,6 @@ model User {
 }
 
 model Transaction {
-  account         Account                        @relation(fields: [accountId], references: [id])
-  accountId       String
   amount          Int
   createdAt       DateTime                       @default(now())
   currency        String
@@ -66,14 +64,14 @@ model Account {
   balance          Float?
   createdAt        DateTime                @default(now())
   currency         EnumAccountCurrency?
-  customers        Customer[]
+  customers        Customer                @relation(fields: [customersId], references: [id])
+  customersId      String
   description      String?
   document         Document                @relation(fields: [documentId], references: [id])
   documentId       String
   id               String                  @id @default(cuid())
   name             String?
   status           EnumAccountStatus?
-  transactions     Transaction[]
   updatedAt        DateTime                @updatedAt
 }
 

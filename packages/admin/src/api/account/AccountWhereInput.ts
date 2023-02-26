@@ -1,8 +1,7 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
-import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type AccountWhereInput = {
   accountNumber?: StringNullableFilter;
@@ -10,10 +9,9 @@ export type AccountWhereInput = {
   availableBalance?: FloatNullableFilter;
   balance?: FloatNullableFilter;
   currency?: "Xof" | "Eur" | "Usd" | "Celo";
-  customers?: CustomerListRelationFilter;
+  customers?: CustomerWhereUniqueInput;
   description?: StringNullableFilter;
   id?: StringFilter;
   name?: StringNullableFilter;
   status?: "Approved" | "Pending" | "Blocked";
-  transactions?: TransactionListRelationFilter;
 };

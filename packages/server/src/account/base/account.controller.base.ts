@@ -27,12 +27,6 @@ import { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
 import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountUpdateInput } from "./AccountUpdateInput";
 import { Account } from "./Account";
-import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
-import { Customer } from "../../customer/base/Customer";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
-import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -57,6 +51,10 @@ export class AccountControllerBase {
       data: {
         ...data,
 
+        customers: {
+          connect: data.customers,
+        },
+
         document: {
           connect: data.document,
         },
@@ -68,6 +66,13 @@ export class AccountControllerBase {
         balance: true,
         createdAt: true,
         currency: true,
+
+        customers: {
+          select: {
+            id: true,
+          },
+        },
+
         description: true,
 
         document: {
@@ -107,6 +112,13 @@ export class AccountControllerBase {
         balance: true,
         createdAt: true,
         currency: true,
+
+        customers: {
+          select: {
+            id: true,
+          },
+        },
+
         description: true,
 
         document: {
@@ -147,6 +159,13 @@ export class AccountControllerBase {
         balance: true,
         createdAt: true,
         currency: true,
+
+        customers: {
+          select: {
+            id: true,
+          },
+        },
+
         description: true,
 
         document: {
@@ -191,6 +210,10 @@ export class AccountControllerBase {
         data: {
           ...data,
 
+          customers: {
+            connect: data.customers,
+          },
+
           document: {
             connect: data.document,
           },
@@ -202,6 +225,13 @@ export class AccountControllerBase {
           balance: true,
           createdAt: true,
           currency: true,
+
+          customers: {
+            select: {
+              id: true,
+            },
+          },
+
           description: true,
 
           document: {
@@ -250,6 +280,13 @@ export class AccountControllerBase {
           balance: true,
           createdAt: true,
           currency: true,
+
+          customers: {
+            select: {
+              id: true,
+            },
+          },
+
           description: true,
 
           document: {
@@ -272,225 +309,5 @@ export class AccountControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/customers")
-  @ApiNestedQuery(CustomerFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "any",
-  })
-  async findManyCustomers(
-    @common.Req() request: Request,
-    @common.Param() params: AccountWhereUniqueInput
-  ): Promise<Customer[]> {
-    const query = plainToClass(CustomerFindManyArgs, request.query);
-    const results = await this.service.findCustomers(params.id, {
-      ...query,
-      select: {
-        address: {
-          select: {
-            id: true,
-          },
-        },
-
-        createdAt: true,
-        dob: true,
-        email: true,
-        firstname: true,
-        id: true,
-        lastname: true,
-        phone: true,
-        status: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/customers")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async connectCustomers(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      customers: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/customers")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async updateCustomers(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      customers: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/customers")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectCustomers(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      customers: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/transactions")
-  @ApiNestedQuery(TransactionFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "any",
-  })
-  async findManyTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: AccountWhereUniqueInput
-  ): Promise<Transaction[]> {
-    const query = plainToClass(TransactionFindManyArgs, request.query);
-    const results = await this.service.findTransactions(params.id, {
-      ...query,
-      select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
-        amount: true,
-        createdAt: true,
-        currency: true,
-        fee: true,
-        id: true,
-        metadata: true,
-        status: true,
-        transactionType: true,
-        updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async connectTransactions(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async updateTransactions(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectTransactions(
-    @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

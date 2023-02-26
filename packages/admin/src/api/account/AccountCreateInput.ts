@@ -1,6 +1,5 @@
-import { CustomerCreateNestedManyWithoutAccountsInput } from "./CustomerCreateNestedManyWithoutAccountsInput";
+import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { DocumentWhereUniqueInput } from "../document/DocumentWhereUniqueInput";
-import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
   accountNumber?: string | null;
@@ -8,10 +7,9 @@ export type AccountCreateInput = {
   availableBalance?: number | null;
   balance?: number | null;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
-  customers?: CustomerCreateNestedManyWithoutAccountsInput;
+  customers: CustomerWhereUniqueInput;
   description?: string | null;
   document: DocumentWhereUniqueInput;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
-  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 };

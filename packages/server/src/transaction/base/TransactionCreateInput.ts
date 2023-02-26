@@ -11,31 +11,21 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import {
-  ValidateNested,
   IsInt,
   IsString,
   IsNumber,
   IsOptional,
   IsEnum,
+  ValidateNested,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { EnumTransactionStatus } from "./EnumTransactionStatus";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class TransactionCreateInput {
-  @ApiProperty({
-    required: true,
-    type: () => AccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => AccountWhereUniqueInput)
-  @Field(() => AccountWhereUniqueInput)
-  account!: AccountWhereUniqueInput;
-
   @ApiProperty({
     required: true,
     type: Number,

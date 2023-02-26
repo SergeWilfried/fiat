@@ -288,6 +288,13 @@ export class CustomerControllerBase {
         balance: true,
         createdAt: true,
         currency: true,
+
+        customers: {
+          select: {
+            id: true,
+          },
+        },
+
         description: true,
 
         document: {

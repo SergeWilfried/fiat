@@ -20,11 +20,10 @@ import {
 } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
-import { CustomerCreateNestedManyWithoutAccountsInput } from "./CustomerCreateNestedManyWithoutAccountsInput";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { EnumAccountStatus } from "./EnumAccountStatus";
-import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
 class AccountCreateInput {
@@ -84,16 +83,13 @@ class AccountCreateInput {
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
 
   @ApiProperty({
-    required: false,
-    type: () => CustomerCreateNestedManyWithoutAccountsInput,
+    required: true,
+    type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => CustomerCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => CustomerCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  customers?: CustomerCreateNestedManyWithoutAccountsInput;
+  @Type(() => CustomerWhereUniqueInput)
+  @Field(() => CustomerWhereUniqueInput)
+  customers!: CustomerWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -136,18 +132,6 @@ class AccountCreateInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionCreateNestedManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => TransactionCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 }
 
 export { AccountCreateInput as AccountCreateInput };

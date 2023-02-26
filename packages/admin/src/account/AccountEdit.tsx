@@ -7,14 +7,11 @@ import {
   TextInput,
   SelectInput,
   NumberInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
   ReferenceInput,
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { DocumentTitle } from "../document/DocumentTitle";
-import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -48,14 +45,13 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <ReferenceArrayInput
-          source="customers"
+        <ReferenceInput
+          source="customer.id"
           reference="Customer"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
+          label="Customers"
         >
-          <SelectArrayInput optionText={CustomerTitle} />
-        </ReferenceArrayInput>
+          <SelectInput optionText={CustomerTitle} />
+        </ReferenceInput>
         <TextInput label="Description" multiline source="description" />
         <ReferenceInput
           source="document.id"
@@ -77,14 +73,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <ReferenceArrayInput
-          source="transactions"
-          reference="Transaction"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={TransactionTitle} />
-        </ReferenceArrayInput>
       </SimpleForm>
     </Edit>
   );

@@ -4,29 +4,18 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  ReferenceArrayInput,
-  SelectArrayInput,
   ReferenceInput,
   SelectInput,
   DateInput,
   TextInput,
 } from "react-admin";
 
-import { AccountTitle } from "../account/AccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
 
 export const DocumentEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceArrayInput
-          source="accounts"
-          reference="Account"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={AccountTitle} />
-        </ReferenceArrayInput>
         <ReferenceInput
           source="customer.id"
           reference="Customer"

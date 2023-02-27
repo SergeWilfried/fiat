@@ -2,6 +2,8 @@ import { SortOrder } from "../../util/SortOrder";
 
 export type UserOrderByInput = {
   address?: SortOrder;
+  availableBalance?: SortOrder;
+  balance?: SortOrder;
   businessName?: SortOrder;
   createdAt?: SortOrder;
   email?: SortOrder;
@@ -12,7 +14,7 @@ export type UserOrderByInput = {
   messages?: SortOrder;
   password?: SortOrder;
   password2?: SortOrder;
-  phoe?: SortOrder;
+  phone?: SortOrder;
   privacyPolicy?: SortOrder;
   roles?: SortOrder;
   status?: SortOrder;

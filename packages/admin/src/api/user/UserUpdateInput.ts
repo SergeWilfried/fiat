@@ -4,16 +4,18 @@ import { TransactionUpdateManyWithoutUsersInput } from "./TransactionUpdateManyW
 
 export type UserUpdateInput = {
   address?: InputJsonValue;
+  availableBalance?: number | null;
+  balance?: number;
   businessName?: string | null;
   customer?: CustomerUpdateManyWithoutUsersInput;
   email?: string;
-  firstName?: string | null;
-  lastName?: string | null;
+  firstName?: string;
+  lastName?: string;
   legalTermVersions?: string;
   messages?: InputJsonValue;
   password?: string;
   password2?: string;
-  phoe?: string;
+  phone?: string;
   privacyPolicy?: boolean;
   roles?: InputJsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;

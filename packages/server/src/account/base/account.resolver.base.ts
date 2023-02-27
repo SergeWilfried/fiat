@@ -26,7 +26,6 @@ import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
 import { Customer } from "../../customer/base/Customer";
-import { Document } from "../../document/base/Document";
 import { AccountService } from "../account.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
@@ -103,10 +102,6 @@ export class AccountResolverBase {
         customers: {
           connect: args.data.customers,
         },
-
-        document: {
-          connect: args.data.document,
-        },
       },
     });
   }
@@ -129,10 +124,6 @@ export class AccountResolverBase {
 
           customers: {
             connect: args.data.customers,
-          },
-
-          document: {
-            connect: args.data.document,
           },
         },
       });
@@ -176,22 +167,6 @@ export class AccountResolverBase {
   })
   async customers(@graphql.Parent() parent: Account): Promise<Customer | null> {
     const result = await this.service.getCustomers(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Document, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
-  })
-  async document(@graphql.Parent() parent: Account): Promise<Document | null> {
-    const result = await this.service.getDocument(parent.id);
 
     if (!result) {
       return null;

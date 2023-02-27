@@ -28,7 +28,7 @@ import { BankFindManyArgs } from "./BankFindManyArgs";
 import { BankUpdateInput } from "./BankUpdateInput";
 import { Bank } from "./Bank";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class BankControllerBase {
   constructor(

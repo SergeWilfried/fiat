@@ -13,8 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsJSON,
-  IsString,
+  IsNumber,
   IsOptional,
+  IsString,
   ValidateNested,
   IsBoolean,
   IsEnum,
@@ -34,6 +35,25 @@ class UserCreateInput {
   @IsJSON()
   @Field(() => GraphQLJSON)
   address!: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  availableBalance?: number | null;
+
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsNumber()
+  @Field(() => Number)
+  balance!: number;
 
   @ApiProperty({
     required: false,
@@ -67,26 +87,20 @@ class UserCreateInput {
   email!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  firstName?: string | null;
+  @Field(() => String)
+  firstName!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  lastName?: string | null;
+  @Field(() => String)
+  lastName!: string;
 
   @ApiProperty({
     required: true,
@@ -128,7 +142,7 @@ class UserCreateInput {
   })
   @IsString()
   @Field(() => String)
-  phoe!: string;
+  phone!: string;
 
   @ApiProperty({
     required: true,

@@ -11,29 +11,17 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { Type } from "class-transformer";
-import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { IsEnum, IsOptional, ValidateNested } from "class-validator";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { Type } from "class-transformer";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 
 @InputType()
 class AccountWhereInput {
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  accountNumber?: StringNullableFilter;
-
   @ApiProperty({
     required: false,
     enum: EnumAccountAccountType,
@@ -44,28 +32,6 @@ class AccountWhereInput {
     nullable: true,
   })
   accountType?: "MobileMoney" | "Iban" | "Wallet";
-
-  @ApiProperty({
-    required: false,
-    type: FloatNullableFilter,
-  })
-  @Type(() => FloatNullableFilter)
-  @IsOptional()
-  @Field(() => FloatNullableFilter, {
-    nullable: true,
-  })
-  availableBalance?: FloatNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: FloatNullableFilter,
-  })
-  @Type(() => FloatNullableFilter)
-  @IsOptional()
-  @Field(() => FloatNullableFilter, {
-    nullable: true,
-  })
-  balance?: FloatNullableFilter;
 
   @ApiProperty({
     required: false,

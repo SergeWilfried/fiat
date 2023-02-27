@@ -1,5 +1,14 @@
 export type Bank = {
-  country: string | null;
+  country?:
+    | "BurkinaFaso"
+    | "CoteDivoire"
+    | "Mali"
+    | "Togo"
+    | "Benin"
+    | "Senegal"
+    | "Niger"
+    | "Cameroon"
+    | null;
   createdAt: Date;
   currency: string;
   id: string;

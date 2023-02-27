@@ -78,7 +78,7 @@ model Document {
 }
 
 model Bank {
-  country         String?
+  country         EnumBankCountry?
   createdAt       DateTime               @default(now())
   currency        String
   id              String                 @id @default(cuid())
@@ -156,6 +156,17 @@ enum EnumDocumentDocumentType {
 enum EnumDocumentStatus {
   Approved
   Rejected
+}
+
+enum EnumBankCountry {
+  BurkinaFaso
+  CoteDivoire
+  Mali
+  Togo
+  Benin
+  Senegal
+  Niger
+  Cameroon
 }
 
 enum EnumBankInstutionType {

@@ -20,8 +20,6 @@ const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
   accountNumber: "exampleAccountNumber",
-  availableBalance: 42.42,
-  balance: 42.42,
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
@@ -30,8 +28,6 @@ const CREATE_INPUT = {
 };
 const CREATE_RESULT = {
   accountNumber: "exampleAccountNumber",
-  availableBalance: 42.42,
-  balance: 42.42,
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
@@ -41,8 +37,6 @@ const CREATE_RESULT = {
 const FIND_MANY_RESULT = [
   {
     accountNumber: "exampleAccountNumber",
-    availableBalance: 42.42,
-    balance: 42.42,
     createdAt: new Date(),
     description: "exampleDescription",
     id: "exampleId",
@@ -52,8 +46,6 @@ const FIND_MANY_RESULT = [
 ];
 const FIND_ONE_RESULT = {
   accountNumber: "exampleAccountNumber",
-  availableBalance: 42.42,
-  balance: 42.42,
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",

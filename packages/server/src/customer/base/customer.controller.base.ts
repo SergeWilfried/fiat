@@ -37,7 +37,7 @@ import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class CustomerControllerBase {
   constructor(
@@ -238,8 +238,6 @@ export class CustomerControllerBase {
       select: {
         accountNumber: true,
         accountType: true,
-        availableBalance: true,
-        balance: true,
         createdAt: true,
         currency: true,
 
@@ -250,13 +248,6 @@ export class CustomerControllerBase {
         },
 
         description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         status: true,
@@ -462,6 +453,8 @@ export class CustomerControllerBase {
       ...query,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,

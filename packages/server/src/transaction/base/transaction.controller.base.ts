@@ -28,7 +28,7 @@ import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionUpdateInput } from "./TransactionUpdateInput";
 import { Transaction } from "./Transaction";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TransactionControllerBase {
   constructor(

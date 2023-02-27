@@ -11,18 +11,11 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
+import { IsString, IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 
 @InputType()
@@ -36,7 +29,7 @@ class AccountUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  accountNumber?: string | null;
+  accountNumber?: string;
 
   @ApiProperty({
     required: false,
@@ -48,28 +41,6 @@ class AccountUpdateInput {
     nullable: true,
   })
   accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  availableBalance?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  balance?: number | null;
 
   @ApiProperty({
     required: false,
@@ -104,18 +75,6 @@ class AccountUpdateInput {
     nullable: true,
   })
   description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => DocumentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => DocumentWhereUniqueInput)
-  @IsOptional()
-  @Field(() => DocumentWhereUniqueInput, {
-    nullable: true,
-  })
-  document?: DocumentWhereUniqueInput;
 
   @ApiProperty({
     required: false,

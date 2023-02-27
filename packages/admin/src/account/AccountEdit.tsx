@@ -1,17 +1,13 @@
 import * as React from "react";
-
 import {
   Edit,
   SimpleForm,
   EditProps,
   TextInput,
   SelectInput,
-  NumberInput,
   ReferenceInput,
 } from "react-admin";
-
 import { CustomerTitle } from "../customer/CustomerTitle";
-import { DocumentTitle } from "../document/DocumentTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -30,8 +26,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <NumberInput label="Available balance" source="availableBalance" />
-        <NumberInput label="Balance" source="balance" />
         <SelectInput
           source="currency"
           label="Currency"
@@ -53,13 +47,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           <SelectInput optionText={CustomerTitle} />
         </ReferenceInput>
         <TextInput label="Description" multiline source="description" />
-        <ReferenceInput
-          source="document.id"
-          reference="Document"
-          label="Document"
-        >
-          <SelectInput optionText={DocumentTitle} />
-        </ReferenceInput>
         <TextInput label="Name" source="name" />
         <SelectInput
           source="status"

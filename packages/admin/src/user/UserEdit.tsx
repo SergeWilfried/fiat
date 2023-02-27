@@ -4,6 +4,7 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  NumberInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -21,6 +22,8 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
     <Edit {...props}>
       <SimpleForm>
         <div />
+        <NumberInput label="Available balance" source="availableBalance" />
+        <NumberInput label="Balance" source="balance" />
         <TextInput label="Business Name" source="businessName" />
         <ReferenceArrayInput
           source="customer"

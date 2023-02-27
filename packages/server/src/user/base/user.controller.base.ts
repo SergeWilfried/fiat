@@ -34,7 +34,7 @@ import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindM
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
   constructor(
@@ -57,6 +57,8 @@ export class UserControllerBase {
       data: data,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -95,6 +97,8 @@ export class UserControllerBase {
       ...args,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -134,6 +138,8 @@ export class UserControllerBase {
       where: params,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -182,6 +188,8 @@ export class UserControllerBase {
         data: data,
         select: {
           address: true,
+          availableBalance: true,
+          balance: true,
           businessName: true,
           createdAt: true,
           email: true,
@@ -229,6 +237,8 @@ export class UserControllerBase {
         where: params,
         select: {
           address: true,
+          availableBalance: true,
+          balance: true,
           businessName: true,
           createdAt: true,
           email: true,

@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsJSON,
   IsOptional,
+  IsNumber,
   IsString,
   ValidateNested,
   IsBoolean,
@@ -37,6 +38,28 @@ class UserUpdateInput {
     nullable: true,
   })
   address?: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  availableBalance?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  balance?: number;
 
   @ApiProperty({
     required: false,

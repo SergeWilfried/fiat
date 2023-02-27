@@ -1,8 +1,6 @@
-import { AccountUpdateManyWithoutDocumentsInput } from "./AccountUpdateManyWithoutDocumentsInput";
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 
 export type DocumentUpdateInput = {
-  accounts?: AccountUpdateManyWithoutDocumentsInput;
   customer?: CustomerWhereUniqueInput | null;
   documentType?: "Driverlicence" | "Passport" | "GovernmentId";
   expiringAt?: Date | null;

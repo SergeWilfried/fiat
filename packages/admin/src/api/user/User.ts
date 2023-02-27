@@ -4,6 +4,8 @@ import { Transaction } from "../transaction/Transaction";
 
 export type User = {
   address: JsonValue;
+  availableBalance: number | null;
+  balance: number;
   businessName: string | null;
   createdAt: Date;
   customer?: Array<Customer>;

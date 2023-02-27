@@ -101,6 +101,15 @@ model Customer {
   updatedAt DateTime            @updatedAt
 }
 
+model Quote {
+  account   Json
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  kyc       Json
+  quoteInfo Json
+  updatedAt DateTime @updatedAt
+}
+
 enum EnumUserStatus {
   Approved
   Pending

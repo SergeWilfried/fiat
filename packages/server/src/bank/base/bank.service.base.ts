@@ -9,40 +9,40 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Bank } from "@prisma/client";
+import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma, Bank } from '@prisma/client';
 
 export class BankServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
   async count<T extends Prisma.BankFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankFindManyArgs>,
   ): Promise<number> {
     return this.prisma.bank.count(args);
   }
 
   async findMany<T extends Prisma.BankFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankFindManyArgs>,
   ): Promise<Bank[]> {
     return this.prisma.bank.findMany(args);
   }
   async findOne<T extends Prisma.BankFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankFindUniqueArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankFindUniqueArgs>,
   ): Promise<Bank | null> {
     return this.prisma.bank.findUnique(args);
   }
   async create<T extends Prisma.BankCreateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankCreateArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankCreateArgs>,
   ): Promise<Bank> {
     return this.prisma.bank.create<T>(args);
   }
   async update<T extends Prisma.BankUpdateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankUpdateArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankUpdateArgs>,
   ): Promise<Bank> {
     return this.prisma.bank.update<T>(args);
   }
   async delete<T extends Prisma.BankDeleteArgs>(
-    args: Prisma.SelectSubset<T, Prisma.BankDeleteArgs>
+    args: Prisma.SelectSubset<T, Prisma.BankDeleteArgs>,
   ): Promise<Bank> {
     return this.prisma.bank.delete(args);
   }

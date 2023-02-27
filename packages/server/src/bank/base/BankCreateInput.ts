@@ -9,10 +9,10 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsEnum, IsOptional } from "class-validator";
-import { EnumBankInstutionType } from "./EnumBankInstutionType";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsEnum, IsOptional } from 'class-validator';
+import { EnumBankInstutionType } from './EnumBankInstutionType';
 
 @InputType()
 class BankCreateInput {
@@ -41,7 +41,7 @@ class BankCreateInput {
   @Field(() => EnumBankInstutionType, {
     nullable: true,
   })
-  instutionType?: "MobileMoney" | "Bank" | null;
+  instutionType?: 'MobileMoney' | 'Bank' | null;
 }
 
 export { BankCreateInput as BankCreateInput };

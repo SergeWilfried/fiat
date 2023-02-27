@@ -1,23 +1,23 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 // @ts-ignore
 // eslint-disable-next-line
-import { UserService } from "../user/user.service";
-import { Credentials } from "./Credentials";
-import { PasswordService } from "./password.service";
-import { TokenService } from "./token.service";
-import { UserInfo } from "./UserInfo";
+import { UserService } from '../user/user.service';
+import { Credentials } from './Credentials';
+import { PasswordService } from './password.service';
+import { TokenService } from './token.service';
+import { UserInfo } from './UserInfo';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly passwordService: PasswordService,
-    private readonly tokenService: TokenService
+    private readonly tokenService: TokenService,
   ) {}
 
   async validateUser(
     username: string,
-    password: string
+    password: string,
   ): Promise<UserInfo | null> {
     const user = await this.userService.findOne({
       where: { username },
@@ -33,10 +33,10 @@ export class AuthService {
     const { username, password } = credentials;
     const user = await this.validateUser(
       credentials.username,
-      credentials.password
+      credentials.password,
     );
     if (!user) {
-      throw new UnauthorizedException("The passed credentials are incorrect");
+      throw new UnauthorizedException('The passed credentials are incorrect');
     }
     //@ts-ignore
     const accessToken = await this.tokenService.createToken({

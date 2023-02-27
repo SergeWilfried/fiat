@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
-import { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
-import { AccountUpdateInput } from "./AccountUpdateInput";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { AccountWhereUniqueInput } from './AccountWhereUniqueInput';
+import { AccountUpdateInput } from './AccountUpdateInput';
 
 @ArgsType()
 class UpdateAccountArgs {

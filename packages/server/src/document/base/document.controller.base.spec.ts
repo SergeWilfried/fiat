@@ -1,60 +1,60 @@
-import { Test } from "@nestjs/testing";
+import { Test } from '@nestjs/testing';
 import {
   INestApplication,
   HttpStatus,
   ExecutionContext,
   CallHandler,
-} from "@nestjs/common";
-import request from "supertest";
-import { MorganModule } from "nest-morgan";
-import { ACGuard } from "nest-access-control";
-import { DefaultAuthGuard } from "../../auth/defaultAuth.guard";
-import { ACLModule } from "../../auth/acl.module";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { map } from "rxjs";
-import { DocumentController } from "../document.controller";
-import { DocumentService } from "../document.service";
+} from '@nestjs/common';
+import request from 'supertest';
+import { MorganModule } from 'nest-morgan';
+import { ACGuard } from 'nest-access-control';
+import { DefaultAuthGuard } from '../../auth/defaultAuth.guard';
+import { ACLModule } from '../../auth/acl.module';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { map } from 'rxjs';
+import { DocumentController } from '../document.controller';
+import { DocumentService } from '../document.service';
 
-const nonExistingId = "nonExistingId";
-const existingId = "existingId";
+const nonExistingId = 'nonExistingId';
+const existingId = 'existingId';
 const CREATE_INPUT = {
   createdAt: new Date(),
   expiringAt: new Date(),
-  id: "exampleId",
-  image: "exampleImage",
-  tags: "exampleTags",
+  id: 'exampleId',
+  image: 'exampleImage',
+  tags: 'exampleTags',
   updatedAt: new Date(),
-  url: "exampleUrl",
+  url: 'exampleUrl',
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
   expiringAt: new Date(),
-  id: "exampleId",
-  image: "exampleImage",
-  tags: "exampleTags",
+  id: 'exampleId',
+  image: 'exampleImage',
+  tags: 'exampleTags',
   updatedAt: new Date(),
-  url: "exampleUrl",
+  url: 'exampleUrl',
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
     expiringAt: new Date(),
-    id: "exampleId",
-    image: "exampleImage",
-    tags: "exampleTags",
+    id: 'exampleId',
+    image: 'exampleImage',
+    tags: 'exampleTags',
     updatedAt: new Date(),
-    url: "exampleUrl",
+    url: 'exampleUrl',
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
   expiringAt: new Date(),
-  id: "exampleId",
-  image: "exampleImage",
-  tags: "exampleTags",
+  id: 'exampleId',
+  image: 'exampleImage',
+  tags: 'exampleTags',
   updatedAt: new Date(),
-  url: "exampleUrl",
+  url: 'exampleUrl',
 };
 
 const service = {
@@ -77,7 +77,7 @@ const basicAuthGuard = {
     const argumentHost = context.switchToHttp();
     const request = argumentHost.getRequest();
     request.user = {
-      roles: ["user"],
+      roles: ['user'],
     };
     return true;
   },
@@ -92,9 +92,9 @@ const acGuard = {
 const aclFilterResponseInterceptor = {
   intercept: (context: ExecutionContext, next: CallHandler) => {
     return next.handle().pipe(
-      map((data) => {
+      map(data => {
         return data;
-      })
+      }),
     );
   },
 };
@@ -104,7 +104,7 @@ const aclValidateRequestInterceptor = {
   },
 };
 
-describe("Document", () => {
+describe('Document', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -132,9 +132,9 @@ describe("Document", () => {
     await app.init();
   });
 
-  test("POST /documents", async () => {
+  test('POST /documents', async () => {
     await request(app.getHttpServer())
-      .post("/documents")
+      .post('/documents')
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -145,9 +145,9 @@ describe("Document", () => {
       });
   });
 
-  test("GET /documents", async () => {
+  test('GET /documents', async () => {
     await request(app.getHttpServer())
-      .get("/documents")
+      .get('/documents')
       .expect(HttpStatus.OK)
       .expect([
         {
@@ -159,20 +159,20 @@ describe("Document", () => {
       ]);
   });
 
-  test("GET /documents/:id non existing", async () => {
+  test('GET /documents/:id non existing', async () => {
     await request(app.getHttpServer())
-      .get(`${"/documents"}/${nonExistingId}`)
+      .get(`${'/documents'}/${nonExistingId}`)
       .expect(HttpStatus.NOT_FOUND)
       .expect({
         statusCode: HttpStatus.NOT_FOUND,
-        message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
-        error: "Not Found",
+        message: `No resource was found for {"${'id'}":"${nonExistingId}"}`,
+        error: 'Not Found',
       });
   });
 
-  test("GET /documents/:id existing", async () => {
+  test('GET /documents/:id existing', async () => {
     await request(app.getHttpServer())
-      .get(`${"/documents"}/${existingId}`)
+      .get(`${'/documents'}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
@@ -182,10 +182,10 @@ describe("Document", () => {
       });
   });
 
-  test("POST /documents existing resource", async () => {
+  test('POST /documents existing resource', async () => {
     let agent = request(app.getHttpServer());
     await agent
-      .post("/documents")
+      .post('/documents')
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -196,7 +196,7 @@ describe("Document", () => {
       })
       .then(function () {
         agent
-          .post("/documents")
+          .post('/documents')
           .send(CREATE_INPUT)
           .expect(HttpStatus.CONFLICT)
           .expect({

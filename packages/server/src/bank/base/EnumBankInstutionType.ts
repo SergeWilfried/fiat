@@ -9,14 +9,14 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { Bank } from "./Bank";
-import { registerEnumType } from "@nestjs/graphql";
+import { Bank } from './Bank';
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum EnumBankInstutionType {
-  MobileMoney = "MobileMoney",
-  Bank = "Bank",
+  MobileMoney = 'MobileMoney',
+  Bank = 'Bank',
 }
 
 registerEnumType(EnumBankInstutionType, {
-  name: "EnumBankInstutionType",
+  name: 'EnumBankInstutionType',
 });

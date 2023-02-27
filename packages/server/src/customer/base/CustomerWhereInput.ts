@@ -9,18 +9,18 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
-import { Account } from "../../account/base/Account";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { DocumentListRelationFilter } from "../../document/base/DocumentListRelationFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { EnumCustomerStatus } from "./EnumCustomerStatus";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountListRelationFilter } from '../../account/base/AccountListRelationFilter';
+import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
+import { Account } from '../../account/base/Account';
+import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
+import { DocumentListRelationFilter } from '../../document/base/DocumentListRelationFilter';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
+import { UserListRelationFilter } from '../../user/base/UserListRelationFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { EnumCustomerStatus } from './EnumCustomerStatus';
 
 @InputType()
 class CustomerWhereInput {
@@ -135,7 +135,7 @@ class CustomerWhereInput {
   @Field(() => EnumCustomerStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Failed" | "Pending";
+  status?: 'Approved' | 'Failed' | 'Pending';
 }
 
 export { CustomerWhereInput as CustomerWhereInput };

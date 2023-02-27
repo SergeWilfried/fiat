@@ -9,39 +9,39 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { AccountService } from "../account.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AccountCreateInput } from "./AccountCreateInput";
-import { AccountWhereInput } from "./AccountWhereInput";
-import { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
-import { AccountFindManyArgs } from "./AccountFindManyArgs";
-import { AccountUpdateInput } from "./AccountUpdateInput";
-import { Account } from "./Account";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { AccountService } from '../account.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AccountCreateInput } from './AccountCreateInput';
+import { AccountWhereInput } from './AccountWhereInput';
+import { AccountWhereUniqueInput } from './AccountWhereUniqueInput';
+import { AccountFindManyArgs } from './AccountFindManyArgs';
+import { AccountUpdateInput } from './AccountUpdateInput';
+import { Account } from './Account';
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AccountControllerBase {
   constructor(
     protected readonly service: AccountService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Account })
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "create",
-    possession: "any",
+    resource: 'Account',
+    action: 'create',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -94,9 +94,9 @@ export class AccountControllerBase {
   @swagger.ApiOkResponse({ type: [Account] })
   @ApiNestedQuery(AccountFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -136,19 +136,19 @@ export class AccountControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Account })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "own",
+    resource: 'Account',
+    action: 'read',
+    possession: 'own',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async findOne(
-    @common.Param() params: AccountWhereUniqueInput
+    @common.Param() params: AccountWhereUniqueInput,
   ): Promise<Account | null> {
     const result = await this.service.findOne({
       where: params,
@@ -182,27 +182,27 @@ export class AccountControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Account })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
+    resource: 'Account',
+    action: 'update',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async update(
     @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() data: AccountUpdateInput
+    @common.Body() data: AccountUpdateInput,
   ): Promise<Account | null> {
     try {
       return await this.service.update({
@@ -249,26 +249,26 @@ export class AccountControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
     }
   }
 
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Account })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "delete",
-    possession: "any",
+    resource: 'Account',
+    action: 'delete',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async delete(
-    @common.Param() params: AccountWhereUniqueInput
+    @common.Param() params: AccountWhereUniqueInput,
   ): Promise<Account | null> {
     try {
       return await this.service.delete({
@@ -304,7 +304,7 @@ export class AccountControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;

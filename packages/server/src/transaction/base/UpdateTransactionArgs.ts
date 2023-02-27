@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
-import { TransactionWhereUniqueInput } from "./TransactionWhereUniqueInput";
-import { TransactionUpdateInput } from "./TransactionUpdateInput";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { TransactionWhereUniqueInput } from './TransactionWhereUniqueInput';
+import { TransactionUpdateInput } from './TransactionUpdateInput';
 
 @ArgsType()
 class UpdateTransactionArgs {

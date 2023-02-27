@@ -9,39 +9,39 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { BankService } from "../bank.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { BankCreateInput } from "./BankCreateInput";
-import { BankWhereInput } from "./BankWhereInput";
-import { BankWhereUniqueInput } from "./BankWhereUniqueInput";
-import { BankFindManyArgs } from "./BankFindManyArgs";
-import { BankUpdateInput } from "./BankUpdateInput";
-import { Bank } from "./Bank";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { BankService } from '../bank.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { BankCreateInput } from './BankCreateInput';
+import { BankWhereInput } from './BankWhereInput';
+import { BankWhereUniqueInput } from './BankWhereUniqueInput';
+import { BankFindManyArgs } from './BankFindManyArgs';
+import { BankUpdateInput } from './BankUpdateInput';
+import { Bank } from './Bank';
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class BankControllerBase {
   constructor(
     protected readonly service: BankService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Bank })
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "create",
-    possession: "any",
+    resource: 'Bank',
+    action: 'create',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -65,9 +65,9 @@ export class BankControllerBase {
   @swagger.ApiOkResponse({ type: [Bank] })
   @ApiNestedQuery(BankFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "read",
-    possession: "any",
+    resource: 'Bank',
+    action: 'read',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -88,19 +88,19 @@ export class BankControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Bank })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "read",
-    possession: "own",
+    resource: 'Bank',
+    action: 'read',
+    possession: 'own',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async findOne(
-    @common.Param() params: BankWhereUniqueInput
+    @common.Param() params: BankWhereUniqueInput,
   ): Promise<Bank | null> {
     const result = await this.service.findOne({
       where: params,
@@ -115,27 +115,27 @@ export class BankControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Bank })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "update",
-    possession: "any",
+    resource: 'Bank',
+    action: 'update',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async update(
     @common.Param() params: BankWhereUniqueInput,
-    @common.Body() data: BankUpdateInput
+    @common.Body() data: BankUpdateInput,
   ): Promise<Bank | null> {
     try {
       return await this.service.update({
@@ -153,26 +153,26 @@ export class BankControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
     }
   }
 
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Bank })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "delete",
-    possession: "any",
+    resource: 'Bank',
+    action: 'delete',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async delete(
-    @common.Param() params: BankWhereUniqueInput
+    @common.Param() params: BankWhereUniqueInput,
   ): Promise<Bank | null> {
     try {
       return await this.service.delete({
@@ -189,7 +189,7 @@ export class BankControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;

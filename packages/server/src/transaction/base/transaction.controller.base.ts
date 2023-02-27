@@ -9,45 +9,45 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { TransactionService } from "../transaction.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { TransactionCreateInput } from "./TransactionCreateInput";
-import { TransactionWhereInput } from "./TransactionWhereInput";
-import { TransactionWhereUniqueInput } from "./TransactionWhereUniqueInput";
-import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
-import { TransactionUpdateInput } from "./TransactionUpdateInput";
-import { Transaction } from "./Transaction";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { TransactionService } from '../transaction.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { TransactionCreateInput } from './TransactionCreateInput';
+import { TransactionWhereInput } from './TransactionWhereInput';
+import { TransactionWhereUniqueInput } from './TransactionWhereUniqueInput';
+import { TransactionFindManyArgs } from './TransactionFindManyArgs';
+import { TransactionUpdateInput } from './TransactionUpdateInput';
+import { Transaction } from './Transaction';
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TransactionControllerBase {
   constructor(
     protected readonly service: TransactionService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Transaction })
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "create",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'create',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async create(
-    @common.Body() data: TransactionCreateInput
+    @common.Body() data: TransactionCreateInput,
   ): Promise<Transaction> {
     return await this.service.create({
       data: {
@@ -82,9 +82,9 @@ export class TransactionControllerBase {
   @swagger.ApiOkResponse({ type: [Transaction] })
   @ApiNestedQuery(TransactionFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'read',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -114,19 +114,19 @@ export class TransactionControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "own",
+    resource: 'Transaction',
+    action: 'read',
+    possession: 'own',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async findOne(
-    @common.Param() params: TransactionWhereUniqueInput
+    @common.Param() params: TransactionWhereUniqueInput,
   ): Promise<Transaction | null> {
     const result = await this.service.findOne({
       where: params,
@@ -150,27 +150,27 @@ export class TransactionControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "update",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'update',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async update(
     @common.Param() params: TransactionWhereUniqueInput,
-    @common.Body() data: TransactionUpdateInput
+    @common.Body() data: TransactionUpdateInput,
   ): Promise<Transaction | null> {
     try {
       return await this.service.update({
@@ -203,26 +203,26 @@ export class TransactionControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
     }
   }
 
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Transaction })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "delete",
-    possession: "any",
+    resource: 'Transaction',
+    action: 'delete',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async delete(
-    @common.Param() params: TransactionWhereUniqueInput
+    @common.Param() params: TransactionWhereUniqueInput,
   ): Promise<Transaction | null> {
     try {
       return await this.service.delete({
@@ -248,7 +248,7 @@ export class TransactionControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;

@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountUpdateManyWithoutCustomersInput } from "./AccountUpdateManyWithoutCustomersInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountUpdateManyWithoutCustomersInput } from './AccountUpdateManyWithoutCustomersInput';
 import {
   ValidateNested,
   IsOptional,
   IsDate,
   IsString,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { Account } from "../../account/base/Account";
-import { DocumentUpdateManyWithoutCustomersInput } from "./DocumentUpdateManyWithoutCustomersInput";
-import { UserUpdateManyWithoutCustomersInput } from "./UserUpdateManyWithoutCustomersInput";
-import { EnumCustomerStatus } from "./EnumCustomerStatus";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { Account } from '../../account/base/Account';
+import { DocumentUpdateManyWithoutCustomersInput } from './DocumentUpdateManyWithoutCustomersInput';
+import { UserUpdateManyWithoutCustomersInput } from './UserUpdateManyWithoutCustomersInput';
+import { EnumCustomerStatus } from './EnumCustomerStatus';
 
 @InputType()
 class CustomerUpdateInput {
@@ -127,7 +127,7 @@ class CustomerUpdateInput {
   @Field(() => EnumCustomerStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Failed" | "Pending" | null;
+  status?: 'Approved' | 'Failed' | 'Pending' | null;
 }
 
 export { CustomerUpdateInput as CustomerUpdateInput };

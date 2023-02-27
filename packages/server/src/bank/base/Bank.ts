@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsEnum, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
-import { EnumBankInstutionType } from "./EnumBankInstutionType";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDate, IsString, IsEnum, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumBankInstutionType } from './EnumBankInstutionType';
 
 @ObjectType()
 class Bank {
@@ -58,7 +58,7 @@ class Bank {
   @Field(() => EnumBankInstutionType, {
     nullable: true,
   })
-  instutionType?: "MobileMoney" | "Bank" | null;
+  instutionType?: 'MobileMoney' | 'Bank' | null;
 
   @ApiProperty({
     required: true,

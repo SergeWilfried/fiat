@@ -9,17 +9,17 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { EnumDocumentDocumentType } from "./EnumDocumentDocumentType";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { EnumDocumentStatus } from "./EnumDocumentStatus";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountListRelationFilter } from '../../account/base/AccountListRelationFilter';
+import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CustomerWhereUniqueInput } from '../../customer/base/CustomerWhereUniqueInput';
+import { EnumDocumentDocumentType } from './EnumDocumentDocumentType';
+import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { EnumDocumentStatus } from './EnumDocumentStatus';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
 
 @InputType()
 class DocumentWhereInput {
@@ -56,7 +56,7 @@ class DocumentWhereInput {
   @Field(() => EnumDocumentDocumentType, {
     nullable: true,
   })
-  documentType?: "Driverlicence" | "Passport" | "GovernmentId";
+  documentType?: 'Driverlicence' | 'Passport' | 'GovernmentId';
 
   @ApiProperty({
     required: false,
@@ -100,7 +100,7 @@ class DocumentWhereInput {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Rejected";
+  status?: 'Approved' | 'Rejected';
 
   @ApiProperty({
     required: false,

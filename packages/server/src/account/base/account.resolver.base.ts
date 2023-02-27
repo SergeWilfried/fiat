@@ -9,41 +9,41 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as graphql from "@nestjs/graphql";
-import * as apollo from "apollo-server-express";
-import { isRecordNotFoundError } from "../../prisma.util";
-import { MetaQueryPayload } from "../../util/MetaQueryPayload";
-import * as nestAccessControl from "nest-access-control";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as common from "@nestjs/common";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { CreateAccountArgs } from "./CreateAccountArgs";
-import { UpdateAccountArgs } from "./UpdateAccountArgs";
-import { DeleteAccountArgs } from "./DeleteAccountArgs";
-import { AccountFindManyArgs } from "./AccountFindManyArgs";
-import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
-import { Account } from "./Account";
-import { Customer } from "../../customer/base/Customer";
-import { Document } from "../../document/base/Document";
-import { AccountService } from "../account.service";
+import * as graphql from '@nestjs/graphql';
+import * as apollo from 'apollo-server-express';
+import { isRecordNotFoundError } from '../../prisma.util';
+import { MetaQueryPayload } from '../../util/MetaQueryPayload';
+import * as nestAccessControl from 'nest-access-control';
+import * as gqlACGuard from '../../auth/gqlAC.guard';
+import { GqlDefaultAuthGuard } from '../../auth/gqlDefaultAuth.guard';
+import * as common from '@nestjs/common';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { CreateAccountArgs } from './CreateAccountArgs';
+import { UpdateAccountArgs } from './UpdateAccountArgs';
+import { DeleteAccountArgs } from './DeleteAccountArgs';
+import { AccountFindManyArgs } from './AccountFindManyArgs';
+import { AccountFindUniqueArgs } from './AccountFindUniqueArgs';
+import { Account } from './Account';
+import { Customer } from '../../customer/base/Customer';
+import { Document } from '../../document/base/Document';
+import { AccountService } from '../account.service';
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
 export class AccountResolverBase {
   constructor(
     protected readonly service: AccountService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
   async _accountsMeta(
-    @graphql.Args() args: AccountFindManyArgs
+    @graphql.Args() args: AccountFindManyArgs,
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -58,12 +58,12 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Account])
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
   async accounts(
-    @graphql.Args() args: AccountFindManyArgs
+    @graphql.Args() args: AccountFindManyArgs,
   ): Promise<Account[]> {
     return this.service.findMany(args);
   }
@@ -71,12 +71,12 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Account, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "own",
+    resource: 'Account',
+    action: 'read',
+    possession: 'own',
   })
   async account(
-    @graphql.Args() args: AccountFindUniqueArgs
+    @graphql.Args() args: AccountFindUniqueArgs,
   ): Promise<Account | null> {
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -88,12 +88,12 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Account)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "create",
-    possession: "any",
+    resource: 'Account',
+    action: 'create',
+    possession: 'any',
   })
   async createAccount(
-    @graphql.Args() args: CreateAccountArgs
+    @graphql.Args() args: CreateAccountArgs,
   ): Promise<Account> {
     return await this.service.create({
       ...args,
@@ -114,12 +114,12 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Account)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "update",
-    possession: "any",
+    resource: 'Account',
+    action: 'update',
+    possession: 'any',
   })
   async updateAccount(
-    @graphql.Args() args: UpdateAccountArgs
+    @graphql.Args() args: UpdateAccountArgs,
   ): Promise<Account | null> {
     try {
       return await this.service.update({
@@ -139,7 +139,7 @@ export class AccountResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -148,19 +148,19 @@ export class AccountResolverBase {
 
   @graphql.Mutation(() => Account)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "delete",
-    possession: "any",
+    resource: 'Account',
+    action: 'delete',
+    possession: 'any',
   })
   async deleteAccount(
-    @graphql.Args() args: DeleteAccountArgs
+    @graphql.Args() args: DeleteAccountArgs,
   ): Promise<Account | null> {
     try {
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -170,9 +170,9 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Customer, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "any",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'any',
   })
   async customers(@graphql.Parent() parent: Account): Promise<Customer | null> {
     const result = await this.service.getCustomers(parent.id);
@@ -186,9 +186,9 @@ export class AccountResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Document, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   async document(@graphql.Parent() parent: Account): Promise<Document | null> {
     const result = await this.service.getDocument(parent.id);

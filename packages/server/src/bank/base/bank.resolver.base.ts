@@ -9,39 +9,39 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as graphql from "@nestjs/graphql";
-import * as apollo from "apollo-server-express";
-import { isRecordNotFoundError } from "../../prisma.util";
-import { MetaQueryPayload } from "../../util/MetaQueryPayload";
-import * as nestAccessControl from "nest-access-control";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as common from "@nestjs/common";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { CreateBankArgs } from "./CreateBankArgs";
-import { UpdateBankArgs } from "./UpdateBankArgs";
-import { DeleteBankArgs } from "./DeleteBankArgs";
-import { BankFindManyArgs } from "./BankFindManyArgs";
-import { BankFindUniqueArgs } from "./BankFindUniqueArgs";
-import { Bank } from "./Bank";
-import { BankService } from "../bank.service";
+import * as graphql from '@nestjs/graphql';
+import * as apollo from 'apollo-server-express';
+import { isRecordNotFoundError } from '../../prisma.util';
+import { MetaQueryPayload } from '../../util/MetaQueryPayload';
+import * as nestAccessControl from 'nest-access-control';
+import * as gqlACGuard from '../../auth/gqlAC.guard';
+import { GqlDefaultAuthGuard } from '../../auth/gqlDefaultAuth.guard';
+import * as common from '@nestjs/common';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { CreateBankArgs } from './CreateBankArgs';
+import { UpdateBankArgs } from './UpdateBankArgs';
+import { DeleteBankArgs } from './DeleteBankArgs';
+import { BankFindManyArgs } from './BankFindManyArgs';
+import { BankFindUniqueArgs } from './BankFindUniqueArgs';
+import { Bank } from './Bank';
+import { BankService } from '../bank.service';
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Bank)
 export class BankResolverBase {
   constructor(
     protected readonly service: BankService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "read",
-    possession: "any",
+    resource: 'Bank',
+    action: 'read',
+    possession: 'any',
   })
   async _banksMeta(
-    @graphql.Args() args: BankFindManyArgs
+    @graphql.Args() args: BankFindManyArgs,
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -56,9 +56,9 @@ export class BankResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Bank])
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "read",
-    possession: "any",
+    resource: 'Bank',
+    action: 'read',
+    possession: 'any',
   })
   async banks(@graphql.Args() args: BankFindManyArgs): Promise<Bank[]> {
     return this.service.findMany(args);
@@ -67,9 +67,9 @@ export class BankResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Bank, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "read",
-    possession: "own",
+    resource: 'Bank',
+    action: 'read',
+    possession: 'own',
   })
   async bank(@graphql.Args() args: BankFindUniqueArgs): Promise<Bank | null> {
     const result = await this.service.findOne(args);
@@ -82,9 +82,9 @@ export class BankResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Bank)
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "create",
-    possession: "any",
+    resource: 'Bank',
+    action: 'create',
+    possession: 'any',
   })
   async createBank(@graphql.Args() args: CreateBankArgs): Promise<Bank> {
     return await this.service.create({
@@ -96,9 +96,9 @@ export class BankResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Bank)
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "update",
-    possession: "any",
+    resource: 'Bank',
+    action: 'update',
+    possession: 'any',
   })
   async updateBank(@graphql.Args() args: UpdateBankArgs): Promise<Bank | null> {
     try {
@@ -109,7 +109,7 @@ export class BankResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -118,9 +118,9 @@ export class BankResolverBase {
 
   @graphql.Mutation(() => Bank)
   @nestAccessControl.UseRoles({
-    resource: "Bank",
-    action: "delete",
-    possession: "any",
+    resource: 'Bank',
+    action: 'delete',
+    possession: 'any',
   })
   async deleteBank(@graphql.Args() args: DeleteBankArgs): Promise<Bank | null> {
     try {
@@ -128,7 +128,7 @@ export class BankResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;

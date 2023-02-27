@@ -9,12 +9,12 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
-import { Type } from "class-transformer";
-import { IsOptional, IsEnum } from "class-validator";
-import { EnumBankInstutionType } from "./EnumBankInstutionType";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { StringFilter } from '../../util/StringFilter';
+import { Type } from 'class-transformer';
+import { IsOptional, IsEnum } from 'class-validator';
+import { EnumBankInstutionType } from './EnumBankInstutionType';
 
 @InputType()
 class BankWhereInput {
@@ -60,7 +60,7 @@ class BankWhereInput {
   @Field(() => EnumBankInstutionType, {
     nullable: true,
   })
-  instutionType?: "MobileMoney" | "Bank";
+  instutionType?: 'MobileMoney' | 'Bank';
 }
 
 export { BankWhereInput as BankWhereInput };

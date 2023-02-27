@@ -9,13 +9,13 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
-import { Type } from "class-transformer";
-import { IsOptional, IsEnum, ValidateNested } from "class-validator";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { StringFilter } from '../../util/StringFilter';
+import { Type } from 'class-transformer';
+import { IsOptional, IsEnum, ValidateNested } from 'class-validator';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
+import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
 
 @InputType()
 class TransactionWhereInput {
@@ -50,7 +50,7 @@ class TransactionWhereInput {
   @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Credit" | "Debit";
+  transactionType?: 'Credit' | 'Debit';
 
   @ApiProperty({
     required: false,

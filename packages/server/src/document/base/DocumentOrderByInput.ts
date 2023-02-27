@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { SortOrder } from "../../util/SortOrder";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { SortOrder } from '../../util/SortOrder';
 
 @InputType({
   isAbstract: true,
@@ -20,7 +20,7 @@ import { SortOrder } from "../../util/SortOrder";
 class DocumentOrderByInput {
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -29,7 +29,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -38,7 +38,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -47,7 +47,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -56,7 +56,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -65,7 +65,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -74,7 +74,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -83,7 +83,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -92,7 +92,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,
@@ -101,7 +101,7 @@ class DocumentOrderByInput {
 
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    enum: ['asc', 'desc'],
   })
   @Field(() => SortOrder, {
     nullable: true,

@@ -9,47 +9,47 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Customer, Account, Document, User } from "@prisma/client";
+import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma, Customer, Account, Document, User } from '@prisma/client';
 
 export class CustomerServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
   async count<T extends Prisma.CustomerFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerFindManyArgs>,
   ): Promise<number> {
     return this.prisma.customer.count(args);
   }
 
   async findMany<T extends Prisma.CustomerFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerFindManyArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerFindManyArgs>,
   ): Promise<Customer[]> {
     return this.prisma.customer.findMany(args);
   }
   async findOne<T extends Prisma.CustomerFindUniqueArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerFindUniqueArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerFindUniqueArgs>,
   ): Promise<Customer | null> {
     return this.prisma.customer.findUnique(args);
   }
   async create<T extends Prisma.CustomerCreateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerCreateArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerCreateArgs>,
   ): Promise<Customer> {
     return this.prisma.customer.create<T>(args);
   }
   async update<T extends Prisma.CustomerUpdateArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerUpdateArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerUpdateArgs>,
   ): Promise<Customer> {
     return this.prisma.customer.update<T>(args);
   }
   async delete<T extends Prisma.CustomerDeleteArgs>(
-    args: Prisma.SelectSubset<T, Prisma.CustomerDeleteArgs>
+    args: Prisma.SelectSubset<T, Prisma.CustomerDeleteArgs>,
   ): Promise<Customer> {
     return this.prisma.customer.delete(args);
   }
 
   async findAccount(
     parentId: string,
-    args: Prisma.AccountFindManyArgs
+    args: Prisma.AccountFindManyArgs,
   ): Promise<Account[]> {
     return this.prisma.customer
       .findUniqueOrThrow({
@@ -60,7 +60,7 @@ export class CustomerServiceBase {
 
   async findDocuments(
     parentId: string,
-    args: Prisma.DocumentFindManyArgs
+    args: Prisma.DocumentFindManyArgs,
   ): Promise<Document[]> {
     return this.prisma.customer
       .findUniqueOrThrow({
@@ -71,7 +71,7 @@ export class CustomerServiceBase {
 
   async findEnitities(
     parentId: string,
-    args: Prisma.UserFindManyArgs
+    args: Prisma.UserFindManyArgs,
   ): Promise<User[]> {
     return this.prisma.customer
       .findUniqueOrThrow({

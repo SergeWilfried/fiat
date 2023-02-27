@@ -9,11 +9,11 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { BankWhereInput } from "./BankWhereInput";
-import { Type } from "class-transformer";
-import { BankOrderByInput } from "./BankOrderByInput";
+import { ArgsType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { BankWhereInput } from './BankWhereInput';
+import { Type } from 'class-transformer';
+import { BankOrderByInput } from './BankOrderByInput';
 
 @ArgsType()
 class BankFindManyArgs {

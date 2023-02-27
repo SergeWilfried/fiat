@@ -9,21 +9,21 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { AccountCreateNestedManyWithoutCustomersInput } from "./AccountCreateNestedManyWithoutCustomersInput";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { AccountCreateNestedManyWithoutCustomersInput } from './AccountCreateNestedManyWithoutCustomersInput';
 import {
   ValidateNested,
   IsOptional,
   IsDate,
   IsString,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { Account } from "../../account/base/Account";
-import { DocumentCreateNestedManyWithoutCustomersInput } from "./DocumentCreateNestedManyWithoutCustomersInput";
-import { UserCreateNestedManyWithoutCustomersInput } from "./UserCreateNestedManyWithoutCustomersInput";
-import { EnumCustomerStatus } from "./EnumCustomerStatus";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { Account } from '../../account/base/Account';
+import { DocumentCreateNestedManyWithoutCustomersInput } from './DocumentCreateNestedManyWithoutCustomersInput';
+import { UserCreateNestedManyWithoutCustomersInput } from './UserCreateNestedManyWithoutCustomersInput';
+import { EnumCustomerStatus } from './EnumCustomerStatus';
 
 @InputType()
 class CustomerCreateInput {
@@ -124,7 +124,7 @@ class CustomerCreateInput {
   @Field(() => EnumCustomerStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Failed" | "Pending" | null;
+  status?: 'Approved' | 'Failed' | 'Pending' | null;
 }
 
 export { CustomerCreateInput as CustomerCreateInput };

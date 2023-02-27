@@ -9,17 +9,17 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { Type } from "class-transformer";
-import { IsOptional, ValidateNested, IsEnum } from "class-validator";
-import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { JsonFilter } from "../../util/JsonFilter";
-import { BooleanFilter } from "../../util/BooleanFilter";
-import { EnumUserStatus } from "./EnumUserStatus";
-import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
+import { Type } from 'class-transformer';
+import { IsOptional, ValidateNested, IsEnum } from 'class-validator';
+import { CustomerListRelationFilter } from '../../customer/base/CustomerListRelationFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { JsonFilter } from '../../util/JsonFilter';
+import { BooleanFilter } from '../../util/BooleanFilter';
+import { EnumUserStatus } from './EnumUserStatus';
+import { TransactionListRelationFilter } from '../../transaction/base/TransactionListRelationFilter';
 
 @InputType()
 class UserWhereInput {
@@ -121,7 +121,7 @@ class UserWhereInput {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Rejected";
+  status?: 'Approved' | 'Pending' | 'Rejected';
 
   @ApiProperty({
     required: false,

@@ -9,48 +9,48 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as common from "@nestjs/common";
-import * as swagger from "@nestjs/swagger";
-import { isRecordNotFoundError } from "../../prisma.util";
-import * as errors from "../../errors";
-import { Request } from "express";
-import { plainToClass } from "class-transformer";
-import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import * as nestAccessControl from "nest-access-control";
-import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import { CustomerService } from "../customer.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { CustomerCreateInput } from "./CustomerCreateInput";
-import { CustomerWhereInput } from "./CustomerWhereInput";
-import { CustomerWhereUniqueInput } from "./CustomerWhereUniqueInput";
-import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
-import { CustomerUpdateInput } from "./CustomerUpdateInput";
-import { Customer } from "./Customer";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
-import { Document } from "../../document/base/Document";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
-import { User } from "../../user/base/User";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import * as common from '@nestjs/common';
+import * as swagger from '@nestjs/swagger';
+import { isRecordNotFoundError } from '../../prisma.util';
+import * as errors from '../../errors';
+import { Request } from 'express';
+import { plainToClass } from 'class-transformer';
+import { ApiNestedQuery } from '../../decorators/api-nested-query.decorator';
+import * as nestAccessControl from 'nest-access-control';
+import * as defaultAuthGuard from '../../auth/defaultAuth.guard';
+import { CustomerService } from '../customer.service';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { CustomerCreateInput } from './CustomerCreateInput';
+import { CustomerWhereInput } from './CustomerWhereInput';
+import { CustomerWhereUniqueInput } from './CustomerWhereUniqueInput';
+import { CustomerFindManyArgs } from './CustomerFindManyArgs';
+import { CustomerUpdateInput } from './CustomerUpdateInput';
+import { Customer } from './Customer';
+import { AccountFindManyArgs } from '../../account/base/AccountFindManyArgs';
+import { Account } from '../../account/base/Account';
+import { AccountWhereUniqueInput } from '../../account/base/AccountWhereUniqueInput';
+import { DocumentFindManyArgs } from '../../document/base/DocumentFindManyArgs';
+import { Document } from '../../document/base/Document';
+import { DocumentWhereUniqueInput } from '../../document/base/DocumentWhereUniqueInput';
+import { UserFindManyArgs } from '../../user/base/UserFindManyArgs';
+import { User } from '../../user/base/User';
+import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class CustomerControllerBase {
   constructor(
     protected readonly service: CustomerService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Customer })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "create",
-    possession: "any",
+    resource: 'Customer',
+    action: 'create',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -77,9 +77,9 @@ export class CustomerControllerBase {
   @swagger.ApiOkResponse({ type: [Customer] })
   @ApiNestedQuery(CustomerFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "any",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
@@ -103,19 +103,19 @@ export class CustomerControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id")
+  @common.Get('/:id')
   @swagger.ApiOkResponse({ type: Customer })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "own",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'own',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async findOne(
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: CustomerWhereUniqueInput,
   ): Promise<Customer | null> {
     const result = await this.service.findOne({
       where: params,
@@ -133,27 +133,27 @@ export class CustomerControllerBase {
     });
     if (result === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return result;
   }
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
-  @common.Patch("/:id")
+  @common.Patch('/:id')
   @swagger.ApiOkResponse({ type: Customer })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async update(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() data: CustomerUpdateInput
+    @common.Body() data: CustomerUpdateInput,
   ): Promise<Customer | null> {
     try {
       return await this.service.update({
@@ -174,26 +174,26 @@ export class CustomerControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
     }
   }
 
-  @common.Delete("/:id")
+  @common.Delete('/:id')
   @swagger.ApiOkResponse({ type: Customer })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "delete",
-    possession: "any",
+    resource: 'Customer',
+    action: 'delete',
+    possession: 'any',
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
   async delete(
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: CustomerWhereUniqueInput,
   ): Promise<Customer | null> {
     try {
       return await this.service.delete({
@@ -213,7 +213,7 @@ export class CustomerControllerBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
+          `No resource was found for ${JSON.stringify(params)}`,
         );
       }
       throw error;
@@ -221,16 +221,16 @@ export class CustomerControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/Account")
+  @common.Get('/:id/Account')
   @ApiNestedQuery(AccountFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
   async findManyAccount(
     @common.Req() request: Request,
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: CustomerWhereUniqueInput,
   ): Promise<Account[]> {
     const query = plainToClass(AccountFindManyArgs, request.query);
     const results = await this.service.findAccount(params.id, {
@@ -265,21 +265,21 @@ export class CustomerControllerBase {
     });
     if (results === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return results;
   }
 
-  @common.Post("/:id/Account")
+  @common.Post('/:id/Account')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async connectAccount(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       Account: {
@@ -293,15 +293,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Patch("/:id/Account")
+  @common.Patch('/:id/Account')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async updateAccount(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       Account: {
@@ -315,15 +315,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Delete("/:id/Account")
+  @common.Delete('/:id/Account')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async disconnectAccount(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
+    @common.Body() body: AccountWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       Account: {
@@ -338,16 +338,16 @@ export class CustomerControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/documents")
+  @common.Get('/:id/documents')
   @ApiNestedQuery(DocumentFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   async findManyDocuments(
     @common.Req() request: Request,
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: CustomerWhereUniqueInput,
   ): Promise<Document[]> {
     const query = plainToClass(DocumentFindManyArgs, request.query);
     const results = await this.service.findDocuments(params.id, {
@@ -373,21 +373,21 @@ export class CustomerControllerBase {
     });
     if (results === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return results;
   }
 
-  @common.Post("/:id/documents")
+  @common.Post('/:id/documents')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async connectDocuments(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: DocumentWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       documents: {
@@ -401,15 +401,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Patch("/:id/documents")
+  @common.Patch('/:id/documents')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async updateDocuments(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: DocumentWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       documents: {
@@ -423,15 +423,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Delete("/:id/documents")
+  @common.Delete('/:id/documents')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async disconnectDocuments(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: DocumentWhereUniqueInput[]
+    @common.Body() body: DocumentWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       documents: {
@@ -446,16 +446,16 @@ export class CustomerControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/enitities")
+  @common.Get('/:id/enitities')
   @ApiNestedQuery(UserFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
+    resource: 'User',
+    action: 'read',
+    possession: 'any',
   })
   async findManyEnitities(
     @common.Req() request: Request,
-    @common.Param() params: CustomerWhereUniqueInput
+    @common.Param() params: CustomerWhereUniqueInput,
   ): Promise<User[]> {
     const query = plainToClass(UserFindManyArgs, request.query);
     const results = await this.service.findEnitities(params.id, {
@@ -482,21 +482,21 @@ export class CustomerControllerBase {
     });
     if (results === null) {
       throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
+        `No resource was found for ${JSON.stringify(params)}`,
       );
     }
     return results;
   }
 
-  @common.Post("/:id/enitities")
+  @common.Post('/:id/enitities')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async connectEnitities(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: UserWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       enitities: {
@@ -510,15 +510,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Patch("/:id/enitities")
+  @common.Patch('/:id/enitities')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async updateEnitities(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: UserWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       enitities: {
@@ -532,15 +532,15 @@ export class CustomerControllerBase {
     });
   }
 
-  @common.Delete("/:id/enitities")
+  @common.Delete('/:id/enitities')
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async disconnectEnitities(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: UserWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[],
   ): Promise<void> {
     const data = {
       enitities: {

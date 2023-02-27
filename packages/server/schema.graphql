@@ -1,0 +1,814 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Account {
+  accountNumber: String
+  accountType: EnumAccountAccountType
+  availableBalance: Float
+  balance: Float
+  createdAt: DateTime!
+  currency: EnumAccountCurrency
+  customers: Customer
+  description: String
+  document: Document
+  id: String!
+  name: String
+  status: EnumAccountStatus
+  updatedAt: DateTime!
+}
+
+input AccountCreateInput {
+  accountNumber: String
+  accountType: EnumAccountAccountType
+  availableBalance: Float
+  balance: Float
+  currency: EnumAccountCurrency
+  customers: CustomerWhereUniqueInput!
+  description: String
+  document: DocumentWhereUniqueInput!
+  name: String
+  status: EnumAccountStatus
+}
+
+input AccountCreateNestedManyWithoutCustomersInput {
+  connect: [AccountWhereUniqueInput!]
+}
+
+input AccountCreateNestedManyWithoutDocumentsInput {
+  connect: [AccountWhereUniqueInput!]
+}
+
+input AccountListRelationFilter {
+  every: AccountWhereInput
+  none: AccountWhereInput
+  some: AccountWhereInput
+}
+
+input AccountOrderByInput {
+  accountNumber: SortOrder
+  accountType: SortOrder
+  availableBalance: SortOrder
+  balance: SortOrder
+  createdAt: SortOrder
+  currency: SortOrder
+  customersId: SortOrder
+  description: SortOrder
+  documentId: SortOrder
+  id: SortOrder
+  name: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+}
+
+input AccountUpdateInput {
+  accountNumber: String
+  accountType: EnumAccountAccountType
+  availableBalance: Float
+  balance: Float
+  currency: EnumAccountCurrency
+  customers: CustomerWhereUniqueInput
+  description: String
+  document: DocumentWhereUniqueInput
+  name: String
+  status: EnumAccountStatus
+}
+
+input AccountUpdateManyWithoutCustomersInput {
+  connect: [AccountWhereUniqueInput!]
+  disconnect: [AccountWhereUniqueInput!]
+  set: [AccountWhereUniqueInput!]
+}
+
+input AccountUpdateManyWithoutDocumentsInput {
+  connect: [AccountWhereUniqueInput!]
+  disconnect: [AccountWhereUniqueInput!]
+  set: [AccountWhereUniqueInput!]
+}
+
+input AccountWhereInput {
+  accountNumber: StringNullableFilter
+  accountType: EnumAccountAccountType
+  availableBalance: FloatNullableFilter
+  balance: FloatNullableFilter
+  currency: EnumAccountCurrency
+  customers: CustomerWhereUniqueInput
+  description: StringNullableFilter
+  id: StringFilter
+  name: StringNullableFilter
+  status: EnumAccountStatus
+}
+
+input AccountWhereUniqueInput {
+  id: String!
+}
+
+type Bank {
+  createdAt: DateTime!
+  currency: String!
+  id: String!
+  institutionName: String!
+  instutionType: EnumBankInstutionType
+  updatedAt: DateTime!
+}
+
+input BankCreateInput {
+  currency: String!
+  institutionName: String!
+  instutionType: EnumBankInstutionType
+}
+
+input BankOrderByInput {
+  createdAt: SortOrder
+  currency: SortOrder
+  id: SortOrder
+  institutionName: SortOrder
+  instutionType: SortOrder
+  updatedAt: SortOrder
+}
+
+input BankUpdateInput {
+  currency: String
+  institutionName: String
+  instutionType: EnumBankInstutionType
+}
+
+input BankWhereInput {
+  currency: StringFilter
+  id: StringFilter
+  institutionName: StringFilter
+  instutionType: EnumBankInstutionType
+}
+
+input BankWhereUniqueInput {
+  id: String!
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+input Credentials {
+  password: String!
+  username: String!
+}
+
+type Customer {
+  account(
+    orderBy: [AccountOrderByInput!]
+    skip: Float
+    take: Float
+    where: AccountWhereInput
+  ): [Account!]!
+  createdAt: DateTime!
+  dob: DateTime
+  documents(
+    orderBy: [DocumentOrderByInput!]
+    skip: Float
+    take: Float
+    where: DocumentWhereInput
+  ): [Document!]!
+  email: String
+  enitities(
+    orderBy: [UserOrderByInput!]
+    skip: Float
+    take: Float
+    where: UserWhereInput
+  ): [User!]!
+  firstname: String
+  id: String!
+  lastname: String
+  phone: String!
+  status: EnumCustomerStatus
+  updatedAt: DateTime!
+}
+
+input CustomerCreateInput {
+  Account: AccountCreateNestedManyWithoutCustomersInput
+  dob: DateTime
+  documents: DocumentCreateNestedManyWithoutCustomersInput
+  email: String
+  enitities: UserCreateNestedManyWithoutCustomersInput
+  firstname: String
+  lastname: String
+  phone: String!
+  status: EnumCustomerStatus
+}
+
+input CustomerCreateNestedManyWithoutUsersInput {
+  connect: [CustomerWhereUniqueInput!]
+}
+
+input CustomerListRelationFilter {
+  every: CustomerWhereInput
+  none: CustomerWhereInput
+  some: CustomerWhereInput
+}
+
+input CustomerOrderByInput {
+  createdAt: SortOrder
+  dob: SortOrder
+  email: SortOrder
+  firstname: SortOrder
+  id: SortOrder
+  lastname: SortOrder
+  phone: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+}
+
+input CustomerUpdateInput {
+  Account: AccountUpdateManyWithoutCustomersInput
+  dob: DateTime
+  documents: DocumentUpdateManyWithoutCustomersInput
+  email: String
+  enitities: UserUpdateManyWithoutCustomersInput
+  firstname: String
+  lastname: String
+  phone: String
+  status: EnumCustomerStatus
+}
+
+input CustomerUpdateManyWithoutUsersInput {
+  connect: [CustomerWhereUniqueInput!]
+  disconnect: [CustomerWhereUniqueInput!]
+  set: [CustomerWhereUniqueInput!]
+}
+
+input CustomerWhereInput {
+  Account: AccountListRelationFilter
+  dob: DateTimeNullableFilter
+  documents: DocumentListRelationFilter
+  email: StringNullableFilter
+  enitities: UserListRelationFilter
+  firstname: StringNullableFilter
+  id: StringFilter
+  lastname: StringNullableFilter
+  phone: StringFilter
+  status: EnumCustomerStatus
+}
+
+input CustomerWhereUniqueInput {
+  id: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+type Document {
+  accounts(
+    orderBy: [AccountOrderByInput!]
+    skip: Float
+    take: Float
+    where: AccountWhereInput
+  ): [Account!]!
+  createdAt: DateTime!
+  customer: Customer
+  documentType: EnumDocumentDocumentType
+  expiringAt: DateTime
+  id: String!
+  image: String!
+  status: EnumDocumentStatus
+  tags: String
+  updatedAt: DateTime!
+  url: String!
+}
+
+input DocumentCreateInput {
+  accounts: AccountCreateNestedManyWithoutDocumentsInput
+  customer: CustomerWhereUniqueInput
+  documentType: EnumDocumentDocumentType!
+  expiringAt: DateTime
+  image: String!
+  status: EnumDocumentStatus
+  tags: String
+  url: String!
+}
+
+input DocumentCreateNestedManyWithoutCustomersInput {
+  connect: [DocumentWhereUniqueInput!]
+}
+
+input DocumentListRelationFilter {
+  every: DocumentWhereInput
+  none: DocumentWhereInput
+  some: DocumentWhereInput
+}
+
+input DocumentOrderByInput {
+  createdAt: SortOrder
+  customerId: SortOrder
+  documentType: SortOrder
+  expiringAt: SortOrder
+  id: SortOrder
+  image: SortOrder
+  status: SortOrder
+  tags: SortOrder
+  updatedAt: SortOrder
+  url: SortOrder
+}
+
+input DocumentUpdateInput {
+  accounts: AccountUpdateManyWithoutDocumentsInput
+  customer: CustomerWhereUniqueInput
+  documentType: EnumDocumentDocumentType
+  expiringAt: DateTime
+  image: String
+  status: EnumDocumentStatus
+  tags: String
+  url: String
+}
+
+input DocumentUpdateManyWithoutCustomersInput {
+  connect: [DocumentWhereUniqueInput!]
+  disconnect: [DocumentWhereUniqueInput!]
+  set: [DocumentWhereUniqueInput!]
+}
+
+input DocumentWhereInput {
+  accounts: AccountListRelationFilter
+  customer: CustomerWhereUniqueInput
+  documentType: EnumDocumentDocumentType
+  expiringAt: DateTimeNullableFilter
+  id: StringFilter
+  image: StringFilter
+  status: EnumDocumentStatus
+  tags: StringNullableFilter
+  url: StringFilter
+}
+
+input DocumentWhereUniqueInput {
+  id: String!
+}
+
+enum EnumAccountAccountType {
+  Iban
+  MobileMoney
+  Wallet
+}
+
+enum EnumAccountCurrency {
+  Celo
+  Eur
+  Usd
+  Xof
+}
+
+enum EnumAccountStatus {
+  Approved
+  Blocked
+  Pending
+}
+
+enum EnumBankInstutionType {
+  Bank
+  MobileMoney
+}
+
+enum EnumCustomerStatus {
+  Approved
+  Failed
+  Pending
+}
+
+enum EnumDocumentDocumentType {
+  Driverlicence
+  GovernmentId
+  Passport
+}
+
+enum EnumDocumentStatus {
+  Approved
+  Rejected
+}
+
+enum EnumTransactionStatus {
+  Failed
+  Pending
+  Successful
+}
+
+enum EnumTransactionTransactionType {
+  Credit
+  Debit
+}
+
+enum EnumUserStatus {
+  Approved
+  Pending
+  Rejected
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: Float
+  notIn: [Float!]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
+
+input JsonFilter {
+  equals: JSONObject
+  not: JSONObject
+}
+
+type MetaQueryPayload {
+  count: Float!
+}
+
+type Mutation {
+  createAccount(data: AccountCreateInput!): Account!
+  createBank(data: BankCreateInput!): Bank!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  createDocument(data: DocumentCreateInput!): Document!
+  createTransaction(data: TransactionCreateInput!): Transaction!
+  createUser(data: UserCreateInput!): User!
+  deleteAccount(where: AccountWhereUniqueInput!): Account!
+  deleteBank(where: BankWhereUniqueInput!): Bank!
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer!
+  deleteDocument(where: DocumentWhereUniqueInput!): Document!
+  deleteTransaction(where: TransactionWhereUniqueInput!): Transaction!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  login(credentials: Credentials!): UserInfo!
+  updateAccount(
+    data: AccountUpdateInput!
+    where: AccountWhereUniqueInput!
+  ): Account!
+  updateBank(data: BankUpdateInput!, where: BankWhereUniqueInput!): Bank!
+  updateCustomer(
+    data: CustomerUpdateInput!
+    where: CustomerWhereUniqueInput!
+  ): Customer!
+  updateDocument(
+    data: DocumentUpdateInput!
+    where: DocumentWhereUniqueInput!
+  ): Document!
+  updateTransaction(
+    data: TransactionUpdateInput!
+    where: TransactionWhereUniqueInput!
+  ): Transaction!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+type Query {
+  _accountsMeta(
+    orderBy: [AccountOrderByInput!]
+    skip: Float
+    take: Float
+    where: AccountWhereInput
+  ): MetaQueryPayload!
+  _banksMeta(
+    orderBy: [BankOrderByInput!]
+    skip: Float
+    take: Float
+    where: BankWhereInput
+  ): MetaQueryPayload!
+  _customersMeta(
+    orderBy: [CustomerOrderByInput!]
+    skip: Float
+    take: Float
+    where: CustomerWhereInput
+  ): MetaQueryPayload!
+  _documentsMeta(
+    orderBy: [DocumentOrderByInput!]
+    skip: Float
+    take: Float
+    where: DocumentWhereInput
+  ): MetaQueryPayload!
+  _transactionsMeta(
+    orderBy: [TransactionOrderByInput!]
+    skip: Float
+    take: Float
+    where: TransactionWhereInput
+  ): MetaQueryPayload!
+  _usersMeta(
+    orderBy: [UserOrderByInput!]
+    skip: Float
+    take: Float
+    where: UserWhereInput
+  ): MetaQueryPayload!
+  account(where: AccountWhereUniqueInput!): Account
+  accounts(
+    orderBy: [AccountOrderByInput!]
+    skip: Float
+    take: Float
+    where: AccountWhereInput
+  ): [Account!]!
+  bank(where: BankWhereUniqueInput!): Bank
+  banks(
+    orderBy: [BankOrderByInput!]
+    skip: Float
+    take: Float
+    where: BankWhereInput
+  ): [Bank!]!
+  customer(where: CustomerWhereUniqueInput!): Customer
+  customers(
+    orderBy: [CustomerOrderByInput!]
+    skip: Float
+    take: Float
+    where: CustomerWhereInput
+  ): [Customer!]!
+  document(where: DocumentWhereUniqueInput!): Document
+  documents(
+    orderBy: [DocumentOrderByInput!]
+    skip: Float
+    take: Float
+    where: DocumentWhereInput
+  ): [Document!]!
+  transaction(where: TransactionWhereUniqueInput!): Transaction
+  transactions(
+    orderBy: [TransactionOrderByInput!]
+    skip: Float
+    take: Float
+    where: TransactionWhereInput
+  ): [Transaction!]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo: UserInfo!
+  users(
+    orderBy: [UserOrderByInput!]
+    skip: Float
+    take: Float
+    where: UserWhereInput
+  ): [User!]!
+}
+
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Transaction {
+  amount: Float!
+  createdAt: DateTime!
+  currency: String!
+  fee: Float
+  id: String!
+  metadata: String
+  status: EnumTransactionStatus
+  transactionType: EnumTransactionTransactionType
+  updatedAt: DateTime!
+  user: User
+}
+
+input TransactionCreateInput {
+  amount: Float!
+  currency: String!
+  fee: Float
+  metadata: String
+  status: EnumTransactionStatus
+  transactionType: EnumTransactionTransactionType!
+  user: UserWhereUniqueInput!
+}
+
+input TransactionCreateNestedManyWithoutUsersInput {
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionListRelationFilter {
+  every: TransactionWhereInput
+  none: TransactionWhereInput
+  some: TransactionWhereInput
+}
+
+input TransactionOrderByInput {
+  amount: SortOrder
+  createdAt: SortOrder
+  currency: SortOrder
+  fee: SortOrder
+  id: SortOrder
+  metadata: SortOrder
+  status: SortOrder
+  transactionType: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input TransactionUpdateInput {
+  amount: Float
+  currency: String
+  fee: Float
+  metadata: String
+  status: EnumTransactionStatus
+  transactionType: EnumTransactionTransactionType
+  user: UserWhereUniqueInput
+}
+
+input TransactionUpdateManyWithoutUsersInput {
+  connect: [TransactionWhereUniqueInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+}
+
+input TransactionWhereInput {
+  currency: StringFilter
+  id: StringFilter
+  transactionType: EnumTransactionTransactionType
+  user: UserWhereUniqueInput
+}
+
+input TransactionWhereUniqueInput {
+  id: String!
+}
+
+type User {
+  address: JSON!
+  businessName: String
+  createdAt: DateTime!
+  customer(
+    orderBy: [CustomerOrderByInput!]
+    skip: Float
+    take: Float
+    where: CustomerWhereInput
+  ): [Customer!]!
+  email: String!
+  firstName: String
+  id: String!
+  lastName: String
+  legalTermVersions: String!
+  messages: JSON
+  password2: String!
+  phoe: String!
+  privacyPolicy: Boolean!
+  roles: JSON!
+  status: EnumUserStatus
+  termsAndConditions: Boolean!
+  transactions(
+    orderBy: [TransactionOrderByInput!]
+    skip: Float
+    take: Float
+    where: TransactionWhereInput
+  ): [Transaction!]!
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UserCreateInput {
+  address: JSON!
+  businessName: String
+  customer: CustomerCreateNestedManyWithoutUsersInput
+  email: String!
+  firstName: String
+  lastName: String
+  legalTermVersions: String!
+  messages: JSON
+  password: String!
+  password2: String!
+  phoe: String!
+  privacyPolicy: Boolean!
+  roles: JSON!
+  status: EnumUserStatus
+  termsAndConditions: Boolean!
+  transactions: TransactionCreateNestedManyWithoutUsersInput
+  username: String!
+}
+
+input UserCreateNestedManyWithoutCustomersInput {
+  connect: [UserWhereUniqueInput!]
+}
+
+type UserInfo {
+  accessToken: String
+  id: String!
+  roles: [String!]!
+  username: String!
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  none: UserWhereInput
+  some: UserWhereInput
+}
+
+input UserOrderByInput {
+  address: SortOrder
+  businessName: SortOrder
+  createdAt: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  legalTermVersions: SortOrder
+  messages: SortOrder
+  password: SortOrder
+  password2: SortOrder
+  phoe: SortOrder
+  privacyPolicy: SortOrder
+  roles: SortOrder
+  status: SortOrder
+  termsAndConditions: SortOrder
+  updatedAt: SortOrder
+  username: SortOrder
+}
+
+input UserUpdateInput {
+  address: JSON
+  businessName: String
+  customer: CustomerUpdateManyWithoutUsersInput
+  email: String
+  firstName: String
+  lastName: String
+  legalTermVersions: String
+  messages: JSON
+  password: String
+  password2: String
+  phoe: String
+  privacyPolicy: Boolean
+  roles: JSON
+  status: EnumUserStatus
+  termsAndConditions: Boolean
+  transactions: TransactionUpdateManyWithoutUsersInput
+  username: String
+}
+
+input UserUpdateManyWithoutCustomersInput {
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+}
+
+input UserWhereInput {
+  businessName: StringNullableFilter
+  customer: CustomerListRelationFilter
+  email: StringFilter
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  messages: JsonFilter
+  privacyPolicy: BooleanFilter
+  status: EnumUserStatus
+  termsAndConditions: BooleanFilter
+  transactions: TransactionListRelationFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}

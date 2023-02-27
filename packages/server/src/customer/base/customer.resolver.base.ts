@@ -9,45 +9,45 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import * as graphql from "@nestjs/graphql";
-import * as apollo from "apollo-server-express";
-import { isRecordNotFoundError } from "../../prisma.util";
-import { MetaQueryPayload } from "../../util/MetaQueryPayload";
-import * as nestAccessControl from "nest-access-control";
-import * as gqlACGuard from "../../auth/gqlAC.guard";
-import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
-import * as common from "@nestjs/common";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { CreateCustomerArgs } from "./CreateCustomerArgs";
-import { UpdateCustomerArgs } from "./UpdateCustomerArgs";
-import { DeleteCustomerArgs } from "./DeleteCustomerArgs";
-import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
-import { CustomerFindUniqueArgs } from "./CustomerFindUniqueArgs";
-import { Customer } from "./Customer";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
-import { Document } from "../../document/base/Document";
-import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
-import { User } from "../../user/base/User";
-import { CustomerService } from "../customer.service";
+import * as graphql from '@nestjs/graphql';
+import * as apollo from 'apollo-server-express';
+import { isRecordNotFoundError } from '../../prisma.util';
+import { MetaQueryPayload } from '../../util/MetaQueryPayload';
+import * as nestAccessControl from 'nest-access-control';
+import * as gqlACGuard from '../../auth/gqlAC.guard';
+import { GqlDefaultAuthGuard } from '../../auth/gqlDefaultAuth.guard';
+import * as common from '@nestjs/common';
+import { AclFilterResponseInterceptor } from '../../interceptors/aclFilterResponse.interceptor';
+import { AclValidateRequestInterceptor } from '../../interceptors/aclValidateRequest.interceptor';
+import { CreateCustomerArgs } from './CreateCustomerArgs';
+import { UpdateCustomerArgs } from './UpdateCustomerArgs';
+import { DeleteCustomerArgs } from './DeleteCustomerArgs';
+import { CustomerFindManyArgs } from './CustomerFindManyArgs';
+import { CustomerFindUniqueArgs } from './CustomerFindUniqueArgs';
+import { Customer } from './Customer';
+import { AccountFindManyArgs } from '../../account/base/AccountFindManyArgs';
+import { Account } from '../../account/base/Account';
+import { DocumentFindManyArgs } from '../../document/base/DocumentFindManyArgs';
+import { Document } from '../../document/base/Document';
+import { UserFindManyArgs } from '../../user/base/UserFindManyArgs';
+import { User } from '../../user/base/User';
+import { CustomerService } from '../customer.service';
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Customer)
 export class CustomerResolverBase {
   constructor(
     protected readonly service: CustomerService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder,
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "any",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'any',
   })
   async _customersMeta(
-    @graphql.Args() args: CustomerFindManyArgs
+    @graphql.Args() args: CustomerFindManyArgs,
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -62,12 +62,12 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Customer])
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "any",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'any',
   })
   async customers(
-    @graphql.Args() args: CustomerFindManyArgs
+    @graphql.Args() args: CustomerFindManyArgs,
   ): Promise<Customer[]> {
     return this.service.findMany(args);
   }
@@ -75,12 +75,12 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Customer, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "read",
-    possession: "own",
+    resource: 'Customer',
+    action: 'read',
+    possession: 'own',
   })
   async customer(
-    @graphql.Args() args: CustomerFindUniqueArgs
+    @graphql.Args() args: CustomerFindUniqueArgs,
   ): Promise<Customer | null> {
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -92,12 +92,12 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Customer)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "create",
-    possession: "any",
+    resource: 'Customer',
+    action: 'create',
+    possession: 'any',
   })
   async createCustomer(
-    @graphql.Args() args: CreateCustomerArgs
+    @graphql.Args() args: CreateCustomerArgs,
   ): Promise<Customer> {
     return await this.service.create({
       ...args,
@@ -108,12 +108,12 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Customer)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
+    resource: 'Customer',
+    action: 'update',
+    possession: 'any',
   })
   async updateCustomer(
-    @graphql.Args() args: UpdateCustomerArgs
+    @graphql.Args() args: UpdateCustomerArgs,
   ): Promise<Customer | null> {
     try {
       return await this.service.update({
@@ -123,7 +123,7 @@ export class CustomerResolverBase {
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -132,19 +132,19 @@ export class CustomerResolverBase {
 
   @graphql.Mutation(() => Customer)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "delete",
-    possession: "any",
+    resource: 'Customer',
+    action: 'delete',
+    possession: 'any',
   })
   async deleteCustomer(
-    @graphql.Args() args: DeleteCustomerArgs
+    @graphql.Args() args: DeleteCustomerArgs,
   ): Promise<Customer | null> {
     try {
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new apollo.ApolloError(
-          `No resource was found for ${JSON.stringify(args.where)}`
+          `No resource was found for ${JSON.stringify(args.where)}`,
         );
       }
       throw error;
@@ -154,13 +154,13 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Account])
   @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
+    resource: 'Account',
+    action: 'read',
+    possession: 'any',
   })
   async account(
     @graphql.Parent() parent: Customer,
-    @graphql.Args() args: AccountFindManyArgs
+    @graphql.Args() args: AccountFindManyArgs,
   ): Promise<Account[]> {
     const results = await this.service.findAccount(parent.id, args);
 
@@ -174,13 +174,13 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Document])
   @nestAccessControl.UseRoles({
-    resource: "Document",
-    action: "read",
-    possession: "any",
+    resource: 'Document',
+    action: 'read',
+    possession: 'any',
   })
   async documents(
     @graphql.Parent() parent: Customer,
-    @graphql.Args() args: DocumentFindManyArgs
+    @graphql.Args() args: DocumentFindManyArgs,
   ): Promise<Document[]> {
     const results = await this.service.findDocuments(parent.id, args);
 
@@ -194,13 +194,13 @@ export class CustomerResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [User])
   @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
+    resource: 'User',
+    action: 'read',
+    possession: 'any',
   })
   async enitities(
     @graphql.Parent() parent: Customer,
-    @graphql.Args() args: UserFindManyArgs
+    @graphql.Args() args: UserFindManyArgs,
   ): Promise<User[]> {
     const results = await this.service.findEnitities(parent.id, args);
 

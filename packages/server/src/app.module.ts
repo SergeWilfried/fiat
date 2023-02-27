@@ -1,23 +1,25 @@
-import { Module, Scope } from "@nestjs/common";
-import { APP_INTERCEPTOR } from "@nestjs/core";
-import { MorganInterceptor, MorganModule } from "nest-morgan";
-import { UserModule } from "./user/user.module";
-import { TransactionModule } from "./transaction/transaction.module";
-import { AccountModule } from "./account/account.module";
-import { DocumentModule } from "./document/document.module";
-import { BankModule } from "./bank/bank.module";
-import { CustomerModule } from "./customer/customer.module";
-import { HealthModule } from "./health/health.module";
-import { PrismaModule } from "./prisma/prisma.module";
-import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
-import { KafkaModule } from "./kafka/kafka.module";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { ServeStaticOptionsService } from "./serveStaticOptions.service";
-import { GraphQLModule } from "@nestjs/graphql";
+import { Module, Scope } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { MorganInterceptor, MorganModule } from 'nest-morgan';
+import { UserModule } from './user/user.module';
+import { TransactionModule } from './transaction/transaction.module';
+import { AccountModule } from './account/account.module';
+import { DocumentModule } from './document/document.module';
+import { BankModule } from './bank/bank.module';
+import { CustomerModule } from './customer/customer.module';
+import { HealthModule } from './health/health.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { SecretsManagerModule } from './providers/secrets/secretsManager.module';
+import { KafkaModule } from './kafka/kafka.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ServeStaticOptionsService } from './serveStaticOptions.service';
+import { GraphQLModule } from '@nestjs/graphql';
 
-import { ACLModule } from "./auth/acl.module";
-import { AuthModule } from "./auth/auth.module";
+import { ACLModule } from './auth/acl.module';
+import { AuthModule } from './auth/auth.module';
+import { CacheService } from './cache/cache.service';
+import { CacheModule } from './cache/cache.module';
 
 @Module({
   controllers: [],
@@ -39,11 +41,11 @@ import { AuthModule } from "./auth/auth.module";
       useClass: ServeStaticOptionsService,
     }),
     GraphQLModule.forRootAsync({
-      useFactory: (configService) => {
-        const playground = configService.get("GRAPHQL_PLAYGROUND");
-        const introspection = configService.get("GRAPHQL_INTROSPECTION");
+      useFactory: configService => {
+        const playground = configService.get('GRAPHQL_PLAYGROUND');
+        const introspection = configService.get('GRAPHQL_INTROSPECTION');
         return {
-          autoSchemaFile: "schema.graphql",
+          autoSchemaFile: 'schema.graphql',
           sortSchema: true,
           playground,
           introspection: playground || introspection,
@@ -52,13 +54,15 @@ import { AuthModule } from "./auth/auth.module";
       inject: [ConfigService],
       imports: [ConfigModule],
     }),
+    CacheModule,
   ],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       scope: Scope.REQUEST,
-      useClass: MorganInterceptor("combined"),
+      useClass: MorganInterceptor('combined'),
     },
+    CacheService,
   ],
 })
 export class AppModule {}

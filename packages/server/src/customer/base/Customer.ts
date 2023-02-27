@@ -9,20 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "../../account/base/Account";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { Account } from '../../account/base/Account';
 import {
   ValidateNested,
   IsOptional,
   IsDate,
   IsString,
   IsEnum,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { Document } from "../../document/base/Document";
-import { User } from "../../user/base/User";
-import { EnumCustomerStatus } from "./EnumCustomerStatus";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { Document } from '../../document/base/Document';
+import { User } from '../../user/base/User';
+import { EnumCustomerStatus } from './EnumCustomerStatus';
 
 @ObjectType()
 class Customer {
@@ -130,7 +130,7 @@ class Customer {
   @Field(() => EnumCustomerStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Failed" | "Pending" | null;
+  status?: 'Approved' | 'Failed' | 'Pending' | null;
 
   @ApiProperty({
     required: true,

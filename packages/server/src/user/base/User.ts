@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsJSON,
   IsString,
@@ -19,13 +19,13 @@ import {
   ValidateNested,
   IsBoolean,
   IsEnum,
-} from "class-validator";
-import { GraphQLJSON } from "graphql-type-json";
-import { JsonValue } from "type-fest";
-import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
-import { EnumUserStatus } from "./EnumUserStatus";
-import { Transaction } from "../../transaction/base/Transaction";
+} from 'class-validator';
+import { GraphQLJSON } from 'graphql-type-json';
+import { JsonValue } from 'type-fest';
+import { Type } from 'class-transformer';
+import { Customer } from '../../customer/base/Customer';
+import { EnumUserStatus } from './EnumUserStatus';
+import { Transaction } from '../../transaction/base/Transaction';
 
 @ObjectType()
 class User {
@@ -160,7 +160,7 @@ class User {
   @Field(() => EnumUserStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Pending" | "Rejected" | null;
+  status?: 'Approved' | 'Pending' | 'Rejected' | null;
 
   @ApiProperty({
     required: true,

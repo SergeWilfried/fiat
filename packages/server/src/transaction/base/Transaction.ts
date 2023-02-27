@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { ObjectType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsInt,
   IsDate,
@@ -19,11 +19,11 @@ import {
   IsOptional,
   IsEnum,
   ValidateNested,
-} from "class-validator";
-import { Type } from "class-transformer";
-import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
-import { User } from "../../user/base/User";
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { EnumTransactionStatus } from './EnumTransactionStatus';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
+import { User } from '../../user/base/User';
 
 @ObjectType()
 class Transaction {
@@ -90,7 +90,7 @@ class Transaction {
   @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  status?: "Successful" | "Pending" | "Failed" | null;
+  status?: 'Successful' | 'Pending' | 'Failed' | null;
 
   @ApiProperty({
     required: true,
@@ -100,7 +100,7 @@ class Transaction {
   @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Credit" | "Debit";
+  transactionType?: 'Credit' | 'Debit';
 
   @ApiProperty({
     required: true,

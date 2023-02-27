@@ -9,8 +9,8 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
+import { InputType, Field } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsInt,
   IsString,
@@ -18,11 +18,11 @@ import {
   IsOptional,
   IsEnum,
   ValidateNested,
-} from "class-validator";
-import { EnumTransactionStatus } from "./EnumTransactionStatus";
-import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { Type } from "class-transformer";
+} from 'class-validator';
+import { EnumTransactionStatus } from './EnumTransactionStatus';
+import { EnumTransactionTransactionType } from './EnumTransactionTransactionType';
+import { UserWhereUniqueInput } from '../../user/base/UserWhereUniqueInput';
+import { Type } from 'class-transformer';
 
 @InputType()
 class TransactionCreateInput {
@@ -73,7 +73,7 @@ class TransactionCreateInput {
   @Field(() => EnumTransactionStatus, {
     nullable: true,
   })
-  status?: "Successful" | "Pending" | "Failed" | null;
+  status?: 'Successful' | 'Pending' | 'Failed' | null;
 
   @ApiProperty({
     required: true,
@@ -81,7 +81,7 @@ class TransactionCreateInput {
   })
   @IsEnum(EnumTransactionTransactionType)
   @Field(() => EnumTransactionTransactionType)
-  transactionType!: "Credit" | "Debit";
+  transactionType!: 'Credit' | 'Debit';
 
   @ApiProperty({
     required: true,

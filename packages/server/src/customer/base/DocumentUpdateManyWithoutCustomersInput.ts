@@ -9,9 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-import { ApiProperty } from "@nestjs/swagger";
+import { InputType, Field } from '@nestjs/graphql';
+import { DocumentWhereUniqueInput } from '../../document/base/DocumentWhereUniqueInput';
+import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
 class DocumentUpdateManyWithoutCustomersInput {

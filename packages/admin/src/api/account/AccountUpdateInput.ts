@@ -1,5 +1,4 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
-import { DocumentWhereUniqueInput } from "../document/DocumentWhereUniqueInput";
 
 export type AccountUpdateInput = {
   accountNumber?: string | null;
@@ -9,7 +8,6 @@ export type AccountUpdateInput = {
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
   customers?: CustomerWhereUniqueInput;
   description?: string | null;
-  document?: DocumentWhereUniqueInput;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
 };

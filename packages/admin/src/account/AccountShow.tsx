@@ -8,7 +8,6 @@ import {
   ReferenceField,
 } from "react-admin";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
-import { DOCUMENT_TITLE_FIELD } from "../document/DocumentTitle";
 
 export const AccountShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -28,13 +27,6 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
           <TextField source={CUSTOMER_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="Description" source="description" />
-        <ReferenceField
-          label="Document"
-          source="document.id"
-          reference="Document"
-        >
-          <TextField source={DOCUMENT_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="Name" source="name" />
         <TextField label="Status" source="status" />

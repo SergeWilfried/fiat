@@ -11,7 +11,6 @@ import {
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
-import { DocumentTitle } from "../document/DocumentTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -53,13 +52,6 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={CustomerTitle} />
         </ReferenceInput>
         <TextInput label="Description" multiline source="description" />
-        <ReferenceInput
-          source="document.id"
-          reference="Document"
-          label="Document"
-        >
-          <SelectInput optionText={DocumentTitle} />
-        </ReferenceInput>
         <TextInput label="Name" source="name" />
         <SelectInput
           source="status"

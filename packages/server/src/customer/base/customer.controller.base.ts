@@ -37,7 +37,7 @@ import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class CustomerControllerBase {
   constructor(
@@ -250,13 +250,6 @@ export class CustomerControllerBase {
         },
 
         description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         status: true,
@@ -471,7 +464,7 @@ export class CustomerControllerBase {
         legalTermVersions: true,
         messages: true,
         password2: true,
-        phoe: true,
+        phone: true,
         privacyPolicy: true,
         roles: true,
         status: true,

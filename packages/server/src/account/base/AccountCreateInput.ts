@@ -22,7 +22,6 @@ import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 
 @InputType()
@@ -101,15 +100,6 @@ class AccountCreateInput {
     nullable: true,
   })
   description?: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: () => DocumentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => DocumentWhereUniqueInput)
-  @Field(() => DocumentWhereUniqueInput)
-  document!: DocumentWhereUniqueInput;
 
   @ApiProperty({
     required: false,

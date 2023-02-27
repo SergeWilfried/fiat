@@ -8,13 +8,13 @@ export type User = {
   createdAt: Date;
   customer?: Array<Customer>;
   email: string;
-  firstName: string | null;
+  firstName: string;
   id: string;
-  lastName: string | null;
+  lastName: string;
   legalTermVersions: string;
   messages: JsonValue;
   password2: string;
-  phoe: string;
+  phone: string;
   privacyPolicy: boolean;
   roles: JsonValue;
   status?: "Approved" | "Pending" | "Rejected" | null;

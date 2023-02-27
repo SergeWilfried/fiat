@@ -9,7 +9,6 @@ export type AccountOrderByInput = {
   currency?: SortOrder;
   customersId?: SortOrder;
   description?: SortOrder;
-  documentId?: SortOrder;
   id?: SortOrder;
   name?: SortOrder;
   status?: SortOrder;

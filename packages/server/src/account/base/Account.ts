@@ -23,7 +23,6 @@ import { EnumAccountAccountType } from "./EnumAccountAccountType";
 import { Type } from "class-transformer";
 import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { Customer } from "../../customer/base/Customer";
-import { Document } from "../../document/base/Document";
 import { EnumAccountStatus } from "./EnumAccountStatus";
 
 @ObjectType()
@@ -109,14 +108,6 @@ class Account {
     nullable: true,
   })
   description!: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: () => Document,
-  })
-  @ValidateNested()
-  @Type(() => Document)
-  document?: Document;
 
   @ApiProperty({
     required: true,

@@ -28,7 +28,7 @@ import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountUpdateInput } from "./AccountUpdateInput";
 import { Account } from "./Account";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AccountControllerBase {
   constructor(
@@ -54,10 +54,6 @@ export class AccountControllerBase {
         customers: {
           connect: data.customers,
         },
-
-        document: {
-          connect: data.document,
-        },
       },
       select: {
         accountNumber: true,
@@ -74,13 +70,6 @@ export class AccountControllerBase {
         },
 
         description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         status: true,
@@ -120,13 +109,6 @@ export class AccountControllerBase {
         },
 
         description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         status: true,
@@ -167,13 +149,6 @@ export class AccountControllerBase {
         },
 
         description: true,
-
-        document: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         status: true,
@@ -213,10 +188,6 @@ export class AccountControllerBase {
           customers: {
             connect: data.customers,
           },
-
-          document: {
-            connect: data.document,
-          },
         },
         select: {
           accountNumber: true,
@@ -233,13 +204,6 @@ export class AccountControllerBase {
           },
 
           description: true,
-
-          document: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           name: true,
           status: true,
@@ -288,13 +252,6 @@ export class AccountControllerBase {
           },
 
           description: true,
-
-          document: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           name: true,
           status: true,

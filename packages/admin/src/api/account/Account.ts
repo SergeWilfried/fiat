@@ -1,5 +1,4 @@
 import { Customer } from "../customer/Customer";
-import { Document } from "../document/Document";
 
 export type Account = {
   accountNumber: string | null;
@@ -10,7 +9,6 @@ export type Account = {
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
   customers?: Customer;
   description: string | null;
-  document?: Document;
   id: string;
   name: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;

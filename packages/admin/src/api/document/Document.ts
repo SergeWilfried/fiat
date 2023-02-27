@@ -9,7 +9,7 @@ export type Document = {
   expiringAt: Date | null;
   id: string;
   image: string;
-  status?: "Approved" | "Rejected" | null;
+  status?: "Approved" | "Rejected" | "Pending" | null;
   tags: string | null;
   updatedAt: Date;
   url: string;

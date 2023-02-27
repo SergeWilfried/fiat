@@ -53,6 +53,7 @@ export const DocumentEdit = (props: EditProps): React.ReactElement => {
           choices={[
             { label: "APPROVED", value: "Approved" },
             { label: "REJECTED", value: "Rejected" },
+            { label: "PENDING", value: "Pending" },
           ]}
           optionText="label"
           allowEmpty

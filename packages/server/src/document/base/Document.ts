@@ -98,7 +98,7 @@ class Document {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Rejected" | null;
+  status?: "Approved" | "Rejected" | "Pending" | null;
 
   @ApiProperty({
     required: false,

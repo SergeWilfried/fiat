@@ -14,6 +14,7 @@ import { registerEnumType } from "@nestjs/graphql";
 export enum EnumDocumentStatus {
   Approved = "Approved",
   Rejected = "Rejected",
+  Pending = "Pending",
 }
 
 registerEnumType(EnumDocumentStatus, {

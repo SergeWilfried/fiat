@@ -156,6 +156,18 @@ enum EnumDocumentDocumentType {
 enum EnumDocumentStatus {
   Approved
   Rejected
+  Pending
+}
+
+enum EnumBankCountry {
+  BurkinaFaso
+  CoteDivoire
+  Mali
+  Togo
+  Benin
+  Senegal
+  Niger
+  Cameroon
 }
 
 enum EnumBankCountry {

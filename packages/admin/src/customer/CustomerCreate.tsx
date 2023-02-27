@@ -6,14 +6,12 @@ import {
   CreateProps,
   ReferenceArrayInput,
   SelectArrayInput,
-  ReferenceInput,
-  SelectInput,
   DateInput,
   TextInput,
+  SelectInput,
 } from "react-admin";
 
 import { AccountTitle } from "../account/AccountTitle";
-import { AddressTitle } from "../address/AddressTitle";
 import { DocumentTitle } from "../document/DocumentTitle";
 import { UserTitle } from "../user/UserTitle";
 
@@ -29,9 +27,6 @@ export const CustomerCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={AccountTitle} />
         </ReferenceArrayInput>
-        <ReferenceInput source="address.id" reference="Address" label="Address">
-          <SelectInput optionText={AddressTitle} />
-        </ReferenceInput>
         <DateInput label="Birthday" source="dob" />
         <ReferenceArrayInput
           source="documents"

@@ -31,7 +31,6 @@ import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
 import { Document } from "../../document/base/Document";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
-import { Address } from "../../address/base/Address";
 import { CustomerService } from "../customer.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Customer)
@@ -102,15 +101,7 @@ export class CustomerResolverBase {
   ): Promise<Customer> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        address: args.data.address
-          ? {
-              connect: args.data.address,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -127,15 +118,7 @@ export class CustomerResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          address: args.data.address
-            ? {
-                connect: args.data.address,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -226,21 +209,5 @@ export class CustomerResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Address, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "any",
-  })
-  async address(@graphql.Parent() parent: Customer): Promise<Address | null> {
-    const result = await this.service.getAddress(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

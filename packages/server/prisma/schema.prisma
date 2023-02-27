@@ -44,19 +44,6 @@ model Transaction {
   userId          String
 }
 
-model Address {
-  address_1 String?
-  address_2 String?
-  city      String?
-  country   String
-  createdAt DateTime   @default(now())
-  customers Customer[]
-  id        String     @id @default(cuid())
-  state     String?
-  updatedAt DateTime   @updatedAt
-  zip       Int?
-}
-
 model Account {
   accountNumber    String?
   accountType      EnumAccountAccountType?
@@ -101,8 +88,6 @@ model Bank {
 
 model Customer {
   Account   Account[]
-  address   Address?            @relation(fields: [addressId], references: [id])
-  addressId String?
   createdAt DateTime            @default(now())
   dob       DateTime?
   documents Document[]

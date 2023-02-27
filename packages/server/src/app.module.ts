@@ -3,7 +3,6 @@ import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
 import { TransactionModule } from "./transaction/transaction.module";
-import { AddressModule } from "./address/address.module";
 import { AccountModule } from "./account/account.module";
 import { DocumentModule } from "./document/document.module";
 import { BankModule } from "./bank/bank.module";
@@ -27,7 +26,6 @@ import { AuthModule } from "./auth/auth.module";
     AuthModule,
     UserModule,
     TransactionModule,
-    AddressModule,
     AccountModule,
     DocumentModule,
     BankModule,

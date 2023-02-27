@@ -47,6 +47,7 @@ model Transaction {
 }
 
 model Account {
+
   accountNumber String
   accountType   EnumAccountAccountType?
   createdAt     DateTime                @default(now())

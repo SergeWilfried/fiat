@@ -170,6 +170,17 @@ enum EnumBankCountry {
   Cameroon
 }
 
+enum EnumBankCountry {
+  BurkinaFaso
+  CoteDivoire
+  Mali
+  Togo
+  Benin
+  Senegal
+  Niger
+  Cameroon
+}
+
 enum EnumBankInstutionType {
   MobileMoney
   Bank

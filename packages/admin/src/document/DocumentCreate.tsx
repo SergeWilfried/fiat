@@ -53,6 +53,7 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           choices={[
             { label: "APPROVED", value: "Approved" },
             { label: "REJECTED", value: "Rejected" },
+            { label: "PENDING", value: "Pending" },
           ]}
           optionText="label"
           allowEmpty

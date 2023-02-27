@@ -11,7 +11,8 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate, IsEnum } from "class-validator";
+import { EnumBankCountry } from "./EnumBankCountry";
+import { IsEnum, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumBankInstutionType } from "./EnumBankInstutionType";
 
@@ -19,14 +20,23 @@ import { EnumBankInstutionType } from "./EnumBankInstutionType";
 class Bank {
   @ApiProperty({
     required: false,
-    type: String,
+    enum: EnumBankCountry,
   })
-  @IsString()
+  @IsEnum(EnumBankCountry)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => EnumBankCountry, {
     nullable: true,
   })
-  country!: string | null;
+  country?:
+    | "BurkinaFaso"
+    | "CoteDivoire"
+    | "Mali"
+    | "Togo"
+    | "Benin"
+    | "Senegal"
+    | "Niger"
+    | "Cameroon"
+    | null;
 
   @ApiProperty({
     required: true,

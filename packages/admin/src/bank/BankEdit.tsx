@@ -3,15 +3,31 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  TextInput,
   SelectInput,
+  TextInput,
 } from "react-admin";
 
 export const BankEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <TextInput label="Country" source="country" />
+        <SelectInput
+          source="country"
+          label="Country"
+          choices={[
+            { label: "Burkina Faso", value: "BurkinaFaso" },
+            { label: "Cote Divoire", value: "CoteDivoire" },
+            { label: "Mali", value: "Mali" },
+            { label: "Togo", value: "Togo" },
+            { label: "Benin", value: "Benin" },
+            { label: "Senegal", value: "Senegal" },
+            { label: "Niger", value: "Niger" },
+            { label: "Cameroon", value: "Cameroon" },
+          ]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
         <TextInput label="Currency" source="currency" />
         <TextInput label="InstitutionName" source="institutionName" />
         <SelectInput

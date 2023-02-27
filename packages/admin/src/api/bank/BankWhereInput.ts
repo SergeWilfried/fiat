@@ -1,8 +1,15 @@
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 
 export type BankWhereInput = {
-  country?: StringNullableFilter;
+  country?:
+    | "BurkinaFaso"
+    | "CoteDivoire"
+    | "Mali"
+    | "Togo"
+    | "Benin"
+    | "Senegal"
+    | "Niger"
+    | "Cameroon";
   currency?: StringFilter;
   id?: StringFilter;
   institutionName?: StringFilter;

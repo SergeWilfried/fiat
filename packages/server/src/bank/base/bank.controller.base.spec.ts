@@ -19,7 +19,6 @@ import { BankService } from "../bank.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  country: "exampleCountry",
   createdAt: new Date(),
   currency: "exampleCurrency",
   id: "exampleId",
@@ -27,7 +26,6 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  country: "exampleCountry",
   createdAt: new Date(),
   currency: "exampleCurrency",
   id: "exampleId",
@@ -36,7 +34,6 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
-    country: "exampleCountry",
     createdAt: new Date(),
     currency: "exampleCurrency",
     id: "exampleId",
@@ -45,7 +42,6 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
-  country: "exampleCountry",
   createdAt: new Date(),
   currency: "exampleCurrency",
   id: "exampleId",

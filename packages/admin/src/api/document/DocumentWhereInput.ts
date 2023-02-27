@@ -11,7 +11,7 @@ export type DocumentWhereInput = {
   expiringAt?: DateTimeNullableFilter;
   id?: StringFilter;
   image?: StringFilter;
-  status?: "Approved" | "Rejected";
+  status?: "Approved" | "Rejected" | "Pending";
   tags?: StringNullableFilter;
   url?: StringFilter;
 };

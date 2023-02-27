@@ -11,12 +11,17 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { registerEnumType } from "@nestjs/graphql";
 
-export enum EnumDocumentStatus {
-  Approved = "Approved",
-  Rejected = "Rejected",
-  Pending = "Pending",
+export enum EnumBankCountry {
+  BurkinaFaso = "BurkinaFaso",
+  CoteDivoire = "CoteDivoire",
+  Mali = "Mali",
+  Togo = "Togo",
+  Benin = "Benin",
+  Senegal = "Senegal",
+  Niger = "Niger",
+  Cameroon = "Cameroon",
 }
 
-registerEnumType(EnumDocumentStatus, {
-  name: "EnumDocumentStatus",
+registerEnumType(EnumBankCountry, {
+  name: "EnumBankCountry",
 });

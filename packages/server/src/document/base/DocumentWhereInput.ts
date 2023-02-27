@@ -100,7 +100,7 @@ class DocumentWhereInput {
   @Field(() => EnumDocumentStatus, {
     nullable: true,
   })
-  status?: "Approved" | "Rejected";
+  status?: "Approved" | "Rejected" | "Pending";
 
   @ApiProperty({
     required: false,

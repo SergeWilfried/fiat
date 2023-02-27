@@ -4,6 +4,8 @@ import { TransactionUpdateManyWithoutUsersInput } from "./TransactionUpdateManyW
 
 export type UserUpdateInput = {
   address?: InputJsonValue;
+  availableBalance?: number | null;
+  balance?: number;
   businessName?: string | null;
   customer?: CustomerUpdateManyWithoutUsersInput;
   email?: string;

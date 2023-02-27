@@ -4,6 +4,8 @@ import { TransactionCreateNestedManyWithoutUsersInput } from "./TransactionCreat
 
 export type UserCreateInput = {
   address: InputJsonValue;
+  availableBalance?: number | null;
+  balance: number;
   businessName?: string | null;
   customer?: CustomerCreateNestedManyWithoutUsersInput;
   email: string;

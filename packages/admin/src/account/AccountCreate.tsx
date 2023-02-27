@@ -1,15 +1,12 @@
 import * as React from "react";
-
 import {
   Create,
   SimpleForm,
   CreateProps,
   TextInput,
   SelectInput,
-  NumberInput,
   ReferenceInput,
 } from "react-admin";
-
 import { CustomerTitle } from "../customer/CustomerTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
@@ -29,8 +26,6 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <NumberInput label="Available balance" source="availableBalance" />
-        <NumberInput label="Balance" source="balance" />
         <SelectInput
           source="currency"
           label="Currency"

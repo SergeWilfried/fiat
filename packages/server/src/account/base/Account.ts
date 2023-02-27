@@ -13,9 +13,8 @@ import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
-  IsOptional,
   IsEnum,
-  IsNumber,
+  IsOptional,
   IsDate,
   ValidateNested,
 } from "class-validator";
@@ -28,15 +27,12 @@ import { EnumAccountStatus } from "./EnumAccountStatus";
 @ObjectType()
 class Account {
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  accountNumber!: string | null;
+  @Field(() => String)
+  accountNumber!: string;
 
   @ApiProperty({
     required: false,
@@ -48,28 +44,6 @@ class Account {
     nullable: true,
   })
   accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  availableBalance!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  balance!: number | null;
 
   @ApiProperty({
     required: true,

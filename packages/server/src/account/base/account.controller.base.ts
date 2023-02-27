@@ -58,8 +58,6 @@ export class AccountControllerBase {
       select: {
         accountNumber: true,
         accountType: true,
-        availableBalance: true,
-        balance: true,
         createdAt: true,
         currency: true,
 
@@ -97,8 +95,6 @@ export class AccountControllerBase {
       select: {
         accountNumber: true,
         accountType: true,
-        availableBalance: true,
-        balance: true,
         createdAt: true,
         currency: true,
 
@@ -137,8 +133,6 @@ export class AccountControllerBase {
       select: {
         accountNumber: true,
         accountType: true,
-        availableBalance: true,
-        balance: true,
         createdAt: true,
         currency: true,
 
@@ -192,8 +186,6 @@ export class AccountControllerBase {
         select: {
           accountNumber: true,
           accountType: true,
-          availableBalance: true,
-          balance: true,
           createdAt: true,
           currency: true,
 
@@ -240,8 +232,6 @@ export class AccountControllerBase {
         select: {
           accountNumber: true,
           accountType: true,
-          availableBalance: true,
-          balance: true,
           createdAt: true,
           currency: true,
 

@@ -238,8 +238,6 @@ export class CustomerControllerBase {
       select: {
         accountNumber: true,
         accountType: true,
-        availableBalance: true,
-        balance: true,
         createdAt: true,
         currency: true,
 
@@ -455,6 +453,8 @@ export class CustomerControllerBase {
       ...query,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,

@@ -1,15 +1,12 @@
 import * as React from "react";
-
 import {
   Edit,
   SimpleForm,
   EditProps,
   TextInput,
   SelectInput,
-  NumberInput,
   ReferenceInput,
 } from "react-admin";
-
 import { CustomerTitle } from "../customer/CustomerTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
@@ -29,8 +26,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <NumberInput label="Available balance" source="availableBalance" />
-        <NumberInput label="Balance" source="balance" />
         <SelectInput
           source="currency"
           label="Currency"

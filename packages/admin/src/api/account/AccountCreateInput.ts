@@ -1,10 +1,8 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 
 export type AccountCreateInput = {
-  accountNumber?: string | null;
+  accountNumber: string;
   accountType?: "MobileMoney" | "Iban" | "Wallet" | null;
-  availableBalance?: number | null;
-  balance?: number | null;
   currency?: "Xof" | "Eur" | "Usd" | "Celo" | null;
   customers: CustomerWhereUniqueInput;
   description?: string | null;

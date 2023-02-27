@@ -15,8 +15,6 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <TextField label="AccountNumber" source="accountNumber" />
         <TextField label="AccountType" source="accountType" />
-        <TextField label="Available balance" source="availableBalance" />
-        <TextField label="Balance" source="balance" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="Currency" source="currency" />
         <ReferenceField

@@ -57,6 +57,8 @@ export class UserControllerBase {
       data: data,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -95,6 +97,8 @@ export class UserControllerBase {
       ...args,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -134,6 +138,8 @@ export class UserControllerBase {
       where: params,
       select: {
         address: true,
+        availableBalance: true,
+        balance: true,
         businessName: true,
         createdAt: true,
         email: true,
@@ -182,6 +188,8 @@ export class UserControllerBase {
         data: data,
         select: {
           address: true,
+          availableBalance: true,
+          balance: true,
           businessName: true,
           createdAt: true,
           email: true,
@@ -229,6 +237,8 @@ export class UserControllerBase {
         where: params,
         select: {
           address: true,
+          availableBalance: true,
+          balance: true,
           businessName: true,
           createdAt: true,
           email: true,

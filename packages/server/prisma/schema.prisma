@@ -9,6 +9,8 @@ generator client {
 
 model User {
   address            Json
+  availableBalance   Float?
+  balance            Float
   businessName       String?         @unique
   createdAt          DateTime        @default(now())
   customer           Customer[]
@@ -45,19 +47,18 @@ model Transaction {
 }
 
 model Account {
-  accountNumber    String?
-  accountType      EnumAccountAccountType?
-  availableBalance Float?
-  balance          Float?
-  createdAt        DateTime                @default(now())
-  currency         EnumAccountCurrency?
-  customers        Customer                @relation(fields: [customersId], references: [id])
-  customersId      String
-  description      String?
-  id               String                  @id @default(cuid())
-  name             String?
-  status           EnumAccountStatus?
-  updatedAt        DateTime                @updatedAt
+
+  accountNumber String
+  accountType   EnumAccountAccountType?
+  createdAt     DateTime                @default(now())
+  currency      EnumAccountCurrency?
+  customers     Customer                @relation(fields: [customersId], references: [id])
+  customersId   String
+  description   String?
+  id            String                  @id @default(cuid())
+  name          String?
+  status        EnumAccountStatus?
+  updatedAt     DateTime                @updatedAt
 }
 
 model Document {

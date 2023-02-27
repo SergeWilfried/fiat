@@ -11,21 +11,31 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsEnum } from "class-validator";
+import { EnumBankCountry } from "./EnumBankCountry";
+import { IsEnum, IsOptional, IsString } from "class-validator";
 import { EnumBankInstutionType } from "./EnumBankInstutionType";
 
 @InputType()
 class BankUpdateInput {
   @ApiProperty({
     required: false,
-    type: String,
+    enum: EnumBankCountry,
   })
-  @IsString()
+  @IsEnum(EnumBankCountry)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => EnumBankCountry, {
     nullable: true,
   })
-  country?: string | null;
+  country?:
+    | "BurkinaFaso"
+    | "CoteDivoire"
+    | "Mali"
+    | "Togo"
+    | "Benin"
+    | "Senegal"
+    | "Niger"
+    | "Cameroon"
+    | null;
 
   @ApiProperty({
     required: false,

@@ -78,6 +78,7 @@ model Document {
 }
 
 model Bank {
+  country         String?
   createdAt       DateTime               @default(now())
   currency        String
   id              String                 @id @default(cuid())

@@ -25,6 +25,15 @@ class BankOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  country?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({

@@ -1,4 +1,5 @@
 export type Bank = {
+  country: string | null;
   createdAt: Date;
   currency: string;
   id: string;

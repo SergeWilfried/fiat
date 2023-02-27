@@ -29,6 +29,10 @@ import { CustomerList } from "./customer/CustomerList";
 import { CustomerCreate } from "./customer/CustomerCreate";
 import { CustomerEdit } from "./customer/CustomerEdit";
 import { CustomerShow } from "./customer/CustomerShow";
+import { QuoteList } from "./quote/QuoteList";
+import { QuoteCreate } from "./quote/QuoteCreate";
+import { QuoteEdit } from "./quote/QuoteEdit";
+import { QuoteShow } from "./quote/QuoteShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -96,6 +100,13 @@ const App = (): React.ReactElement => {
           edit={CustomerEdit}
           create={CustomerCreate}
           show={CustomerShow}
+        />
+        <Resource
+          name="Quote"
+          list={QuoteList}
+          edit={QuoteEdit}
+          create={QuoteCreate}
+          show={QuoteShow}
         />
       </Admin>
     </div>

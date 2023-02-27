@@ -7,6 +7,7 @@ import { AccountModule } from "./account/account.module";
 import { DocumentModule } from "./document/document.module";
 import { BankModule } from "./bank/bank.module";
 import { CustomerModule } from "./customer/customer.module";
+import { QuoteModule } from "./quote/quote.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -30,6 +31,7 @@ import { AuthModule } from "./auth/auth.module";
     DocumentModule,
     BankModule,
     CustomerModule,
+    QuoteModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

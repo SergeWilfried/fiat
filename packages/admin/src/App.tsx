@@ -13,10 +13,6 @@ import { TransactionList } from "./transaction/TransactionList";
 import { TransactionCreate } from "./transaction/TransactionCreate";
 import { TransactionEdit } from "./transaction/TransactionEdit";
 import { TransactionShow } from "./transaction/TransactionShow";
-import { AddressList } from "./address/AddressList";
-import { AddressCreate } from "./address/AddressCreate";
-import { AddressEdit } from "./address/AddressEdit";
-import { AddressShow } from "./address/AddressShow";
 import { AccountList } from "./account/AccountList";
 import { AccountCreate } from "./account/AccountCreate";
 import { AccountEdit } from "./account/AccountEdit";
@@ -72,13 +68,6 @@ const App = (): React.ReactElement => {
           edit={TransactionEdit}
           create={TransactionCreate}
           show={TransactionShow}
-        />
-        <Resource
-          name="Address"
-          list={AddressList}
-          edit={AddressEdit}
-          create={AddressCreate}
-          show={AddressShow}
         />
         <Resource
           name="Account"

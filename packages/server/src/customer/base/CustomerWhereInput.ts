@@ -15,7 +15,6 @@ import { AccountListRelationFilter } from "../../account/base/AccountListRelatio
 import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { Account } from "../../account/base/Account";
-import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { DocumentListRelationFilter } from "../../document/base/DocumentListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
@@ -36,18 +35,6 @@ class CustomerWhereInput {
     nullable: true,
   })
   Account?: AccountListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => AddressWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => AddressWhereUniqueInput)
-  @IsOptional()
-  @Field(() => AddressWhereUniqueInput, {
-    nullable: true,
-  })
-  address?: AddressWhereUniqueInput;
 
   @ApiProperty({
     required: false,

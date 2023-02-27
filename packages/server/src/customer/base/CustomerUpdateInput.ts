@@ -21,7 +21,6 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Account } from "../../account/base/Account";
-import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
 import { DocumentUpdateManyWithoutCustomersInput } from "./DocumentUpdateManyWithoutCustomersInput";
 import { UserUpdateManyWithoutCustomersInput } from "./UserUpdateManyWithoutCustomersInput";
 import { EnumCustomerStatus } from "./EnumCustomerStatus";
@@ -39,18 +38,6 @@ class CustomerUpdateInput {
     nullable: true,
   })
   Account?: AccountUpdateManyWithoutCustomersInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => AddressWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => AddressWhereUniqueInput)
-  @IsOptional()
-  @Field(() => AddressWhereUniqueInput, {
-    nullable: true,
-  })
-  address?: AddressWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

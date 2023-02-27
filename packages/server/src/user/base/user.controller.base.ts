@@ -273,12 +273,6 @@ export class UserControllerBase {
     const results = await this.service.findCustomer(params.id, {
       ...query,
       select: {
-        address: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         dob: true,
         email: true,

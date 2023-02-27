@@ -20,7 +20,6 @@ import {
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Address } from "../../address/base/Address";
 import { Document } from "../../document/base/Document";
 import { User } from "../../user/base/User";
 import { EnumCustomerStatus } from "./EnumCustomerStatus";
@@ -35,15 +34,6 @@ class Customer {
   @Type(() => Account)
   @IsOptional()
   Account?: Array<Account>;
-
-  @ApiProperty({
-    required: false,
-    type: () => Address,
-  })
-  @ValidateNested()
-  @Type(() => Address)
-  @IsOptional()
-  address?: Address | null;
 
   @ApiProperty({
     required: true,

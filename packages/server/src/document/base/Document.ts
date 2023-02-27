@@ -11,11 +11,10 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "../../account/base/Account";
 import {
+  IsDate,
   ValidateNested,
   IsOptional,
-  IsDate,
   IsEnum,
   IsString,
 } from "class-validator";
@@ -26,15 +25,6 @@ import { EnumDocumentStatus } from "./EnumDocumentStatus";
 
 @ObjectType()
 class Document {
-  @ApiProperty({
-    required: false,
-    type: () => [Account],
-  })
-  @ValidateNested()
-  @Type(() => Account)
-  @IsOptional()
-  accounts?: Array<Account>;
-
   @ApiProperty({
     required: true,
   })

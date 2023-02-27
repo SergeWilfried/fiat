@@ -19,6 +19,8 @@ import { UserService } from "../user.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  availableBalance: 42.42,
+  balance: 42.42,
   businessName: "exampleBusinessName",
   createdAt: new Date(),
   email: "exampleEmail",
@@ -28,13 +30,15 @@ const CREATE_INPUT = {
   legalTermVersions: "exampleLegalTermVersions",
   password: "examplePassword",
   password2: "examplePassword2",
-  phoe: "examplePhoe",
+  phone: "examplePhone",
   privacyPolicy: "true",
   termsAndConditions: "true",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const CREATE_RESULT = {
+  availableBalance: 42.42,
+  balance: 42.42,
   businessName: "exampleBusinessName",
   createdAt: new Date(),
   email: "exampleEmail",
@@ -44,7 +48,7 @@ const CREATE_RESULT = {
   legalTermVersions: "exampleLegalTermVersions",
   password: "examplePassword",
   password2: "examplePassword2",
-  phoe: "examplePhoe",
+  phone: "examplePhone",
   privacyPolicy: "true",
   termsAndConditions: "true",
   updatedAt: new Date(),
@@ -52,6 +56,8 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
+    availableBalance: 42.42,
+    balance: 42.42,
     businessName: "exampleBusinessName",
     createdAt: new Date(),
     email: "exampleEmail",
@@ -61,7 +67,7 @@ const FIND_MANY_RESULT = [
     legalTermVersions: "exampleLegalTermVersions",
     password: "examplePassword",
     password2: "examplePassword2",
-    phoe: "examplePhoe",
+    phone: "examplePhone",
     privacyPolicy: "true",
     termsAndConditions: "true",
     updatedAt: new Date(),
@@ -69,6 +75,8 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
+  availableBalance: 42.42,
+  balance: 42.42,
   businessName: "exampleBusinessName",
   createdAt: new Date(),
   email: "exampleEmail",
@@ -78,7 +86,7 @@ const FIND_ONE_RESULT = {
   legalTermVersions: "exampleLegalTermVersions",
   password: "examplePassword",
   password2: "examplePassword2",
-  phoe: "examplePhoe",
+  phone: "examplePhone",
   privacyPolicy: "true",
   termsAndConditions: "true",
   updatedAt: new Date(),

@@ -34,10 +34,13 @@ async function seed(bcryptSalt: Salt) {
       foo: "bar",
     },
 
+    balance: 0,
     email: "example@example.com",
+    firstName: "",
+    lastName: "",
     legalTermVersions: "",
     password2: "",
-    phoe: "",
+    phone: "",
     privacyPolicy: false,
     termsAndConditions: false,
   };

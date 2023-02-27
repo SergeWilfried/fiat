@@ -28,7 +28,7 @@ import { QuoteFindManyArgs } from "./QuoteFindManyArgs";
 import { QuoteUpdateInput } from "./QuoteUpdateInput";
 import { Quote } from "./Quote";
 
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class QuoteControllerBase {
   constructor(

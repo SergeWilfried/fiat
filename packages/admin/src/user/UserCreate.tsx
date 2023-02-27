@@ -4,6 +4,7 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  NumberInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -21,6 +22,8 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <div />
+        <NumberInput label="Available balance" source="availableBalance" />
+        <NumberInput label="Balance" source="balance" />
         <TextInput label="Business Name" source="businessName" />
         <ReferenceArrayInput
           source="customer"
@@ -31,13 +34,13 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={CustomerTitle} />
         </ReferenceArrayInput>
         <TextInput label="Email" source="email" type="email" />
-        <TextInput label="First Name" source="firstName" />
-        <TextInput label="Last Name" source="lastName" />
+        <TextInput label="FirstName" source="firstName" />
+        <TextInput label="LastName" source="lastName" />
         <TextInput label="Legal Term Versions" source="legalTermVersions" />
         <div />
         <PasswordInput label="Password" source="password" />
         <TextInput label="Password2" source="password2" />
-        <TextInput label="Phone" source="phoe" />
+        <TextInput label="Phone" source="phone" />
         <BooleanInput label="Privacy Policy" source="privacyPolicy" />
         <SelectArrayInput
           source="roles"

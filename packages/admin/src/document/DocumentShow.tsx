@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Show,
   SimpleShowLayout,
@@ -7,12 +6,8 @@ import {
   DateField,
   ReferenceField,
   TextField,
-  ReferenceManyField,
-  Datagrid,
 } from "react-admin";
-
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
-import { DOCUMENT_TITLE_FIELD } from "./DocumentTitle";
 
 export const DocumentShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -34,39 +29,6 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
         <TextField label="Tags" source="tags" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="URL" source="url" />
-        <ReferenceManyField
-          reference="Account"
-          target="DocumentId"
-          label="Accounts"
-        >
-          <Datagrid rowClick="show">
-            <TextField label="AccountNumber" source="accountNumber" />
-            <TextField label="AccountType" source="accountType" />
-            <TextField label="Available balance" source="availableBalance" />
-            <TextField label="Balance" source="balance" />
-            <DateField source="createdAt" label="Created At" />
-            <TextField label="Currency" source="currency" />
-            <ReferenceField
-              label="Customers"
-              source="customer.id"
-              reference="Customer"
-            >
-              <TextField source={CUSTOMER_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="Description" source="description" />
-            <ReferenceField
-              label="Document"
-              source="document.id"
-              reference="Document"
-            >
-              <TextField source={DOCUMENT_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="ID" source="id" />
-            <TextField label="Name" source="name" />
-            <TextField label="Status" source="status" />
-            <DateField source="updatedAt" label="Updated At" />
-          </Datagrid>
-        </ReferenceManyField>
       </SimpleShowLayout>
     </Show>
   );

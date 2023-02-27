@@ -124,7 +124,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  phoe?: SortOrder;
+  phone?: SortOrder;
 
   @ApiProperty({
     required: false,

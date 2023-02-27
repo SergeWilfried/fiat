@@ -13,14 +13,14 @@ model User {
   createdAt          DateTime        @default(now())
   customer           Customer[]
   email              String          @unique
-  firstName          String?
+  firstName          String
   id                 String          @id @default(cuid())
-  lastName           String?
+  lastName           String
   legalTermVersions  String
   messages           Json?
   password           String
   password2          String
-  phoe               String
+  phone              String          @unique
   privacyPolicy      Boolean
   roles              Json
   status             EnumUserStatus?
@@ -157,17 +157,6 @@ enum EnumDocumentStatus {
   Approved
   Rejected
   Pending
-}
-
-enum EnumBankCountry {
-  BurkinaFaso
-  CoteDivoire
-  Mali
-  Togo
-  Benin
-  Senegal
-  Niger
-  Cameroon
 }
 
 enum EnumBankCountry {

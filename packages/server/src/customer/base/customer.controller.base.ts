@@ -471,7 +471,7 @@ export class CustomerControllerBase {
         legalTermVersions: true,
         messages: true,
         password2: true,
-        phoe: true,
+        phone: true,
         privacyPolicy: true,
         roles: true,
         status: true,

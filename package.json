@@ -13,7 +13,7 @@
     "start-server": "cd packages/server && node dist/main"
   },
   "dependencies": {
-    "react-scripts": "3.4.1"
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "8.2.5",

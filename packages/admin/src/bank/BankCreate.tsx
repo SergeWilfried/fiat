@@ -11,6 +11,7 @@ export const BankCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="Country" source="country" />
         <TextInput label="Currency" source="currency" />
         <TextInput label="InstitutionName" source="institutionName" />
         <SelectInput

@@ -50,6 +50,7 @@ export class BankControllerBase {
     return await this.service.create({
       data: data,
       select: {
+        country: true,
         createdAt: true,
         currency: true,
         id: true,
@@ -77,6 +78,7 @@ export class BankControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        country: true,
         createdAt: true,
         currency: true,
         id: true,
@@ -105,6 +107,7 @@ export class BankControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        country: true,
         createdAt: true,
         currency: true,
         id: true,
@@ -142,6 +145,7 @@ export class BankControllerBase {
         where: params,
         data: data,
         select: {
+          country: true,
           createdAt: true,
           currency: true,
           id: true,
@@ -178,6 +182,7 @@ export class BankControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          country: true,
           createdAt: true,
           currency: true,
           id: true,

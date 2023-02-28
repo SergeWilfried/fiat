@@ -25,7 +25,6 @@ import { InputJsonValue } from "../../types";
 import { CustomerCreateNestedManyWithoutUsersInput } from "./CustomerCreateNestedManyWithoutUsersInput";
 import { Type } from "class-transformer";
 import { EnumUserStatus } from "./EnumUserStatus";
-import { TransactionCreateNestedManyWithoutUsersInput } from "./TransactionCreateNestedManyWithoutUsersInput";
 
 @InputType()
 class UserCreateInput {
@@ -134,14 +133,6 @@ class UserCreateInput {
   })
   @IsString()
   @Field(() => String)
-  password2!: string;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
   phone!: string;
 
   @ApiProperty({
@@ -177,18 +168,6 @@ class UserCreateInput {
   @IsBoolean()
   @Field(() => Boolean)
   termsAndConditions!: boolean;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionCreateNestedManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionCreateNestedManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => TransactionCreateNestedManyWithoutUsersInput, {
-    nullable: true,
-  })
-  transactions?: TransactionCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

@@ -11,21 +11,33 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import {
-  IsInt,
+  ValidateNested,
   IsOptional,
+  IsInt,
   IsString,
   IsNumber,
   IsEnum,
-  ValidateNested,
 } from "class-validator";
+import { Type } from "class-transformer";
 import { EnumTransactionStatus } from "./EnumTransactionStatus";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { Type } from "class-transformer";
 
 @InputType()
 class TransactionUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  account?: AccountWhereUniqueInput | null;
+
   @ApiProperty({
     required: false,
     type: Number,
@@ -91,18 +103,6 @@ class TransactionUpdateInput {
     nullable: true,
   })
   transactionType?: "Credit" | "Debit";
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput;
 }
 
 export { TransactionUpdateInput as TransactionUpdateInput };

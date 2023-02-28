@@ -27,8 +27,6 @@ import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
 import { UserService } from "../user.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => User)
@@ -151,26 +149,6 @@ export class UserResolverBase {
     @graphql.Args() args: CustomerFindManyArgs
   ): Promise<Customer[]> {
     const results = await this.service.findCustomer(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Transaction])
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "any",
-  })
-  async transactions(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: TransactionFindManyArgs
-  ): Promise<Transaction[]> {
-    const results = await this.service.findTransactions(parent.id, args);
 
     if (!results) {
       return [];

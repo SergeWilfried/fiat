@@ -1,4 +1,5 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
+import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
   accountNumber: string;
@@ -8,4 +9,5 @@ export type AccountCreateInput = {
   description?: string | null;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
+  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 };

@@ -17,6 +17,7 @@ import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 import { EnumAccountStatus } from "./EnumAccountStatus";
+import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
 class AccountUpdateInput {
@@ -97,6 +98,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionUpdateManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionUpdateManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => TransactionUpdateManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  transactions?: TransactionUpdateManyWithoutAccountsInput;
 }
 
 export { AccountUpdateInput as AccountUpdateInput };

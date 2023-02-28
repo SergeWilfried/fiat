@@ -463,7 +463,6 @@ export class CustomerControllerBase {
         lastName: true,
         legalTermVersions: true,
         messages: true,
-        password2: true,
         phone: true,
         privacyPolicy: true,
         roles: true,

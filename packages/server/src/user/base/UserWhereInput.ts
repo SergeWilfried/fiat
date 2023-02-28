@@ -20,7 +20,6 @@ import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { BooleanFilter } from "../../util/BooleanFilter";
 import { EnumUserStatus } from "./EnumUserStatus";
-import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class UserWhereInput {
@@ -145,18 +144,6 @@ class UserWhereInput {
     nullable: true,
   })
   termsAndConditions?: BooleanFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => TransactionListRelationFilter)
-  @IsOptional()
-  @Field(() => TransactionListRelationFilter, {
-    nullable: true,
-  })
-  transactions?: TransactionListRelationFilter;
 
   @ApiProperty({
     required: false,

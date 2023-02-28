@@ -25,6 +25,15 @@ class TransactionOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  accountId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   amount?: SortOrder;
 
   @ApiProperty({
@@ -98,15 +107,6 @@ class TransactionOrderByInput {
     nullable: true,
   })
   updatedAt?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  userId?: SortOrder;
 }
 
 export { TransactionOrderByInput as TransactionOrderByInput };

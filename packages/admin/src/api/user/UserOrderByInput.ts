@@ -13,7 +13,6 @@ export type UserOrderByInput = {
   legalTermVersions?: SortOrder;
   messages?: SortOrder;
   password?: SortOrder;
-  password2?: SortOrder;
   phone?: SortOrder;
   privacyPolicy?: SortOrder;
   roles?: SortOrder;

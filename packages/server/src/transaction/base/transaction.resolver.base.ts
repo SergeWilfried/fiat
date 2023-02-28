@@ -25,7 +25,7 @@ import { DeleteTransactionArgs } from "./DeleteTransactionArgs";
 import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { Transaction } from "./Transaction";
-import { User } from "../../user/base/User";
+import { Account } from "../../account/base/Account";
 import { TransactionService } from "../transaction.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Transaction)
@@ -99,9 +99,11 @@ export class TransactionResolverBase {
       data: {
         ...args.data,
 
-        user: {
-          connect: args.data.user,
-        },
+        account: args.data.account
+          ? {
+              connect: args.data.account,
+            }
+          : undefined,
       },
     });
   }
@@ -122,9 +124,11 @@ export class TransactionResolverBase {
         data: {
           ...args.data,
 
-          user: {
-            connect: args.data.user,
-          },
+          account: args.data.account
+            ? {
+                connect: args.data.account,
+              }
+            : undefined,
         },
       });
     } catch (error) {
@@ -159,14 +163,16 @@ export class TransactionResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => User, { nullable: true })
+  @graphql.ResolveField(() => Account, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Account",
     action: "read",
     possession: "any",
   })
-  async user(@graphql.Parent() parent: Transaction): Promise<User | null> {
-    const result = await this.service.getUser(parent.id);
+  async account(
+    @graphql.Parent() parent: Transaction
+  ): Promise<Account | null> {
+    const result = await this.service.getAccount(parent.id);
 
     if (!result) {
       return null;

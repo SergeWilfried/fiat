@@ -4,7 +4,6 @@ import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilt
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { BooleanFilter } from "../../util/BooleanFilter";
-import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type UserWhereInput = {
   availableBalance?: FloatNullableFilter;
@@ -18,6 +17,5 @@ export type UserWhereInput = {
   privacyPolicy?: BooleanFilter;
   status?: "Approved" | "Pending" | "Rejected";
   termsAndConditions?: BooleanFilter;
-  transactions?: TransactionListRelationFilter;
   username?: StringFilter;
 };

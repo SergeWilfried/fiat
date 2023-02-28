@@ -1,4 +1,5 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
+import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 export type AccountUpdateInput = {
   accountNumber?: string;
@@ -8,4 +9,5 @@ export type AccountUpdateInput = {
   description?: string | null;
   name?: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
+  transactions?: TransactionUpdateManyWithoutAccountsInput;
 };

@@ -1,5 +1,5 @@
 import { TransactionWhereUniqueInput } from "../transaction/TransactionWhereUniqueInput";
 
-export type TransactionCreateNestedManyWithoutUsersInput = {
+export type TransactionCreateNestedManyWithoutAccountsInput = {
   connect?: Array<TransactionWhereUniqueInput>;
 };

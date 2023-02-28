@@ -39,7 +39,6 @@ async function seed(bcryptSalt: Salt) {
     firstName: "",
     lastName: "",
     legalTermVersions: "",
-    password2: "",
     phone: "",
     privacyPolicy: false,
     termsAndConditions: false,

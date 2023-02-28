@@ -1,4 +1,5 @@
 import { Customer } from "../customer/Customer";
+import { Transaction } from "../transaction/Transaction";
 
 export type Account = {
   accountNumber: string;
@@ -10,5 +11,6 @@ export type Account = {
   id: string;
   name: string | null;
   status?: "Approved" | "Pending" | "Blocked" | null;
+  transactions?: Array<Transaction>;
   updatedAt: Date;
 };

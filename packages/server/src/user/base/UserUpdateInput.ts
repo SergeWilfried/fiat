@@ -25,7 +25,6 @@ import { InputJsonValue } from "../../types";
 import { CustomerUpdateManyWithoutUsersInput } from "./CustomerUpdateManyWithoutUsersInput";
 import { Type } from "class-transformer";
 import { EnumUserStatus } from "./EnumUserStatus";
-import { TransactionUpdateManyWithoutUsersInput } from "./TransactionUpdateManyWithoutUsersInput";
 
 @InputType()
 class UserUpdateInput {
@@ -158,17 +157,6 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  password2?: string;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
   phone?: string;
 
   @ApiProperty({
@@ -213,18 +201,6 @@ class UserUpdateInput {
     nullable: true,
   })
   termsAndConditions?: boolean;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionUpdateManyWithoutUsersInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionUpdateManyWithoutUsersInput)
-  @IsOptional()
-  @Field(() => TransactionUpdateManyWithoutUsersInput, {
-    nullable: true,
-  })
-  transactions?: TransactionUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

@@ -14,7 +14,7 @@ import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionW
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class TransactionCreateNestedManyWithoutUsersInput {
+class TransactionCreateNestedManyWithoutAccountsInput {
   @Field(() => [TransactionWhereUniqueInput], {
     nullable: true,
   })
@@ -25,4 +25,4 @@ class TransactionCreateNestedManyWithoutUsersInput {
   connect?: Array<TransactionWhereUniqueInput>;
 }
 
-export { TransactionCreateNestedManyWithoutUsersInput as TransactionCreateNestedManyWithoutUsersInput };
+export { TransactionCreateNestedManyWithoutAccountsInput as TransactionCreateNestedManyWithoutAccountsInput };

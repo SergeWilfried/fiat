@@ -30,9 +30,6 @@ import { User } from "./User";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
-import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
 
 @swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -67,7 +64,6 @@ export class UserControllerBase {
         lastName: true,
         legalTermVersions: true,
         messages: true,
-        password2: true,
         phone: true,
         privacyPolicy: true,
         roles: true,
@@ -107,7 +103,6 @@ export class UserControllerBase {
         lastName: true,
         legalTermVersions: true,
         messages: true,
-        password2: true,
         phone: true,
         privacyPolicy: true,
         roles: true,
@@ -148,7 +143,6 @@ export class UserControllerBase {
         lastName: true,
         legalTermVersions: true,
         messages: true,
-        password2: true,
         phone: true,
         privacyPolicy: true,
         roles: true,
@@ -198,7 +192,6 @@ export class UserControllerBase {
           lastName: true,
           legalTermVersions: true,
           messages: true,
-          password2: true,
           phone: true,
           privacyPolicy: true,
           roles: true,
@@ -247,7 +240,6 @@ export class UserControllerBase {
           lastName: true,
           legalTermVersions: true,
           messages: true,
-          password2: true,
           phone: true,
           privacyPolicy: true,
           roles: true,
@@ -358,113 +350,6 @@ export class UserControllerBase {
   ): Promise<void> {
     const data = {
       customer: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/transactions")
-  @ApiNestedQuery(TransactionFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Transaction",
-    action: "read",
-    possession: "any",
-  })
-  async findManyTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<Transaction[]> {
-    const query = plainToClass(TransactionFindManyArgs, request.query);
-    const results = await this.service.findTransactions(params.id, {
-      ...query,
-      select: {
-        amount: true,
-        createdAt: true,
-        currency: true,
-        fee: true,
-        id: true,
-        metadata: true,
-        status: true,
-        transactionType: true,
-        updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async connectTransactions(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async updateTransactions(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/transactions")
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectTransactions(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
         disconnect: body,
       },
     };

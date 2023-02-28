@@ -28,7 +28,6 @@ import { JsonValue } from "type-fest";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { EnumUserStatus } from "./EnumUserStatus";
-import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class User {
@@ -142,14 +141,6 @@ class User {
   })
   @IsString()
   @Field(() => String)
-  password2!: string;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
   phone!: string;
 
   @ApiProperty({
@@ -185,15 +176,6 @@ class User {
   @IsBoolean()
   @Field(() => Boolean)
   termsAndConditions!: boolean;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Transaction],
-  })
-  @ValidateNested()
-  @Type(() => Transaction)
-  @IsOptional()
-  transactions?: Array<Transaction>;
 
   @ApiProperty({
     required: true,

@@ -17,6 +17,7 @@ import { EnumAccountCurrency } from "./EnumAccountCurrency";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 import { EnumAccountStatus } from "./EnumAccountStatus";
+import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
 class AccountCreateInput {
@@ -91,6 +92,18 @@ class AccountCreateInput {
     nullable: true,
   })
   status?: "Approved" | "Pending" | "Blocked" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => TransactionCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 }
 
 export { AccountCreateInput as AccountCreateInput };

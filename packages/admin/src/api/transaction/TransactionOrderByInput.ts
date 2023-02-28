@@ -1,6 +1,7 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type TransactionOrderByInput = {
+  accountId?: SortOrder;
   amount?: SortOrder;
   createdAt?: SortOrder;
   currency?: SortOrder;
@@ -10,5 +11,4 @@ export type TransactionOrderByInput = {
   status?: SortOrder;
   transactionType?: SortOrder;
   updatedAt?: SortOrder;
-  userId?: SortOrder;
 };

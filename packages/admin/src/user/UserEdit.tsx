@@ -14,7 +14,6 @@ import {
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
-import { TransactionTitle } from "../transaction/TransactionTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserEdit = (props: EditProps): React.ReactElement => {
@@ -39,7 +38,6 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
         <TextInput label="Legal Term Versions" source="legalTermVersions" />
         <div />
         <PasswordInput label="Password" source="password" />
-        <TextInput label="Password2" source="password2" />
         <TextInput label="Phone" source="phone" />
         <BooleanInput label="Privacy Policy" source="privacyPolicy" />
         <SelectArrayInput
@@ -64,14 +62,6 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
           label="Terms and Conditions  "
           source="termsAndConditions"
         />
-        <ReferenceArrayInput
-          source="transactions"
-          reference="Transaction"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={TransactionTitle} />
-        </ReferenceArrayInput>
         <TextInput label="Username" source="username" />
       </SimpleForm>
     </Edit>
